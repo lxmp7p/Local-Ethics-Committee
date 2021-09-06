@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, View
 
 from .models import Researh
+from .functions.loadResearch import AddResearch
 # Create your views here.
 
 class ResearchTypeListView(View):
@@ -25,7 +26,7 @@ class LoadResearch(View):
         })
 
     def post(self, request, researchType, requestType):
-        print(request.POST)
+        AddResearch(request=request, researchType=researchType, requestType=requestType)
         return render(request, "research/loadResearch.html", {
             'researchType': researchType,
             'requestType': requestType,

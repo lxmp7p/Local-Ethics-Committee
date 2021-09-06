@@ -1,16 +1,16 @@
 {% load static %}
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div id="loadForm">
         <div class="researchInfo">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Номер протокола">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Название протокола">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Название препарата">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Главный исследователь">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Исследовательский центр">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Заказчик исследования">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Контактные данные заказчика">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Срок проведение исследования">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="protocol_number" placeholder="Номер протокола">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="protocol_name" placeholder="Название протокола">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="drug_name" placeholder="Название препарата">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="main_researcher" placeholder="Главный исследователь">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="research_center" placeholder="Исследовательский центр">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="customer" placeholder="Заказчик исследования">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="customer_contacts" placeholder="Контактные данные заказчика">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="duration" placeholder="Срок проведение исследования">
         </div>
 
         <hr>
@@ -82,6 +82,7 @@
         <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button>
 
         <button type="submit">Конец</button>
+        <input hidden="true" value="1" name="research">
     </div>
 </form>
 
