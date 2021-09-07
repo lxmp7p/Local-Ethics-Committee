@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-{% include 'research/loadForms/clinicalResearchLoadForm.html'%}
+{% if researchType == 'clinicalResearch' %}
+    {% include 'research/loadForms/clinicalResearchLoadForm.html'%}
+{% endif %}
 {% endblock %}

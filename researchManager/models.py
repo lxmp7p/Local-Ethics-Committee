@@ -21,7 +21,7 @@ class Researh(models.Model):
 class Files(models.Model):
     name = models.CharField("Название документа", max_length=150)
     version = models.CharField("Версия документа", max_length=50, null=True, blank=True)
-    date = models.DateField("Дата документа", null=True, blank=True)
+    date = models.CharField("Дата документа", max_length=50, null=True, blank=True)
     file = models.FileField("Путь к файлу")
     research = models.ForeignKey(Researh, on_delete=models.CASCADE, related_name='research_id')
 
