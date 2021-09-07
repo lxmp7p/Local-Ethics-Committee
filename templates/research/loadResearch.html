@@ -3,4 +3,7 @@
 {% if researchType == 'clinicalResearch' %}
     {% include 'research/loadForms/clinicalResearchLoadForm.html'%}
 {% endif %}
+{% if researchType == 'preclinicalResearch' %}
+    {% include 'research/loadForms/preclinicalResearchLoadForm.html'%}
+{% endif %}
 {% endblock %}
