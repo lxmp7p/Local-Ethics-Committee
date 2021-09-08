@@ -4,9 +4,9 @@ from.import views
 
 urlpatterns = [
    
-    path("", views.user_login, name="login"),
-    path("logout/", views.logout_view, name="logout"),
-    path('register/', views.register, name='register')
+    path("", views.Authorization.as_view(), name="login"),
+    path("logout/", views.Logout.as_view(), name="logout"),
+    path('register/', views.Registration.as_view(), name='register')
  
    
 ]

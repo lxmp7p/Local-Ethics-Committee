@@ -1,9 +1,16 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-{% if researchType == 'clinicalResearch' %}
-    {% include 'research/loadForms/clinicalResearchLoadForm.html'%}
+
+{% if researchType == "clinicalResearch" %}
+    {% include "research/loadForms/clinicalResearchLoadForm.html" %}
 {% endif %}
-{% if researchType == 'preclinicalResearch' %}
-    {% include 'research/loadForms/preclinicalResearchLoadForm.html'%}
+
+{% if researchType == "preclinicalResearch" %}
+    {% include "research/loadForms/preclinicalResearchLoadForm.html" %}
 {% endif %}
+
+{% if researchType == "initiativeResearch" %}
+    {% include "research/loadForms/initiativeResearchLoadForm.html" %}
+{% endif %}
+
 {% endblock %}

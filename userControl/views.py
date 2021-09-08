@@ -1,50 +1,41 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm, UserRegistrationForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.views.generic import ListView, DetailView, View
+from .functions.userFunc import authorize, addNewUser
+from django.contrib.auth import logout
 
 
-
-def register(request):
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            # Create a new user object but avoid saving it yet
-            new_user = user_form.save(commit=False)
-            # Set the chosen password
-            new_user.set_password(user_form.cleaned_data['password'])
-            # Save the User object
-            new_user.save()
-            return render(request, 'userControl/register_done.html', {'new_user': new_user})
-    else:
+class Registration(View):
+    """Регистрация нового пользователя в системе"""
+    def get(self, request):
         user_form = UserRegistrationForm()
-    return render(request, 'userControl/register.html', {'user_form': user_form})
+        return render(request, 'userControl/register.html', {'user_form': user_form})
+
+    def post(self, request):
+        addNewUser(request)
+        return redirect('login')
 
 
-def user_login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            cd = form.cleaned_data
-            user = authenticate(username=cd['username'], password=cd['password'])
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return redirect(reverse('researchTypeList'))
-                else:
-                    return HttpResponse('Disabled account')
-            else:
-                return HttpResponse('Invalid login')
-    else:
+class Authorization(View):
+    """Авторизация в системе"""
+    def get(self, request):
         form = LoginForm()
-    return render(request, 'userControl/login.html', {'form': form})
+        return render(request, 'userControl/login.html', {'form': form})
+
+    def post(self, request):
+        error = authorize(request)
+        if error:
+           return HttpResponse(error) 
+        else:
+            return redirect(reverse('researchTypeList'))
 
 
-
-
-def logout_view(request):
-    logout(request)
-    return redirect('login')
+class Logout(View):
+    """Выход из системы"""
+    def get(self, request):
+        logout(request)
+        return redirect('login')
 
