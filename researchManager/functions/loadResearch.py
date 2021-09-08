@@ -1,4 +1,3 @@
-import folder as folder
 from django.core.files.storage import FileSystemStorage
 
 from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm
@@ -17,8 +16,10 @@ def AddResearch(request=None, researchType=None, requestType=None):
         (protocol_number = AddClinicalResearch(request, researchId))
     """
     researchId = addResearchMainData(researchType, requestType)
-    folderName = AddClinicalResearch(request, researchId, researchType)
-    saveFiles(request.FILES, request.POST, folderName, researchId)
+    if researchId:
+        folderName = AddResearchInformation(request, researchId, researchType)
+    if folderName:
+        saveFiles(request.FILES, request.POST, folderName, researchId)
 
 
 def addResearchMainData(researchType, requestType):
@@ -27,7 +28,7 @@ def addResearchMainData(researchType, requestType):
     research = Researh.objects.all().last()
     return research.id
 
-def AddClinicalResearch(request, idResearch, researchType):
+def AddResearchInformation(request, idResearch, researchType):
     """
     Добавление клинического исследования
     * Оптимизировать и уменьшить IF
