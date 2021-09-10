@@ -2,15 +2,23 @@
 {% block content %}
 
 {% if researchType == "clinicalResearch" %}
+    <h1>Клиническое исследование</h1>
     {% include "research/loadForms/clinicalResearchLoadForm.html" %}
 {% endif %}
 
 {% if researchType == "preclinicalResearch" %}
+    <h1>Доклиническое исследование</h1>
     {% include "research/loadForms/preclinicalResearchLoadForm.html" %}
 {% endif %}
 
 {% if researchType == "initiativeResearch" %}
+    <h1>Инициативное исследование</h1>
     {% include "research/loadForms/initiativeResearchLoadForm.html" %}
+{% endif %}
+
+{% if researchType == "dissertationWork" %}
+    <h1>Диссертационная работа</h1>
+    {% include "research/loadForms/dissertationWorkLoadForm.html" %}
 {% endif %}
 
 {% endblock %}
