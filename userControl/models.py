@@ -12,7 +12,7 @@ class Role(models.Model):
 # Create your models here.
 class User(AbstractUser):
     username = models.EmailField(
-        _('username'),
+        _('Email'),
         max_length=150,
         unique=True,
         help_text=_(''),
@@ -24,7 +24,7 @@ class User(AbstractUser):
     last_name = models.CharField('Фамилия', max_length=150)
     middle_name = models.CharField('Отчество', max_length=30)
     #email = models.EmailField('Почта')
-    role = models.ForeignKey(Role, on_delete=models.CASCADE, related_name='role', null=True, blank=True, default=7)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, related_name='role', null=True, blank=True, default=7, verbose_name='Роль')
     #phone_number = models.CharField('Номер телефона', max_length=17, null=True, blank=True)
     #birth_date = models.DateField('Дата рождения', null=True, max_length=10)
     password = models.CharField('Пароль', max_length=150)
