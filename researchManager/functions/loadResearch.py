@@ -1,4 +1,3 @@
-import kwargs as kwargs
 from django.core.files.storage import FileSystemStorage
 
 from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm
