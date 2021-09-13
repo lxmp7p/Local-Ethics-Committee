@@ -30,7 +30,7 @@ class Authorization(View):
         if error:
            return HttpResponse(error) 
         else:
-            return redirect(reverse('researchTypeList'))
+            return redirect(reverse('index'))
 
 
 class Logout(View):
@@ -39,3 +39,7 @@ class Logout(View):
         logout(request)
         return redirect('login')
 
+class Index(View):
+    """Регистрация нового пользователя в системе"""
+    def get(self, request):
+        return render(request, 'index.html')
