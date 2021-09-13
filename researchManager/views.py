@@ -14,6 +14,7 @@ class ResearchTypeListView(View):
 class ResearchRequestTypeListView(View):
     """Выбор типа заявки для загрузки"""
     def get(self, request, researchType):
+        print(request.user)
         return render(request, "research/researchRequestType.html", {'researchType': researchType})
 
 

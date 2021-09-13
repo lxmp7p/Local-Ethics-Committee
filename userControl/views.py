@@ -15,22 +15,24 @@ class Registration(View):
         return render(request, 'userControl/register.html', {'user_form': user_form})
 
     def post(self, request):
-        addNewUser(request)
-        return redirect('login')
+        error = addNewUser(request)
+        if error:
+           return render(request, 'userControl/register.html', {'error': error})
+        else:
+            return redirect('login')
 
 
 class Authorization(View):
     """Авторизация в системе"""
     def get(self, request):
-        form = LoginForm()
-        return render(request, 'userControl/login.html', {'form': form})
+        return render(request, 'userControl/login.html')
 
     def post(self, request):
         error = authorize(request)
         if error:
-           return HttpResponse(error) 
+           return render(request, 'userControl/login.html', {'error': error})
         else:
-            return redirect(reverse('researchTypeList'))
+            return redirect(reverse('index'))
 
 
 class Logout(View):
@@ -39,3 +41,7 @@ class Logout(View):
         logout(request)
         return redirect('login')
 
+class Index(View):
+    """Регистрация нового пользователя в системе"""
+    def get(self, request):
+        return render(request, 'index.html')
