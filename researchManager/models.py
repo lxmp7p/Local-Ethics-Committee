@@ -4,28 +4,13 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Researh(models.Model):
     """Исследования"""
-    type = models.CharField("Тип исследования", max_length=50)
-    type_request = models.CharField("Тип заявки", max_length=50)
-    owner = models.CharField("ОВНЕР", max_length=50)
-    identityCode = models.CharField("Код исследования", max_length=50)
+    type = models.CharField("Тип исследования", max_length=50, null=True, blank=True)
+    type_request = models.CharField("Тип заявки", max_length=50, null=True, blank=True)
+    owner = models.CharField("ОВНЕР", max_length=50, null=True, blank=True)
+    identityCode = models.CharField("Код исследования", max_length=50, null=True, blank=True)
     date_accepted = models.DateTimeField("Дата одобрения", blank=True, null=True, default='2021-05-25 11:17:49.353268')
-    date_created = models.DateTimeField("Дата загрузки в систему", auto_now_add=True)
-    version = models.CharField("Версия исследования", max_length=50)
-
-    class Meta:
-        verbose_name = "Исследование"
-        verbose_name_plural = "Исследования"
-
-
-class Files(models.Model):
-    name = models.CharField("Название документа", max_length=150)
-    version = models.CharField("Версия документа", max_length=50, null=True, blank=True)
-    date = models.CharField("Дата документа", max_length=50, null=True, blank=True)
-    file = models.FileField("Путь к файлу")
-    research = models.ForeignKey(Researh, on_delete=models.CASCADE, related_name='research_id')
-
-
-class Information(models.Model):
+    date_created = models.DateTimeField("Дата загрузки в систему", auto_now_add=True, null=True, blank=True)
+    version = models.CharField("Версия исследования", max_length=50, null=True, blank=True)
     protocol_number = models.CharField("Номер протокола", max_length=50, null=True, blank=True)
     protocol_name = models.CharField("Название протокола", max_length=500, null=True, blank=True)
     work_name = models.CharField("Название работы", max_length=500, null=True, blank=True)
@@ -40,5 +25,17 @@ class Information(models.Model):
     customer = models.CharField("Заказчик", max_length=500, null=True, blank=True)
     customer_contacts = models.CharField("Контактные данные заказчика", max_length=500, null=True, blank=True)
     duration = models.DateTimeField("Дата окончания исследования", null=True, blank=True)
-    research = models.ForeignKey(Researh, on_delete=models.CASCADE, related_name='info_research_id', null=True, blank=True)
+
+    class Meta:
+        verbose_name = "Исследование"
+        verbose_name_plural = "Исследования"
+
+
+class Files(models.Model):
+    name = models.CharField("Название документа", max_length=150)
+    version = models.CharField("Версия документа", max_length=50, null=True, blank=True)
+    date = models.CharField("Дата документа", max_length=50, null=True, blank=True)
+    file = models.FileField("Путь к файлу")
+    research = models.ForeignKey(Researh, on_delete=models.CASCADE, related_name='research_id')
+
 

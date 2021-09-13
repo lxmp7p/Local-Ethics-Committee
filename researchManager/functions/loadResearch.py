@@ -1,7 +1,7 @@
 from django.core.files.storage import FileSystemStorage
 
 from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm
-from ..models import Researh, Files, Information
+from ..models import Researh, Files
 import datetime
 import re
 from collections import defaultdict
@@ -10,25 +10,11 @@ from collections import defaultdict
 now = datetime.datetime.now()
 
 def AddResearch(request=None, researchType=None, requestType=None):
-    """
-    - Добавление исследования
-    Для добавления нового типа исследования нужно:
-    -> AddResearchInformation()
-    """
-    researchId = addResearchMainData(researchType, requestType)
-    if researchId:
-        folderName = AddResearchInformation(request, researchId, researchType)
-    if folderName:
-        saveFiles(request.FILES, request.POST, folderName, researchId)
+    folderName, researchId = CreateResearch(request, researchType, requestType)
+    saveFiles(request.FILES, request.POST, folderName, researchId)
 
 
-def addResearchMainData(researchType, requestType):
-    """Добавление служебных данных исследования"""
-    Researh.objects.create(type_request=requestType, identityCode='rand', version='1', owner='lxmp7p', type=researchType)
-    research = Researh.objects.all().last()
-    return research.id
-
-def AddResearchInformation(request, idResearch, researchType):
+def CreateResearch(request, researchType, requestType):
     """
     Добавление клинического исследования
     * Оптимизировать и уменьшить IF
@@ -52,9 +38,14 @@ def AddResearchInformation(request, idResearch, researchType):
             folderName = informationForm.name_research
         if researchType == "dissertationWork":
             folderName = informationForm.work_name
-        informationForm.research_id = idResearch
+        informationForm.type_request=requestType 
+        informationForm.identityCode='rand'
+        informationForm.version='1'
+        informationForm.owner='lxmp7p'
+        informationForm.type=researchType
         informationForm.save()
-    return folderName
+    researchId = Researh.objects.all().last()
+    return folderName, researchId.id
 
 def AddPreclinicalResearch(request, idResearch):
     """Добавление доклинического исследования"""

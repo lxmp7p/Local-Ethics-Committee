@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, View
-
-from .models import Researh
+from django.shortcuts import render
+from django.views.generic import View
 from .functions.loadResearch import AddResearch
+from .models import Researh
+
+
 # Create your views here.
 
 class ResearchTypeListView(View):
