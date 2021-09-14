@@ -30,6 +30,9 @@ class Researh(models.Model):
         verbose_name = "Исследование"
         verbose_name_plural = "Исследования"
 
+    def __str__(self):
+        return self.protocol_number
+
 
 class Files(models.Model):
     name = models.CharField("Название документа", max_length=150)

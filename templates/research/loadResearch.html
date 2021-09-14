@@ -10,6 +10,10 @@
         <h1 class='text-center'>Вторичная заявка</h1> 
     {% endif %}
 
+    {% if requestType == 'secondRelationRequest' %}
+        <h1 class='text-center'>Вторичная заявка с привязкой</h1> 
+    {% endif %}
+
 {% if researchType == "clinicalResearch" %}
     <h1 class='text-center'>Клиническое исследование</h1>
     {% include "research/loadForms/clinicalResearchLoadForm.html" %}

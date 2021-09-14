@@ -5,7 +5,7 @@
         <tr>
           <td><a href="{% url 'loadResearch' researchType 'firstRequest' %}">Первичная заявка</a></td>
           <td><a href="{% url 'loadResearch' researchType 'secondRequest' %}">Вторичная заявка</a></td>
-          <td><a href="secondRelationRequest">Вторичная заявка с привязкой</a></td>
+          <td><a href="{% url 'loadResearch' researchType 'secondRelationRequest' %}">Вторичная заявка с привязкой</a></td>
         </tr>
   </tbody>
 </table>
