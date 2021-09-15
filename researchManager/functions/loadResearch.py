@@ -50,7 +50,6 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             folderName = informationForm.work_name
         informationForm.type_request=requestType 
         informationForm.identityCode=identityCode
-        informationForm.version='1'
         informationForm.owner=request.user.username
         informationForm.type=researchType
         informationForm.date_accepted=dateAccepted

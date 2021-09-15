@@ -10,7 +10,6 @@ class Research(models.Model):
     identityCode = models.CharField("Код исследования", max_length=50, null=True, blank=True)
     date_accepted = models.DateField("Дата одобрения", blank=True, null=True)
     date_created = models.DateTimeField("Дата загрузки в систему", auto_now_add=True, null=True, blank=True)
-    version = models.CharField("Версия исследования", max_length=50, null=True, blank=True)
     protocol_number = models.CharField("Номер протокола", max_length=50, null=True, blank=True)
     protocol_name = models.CharField("Название протокола", max_length=500, null=True, blank=True)
     work_name = models.CharField("Название работы", max_length=500, null=True, blank=True)
