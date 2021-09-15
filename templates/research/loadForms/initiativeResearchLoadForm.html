@@ -1,6 +1,7 @@
 {% load static %}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    {% include "research/loadForms/setCalendar.html" %}
     <div id="loadForm">
         <div class="researchInfo">
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_research" placeholder="Название исследования">

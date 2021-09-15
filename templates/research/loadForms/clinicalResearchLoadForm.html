@@ -1,13 +1,7 @@
 {% load static %}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    {% if researchList %}
-        <select>
-            {% for research in researchList %}
-                <option>{{ research.protocol_number }}</option>
-            {% endfor %}
-        </select>
-    {% endif %} 
+    {% include "research/loadForms/setCalendar.html" %}
     <div id="loadForm">
         <div class="researchInfo">
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="protocol_number" placeholder="Номер протокола">

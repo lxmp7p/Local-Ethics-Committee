@@ -1,18 +1,20 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.generic import View
 from .functions.loadResearch import AddResearch
 from .models import *
 # Create your views here.
 
-class ResearchTypeListView(View):
+
+class ResearchListView(View):
     """Выбор типа исследования для загрузки"""
-    def get(self, request):
+    def loadResearch(request):
         return render(request, "research/researchType.html", {"method":"loadResearch"})
 
+    def watchResearch(request):
+        return render(request, "research/researchType.html", {"method":"watchResearch"})
 
-class ResearchRequestTypeListView(View):
-    """Выбор типа заявки для загрузки"""
-    def get(self, request, researchType):
+    def getResearchRequestTypeList(request, researchType):
         return render(request, "research/researchRequestType.html", {'researchType': researchType})
 
 
@@ -21,8 +23,7 @@ class LoadResearch(View):
     def get(self, request, researchType, requestType):
         researchList = None
         if requestType == 'secondRelationRequest':
-            researchList = Researh.objects.filter(type=researchType)
-        print(researchList)
+            researchList = Research.objects.filter(type=researchType)
         return render(request, "research/loadResearch.html", {
             'researchType': researchType,
             'requestType': requestType,
@@ -37,30 +38,22 @@ class LoadResearch(View):
         })
 
 
-class ResearchTypeListViewForWatch(View):
-    """Выбор типа исследования для загрузки"""
-    def get(self, request):
-        return render(request, "research/researchType.html", {"method":"watchResearch"})
-
-
-class WatchResearchList(View):
+class WatchResearch(View):
     """Просмотр списка исследований в системе"""
-    def get(self, request, researchType):
-        researchList = Researh.objects.filter()
+    def getResearchList(request, researchType):
+        researchList = Research.objects.filter()
         return render(request, "research/researchList.html", {
             'researchList': researchList,
             'researchType': researchType,
         })
 
-
-class WatchResearch(View):
-    """Просмотри исследования"""
-    def get(self, request, researchId):
-        research = Researh.objects.get(id=researchId)
+    def getResearch(request, researchId):
+        research = Research.objects.get(id=researchId)
         filesList = Files.objects.filter(research=research)
         return render(request, "research/research.html", {
             'research': research,
             'filesList': filesList,
         })
+
 
 

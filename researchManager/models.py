@@ -1,14 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from datetime import date
 # Create your models here.
-class Researh(models.Model):
+class Research(models.Model):
     """Исследования"""
     type = models.CharField("Тип исследования", max_length=50, null=True, blank=True)
     type_request = models.CharField("Тип заявки", max_length=50, null=True, blank=True)
     owner = models.CharField("ОВНЕР", max_length=50, null=True, blank=True)
     identityCode = models.CharField("Код исследования", max_length=50, null=True, blank=True)
-    date_accepted = models.DateTimeField("Дата одобрения", blank=True, null=True, default='2021-05-25 11:17:49.353268')
+    date_accepted = models.DateField("Дата одобрения", blank=True, null=True)
     date_created = models.DateTimeField("Дата загрузки в систему", auto_now_add=True, null=True, blank=True)
     version = models.CharField("Версия исследования", max_length=50, null=True, blank=True)
     protocol_number = models.CharField("Номер протокола", max_length=50, null=True, blank=True)
@@ -39,6 +39,6 @@ class Files(models.Model):
     version = models.CharField("Версия документа", max_length=50, null=True, blank=True)
     date = models.CharField("Дата документа", max_length=50, null=True, blank=True)
     file = models.FileField("Путь к файлу")
-    research = models.ForeignKey(Researh, on_delete=models.CASCADE, related_name='research_id')
+    research = models.ForeignKey(Research, on_delete=models.CASCADE, related_name='research_id')
 
 

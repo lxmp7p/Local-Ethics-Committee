@@ -1,20 +1,30 @@
 from django.core.files.storage import FileSystemStorage
 
 from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm
-from ..models import Researh, Files
+from ..models import Research, Files
 import datetime
 import re
 from collections import defaultdict
+import string
+import random
 
 
 now = datetime.datetime.now()
 
 def AddResearch(request=None, researchType=None, requestType=None):
-    folderName, researchId = CreateResearch(request, researchType, requestType)
+    print(request.POST)
+    if requestType == "secondRelationRequest":
+        parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
+        dateAccepted = request.POST.get("date_accepted")
+        identityCode = parentResearch.identityCode
+    else:
+        identityCode = createIdentityCode()
+        dateAccepted = None
+    folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
     saveFiles(request.FILES, request.POST, folderName, researchId)
 
 
-def CreateResearch(request, researchType, requestType):
+def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
     Добавление клинического исследования
     * Оптимизировать и уменьшить IF
@@ -25,9 +35,9 @@ def CreateResearch(request, researchType, requestType):
     if researchType == "preclinicalResearch":
         informationForm = PreclinicalResearchInformationForm(request.POST)
     if researchType == "initiativeResearch":
-        informationForm = PreclinicalResearchInformationForm(request.POST)
+        informationForm = InitiativeResearchInformationForm(request.POST)
     if researchType == "dissertationWork":
-        informationForm = PreclinicalResearchInformationForm(request.POST)
+        informationForm = DissertationWorkInformationForm(request.POST)
     if informationForm.is_valid():
         informationForm = informationForm.save(commit=False)
         if researchType == "clinicalResearch":
@@ -39,12 +49,13 @@ def CreateResearch(request, researchType, requestType):
         if researchType == "dissertationWork":
             folderName = informationForm.work_name
         informationForm.type_request=requestType 
-        informationForm.identityCode='rand'
+        informationForm.identityCode=identityCode
         informationForm.version='1'
-        informationForm.owner='lxmp7p'
+        informationForm.owner=request.user.username
         informationForm.type=researchType
+        informationForm.date_accepted=dateAccepted
         informationForm.save()
-    researchId = Researh.objects.all().last()
+    researchId = Research.objects.all().last()
     return folderName, researchId.id
 
 def AddPreclinicalResearch(request, idResearch):
@@ -89,3 +100,9 @@ def saveFiles(files, filesInfo, folderName, researchId):
                 file=fileUrl, research_id=researchId,
                 date=date, version=version, name=name
             )
+
+
+def createIdentityCode():
+    chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
+    size = 8
+    return ''.join(random.choice(chars) for x in range(size,20))
