@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.views.generic import View
 from .functions.loadResearch import AddResearch
 from .models import *
@@ -7,7 +7,7 @@ from .models import *
 
 
 class ResearchListView(View):
-    """Выбор типа исследования для загрузки"""
+    """Переход к нужному типу исследования"""
     def loadResearch(request):
         return render(request, "research/researchType.html", {"method":"loadResearch"})
 
@@ -50,10 +50,12 @@ class WatchResearch(View):
     def getResearch(request, researchId):
         research = Research.objects.get(id=researchId)
         filesList = Files.objects.filter(research=research)
+        history = []
+        for historyResearch in Research.objects.filter(identityCode=research.identityCode):
+            historyFiles = Files.objects.filter(research=research)
+            history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
         return render(request, "research/research.html", {
             'research': research,
             'filesList': filesList,
+            'history': history,
         })
-
-
-

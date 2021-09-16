@@ -1,5 +1,5 @@
 {% if researchList %}
-        <select name="relationResearchId" class="js-selectize" placeholder="Выберите исследование">
+        <select name="relationResearchId" id="relationResearchId" class="js-selectize" placeholder="Выберите исследование">
                 <option value=""></option>
                 {% for research in researchList %}
                 <option value="{{ research.id }}">{{ research.protocol_number }}</option>
@@ -10,8 +10,8 @@
         <div class='calendar' id='date' hidden="true" >
                 Дата заседания:
                 <input placeholder="Дата заседания" name="date_accepted" class="form-control" type="date" id="dateInput">
-                <hr>
         </div>
+
         <script>
                 function date_accepted_set_visible_false()
                 {

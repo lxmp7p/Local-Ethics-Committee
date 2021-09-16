@@ -3,15 +3,45 @@
     {% csrf_token %}
     {% include "research/loadForms/setCalendar.html" %}
     <div id="loadForm">
+        <button type="button" class="btn btn-warning" id="getInfoBtn">Внести данные из привязаного исследования</button>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $("#getInfoBtn").click(function(){
+            var id = $('#relationResearchId').val();
+            console.log(id);
+            $.ajax({
+                url: "/research/ajax/get_research_info/",
+                type: 'GET', // This is the default though, you don't actually need to always mention it
+                data:{
+                    relationResearchId: id,
+                },
+                success: function(data) {
+                    $('#protocol_number').val(data.protocolNumber);
+                    $('#protocol_name').val(data.protocolName);
+                    $('#drug_name').val(data.drugName);
+                    $('#main_researcher').val(data.mainResearcher);
+                    $('#research_center').val(data.researchCenter);
+                    $('#customer').val(data.customer);
+                    $('#customer_contacts').val(data.customerContacts);
+                    $('#duration').val(data.duration);
+                    console.log(data.protocolNumber);
+                },
+                failure: function(data) { 
+                    alert('Got an error dude');
+                }
+            });
+        })
+    });
+    </script>
         <div class="researchInfo">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="protocol_number" placeholder="Номер протокола">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="protocol_name" placeholder="Название протокола">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="drug_name" placeholder="Название препарата">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="main_researcher" placeholder="Главный исследователь">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="research_center" placeholder="Исследовательский центр">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="customer" placeholder="Заказчик исследования">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="customer_contacts" placeholder="Контактные данные заказчика">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="duration" placeholder="Срок проведение исследования">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_number" name="protocol_number" placeholder="Номер протокола">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_name" name="protocol_name" placeholder="Название протокола">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="drug_name" name="drug_name" placeholder="Название препарата">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="main_researcher" name="main_researcher" placeholder="Главный исследователь">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="research_center" name="research_center" placeholder="Исследовательский центр">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer" name="customer" placeholder="Заказчик исследования">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer_contacts" name="customer_contacts" placeholder="Контактные данные заказчика">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="duration" name="duration" placeholder="Срок проведение исследования">
         </div>
 
         <hr>

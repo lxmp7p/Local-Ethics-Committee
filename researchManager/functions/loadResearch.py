@@ -12,10 +12,12 @@ import random
 now = datetime.datetime.now()
 
 def AddResearch(request=None, researchType=None, requestType=None):
-    print(request.POST)
+    dateAccepted = 's'
     if requestType == "secondRelationRequest":
         parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
         dateAccepted = request.POST.get("date_accepted")
+        if request.POST.get("date_accepted") == '':
+            dateAccepted = None
         identityCode = parentResearch.identityCode
     else:
         identityCode = createIdentityCode()
