@@ -107,3 +107,36 @@ def createIdentityCode():
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
     size = 8
     return ''.join(random.choice(chars) for x in range(size,20))
+
+
+def getResearchHistory(researchId):
+    """Выдает текущее исследование, список файлов и историю"""
+    research = Research.objects.get(id=researchId)
+    filesList = Files.objects.filter(research=research)
+    history = []
+    relatedResearchs = Research.objects.filter(identityCode=research.identityCode).order_by('-date_accepted')
+    for historyResearch in relatedResearchs:
+        historyFiles = Files.objects.filter(research=research)
+        history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
+    return research, filesList, history
+
+
+def getMainResearchsList(researchType):
+    """Выдает список самых новых исследований с уникальным identityCode"""
+    allResearch = Research.objects.filter(type=researchType).order_by('-date_accepted')
+    researchList = []
+    for notFiltredResearch in allResearch:
+        if researchList:
+            have = False
+            for research in researchList:
+                if notFiltredResearch.identityCode == research.identityCode:
+                    have = True
+                    if notFiltredResearch.date_accepted > research.date_accepted:
+                        research = notFiltredResearch
+                        have = False
+            if not have:
+                researchList.append(notFiltredResearch)
+                have = False
+        else: 
+            researchList.append(allResearch[0])
+    return researchList

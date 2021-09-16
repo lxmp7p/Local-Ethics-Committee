@@ -5,4 +5,16 @@
   {% include "research/researchLists/clinicalResearchsList.html" %}
 {% endif %}
 
+{% if researchType == "preclinicalResearch" %}
+  {% include "research/researchLists/preclinicalResearchsList.html" %}
+{% endif %}
+
+{% if researchType == "initiativeResearch" %}
+  {% include "research/researchLists/initiativeResearchsList.html" %}
+{% endif %}
+
+{% if researchType == "dissertationWork" %}
+  {% include "research/researchLists/dissertationWorksList.html" %}
+{% endif %}
+
 {% endblock %}

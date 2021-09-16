@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse
 from django.views.generic import View
-from .functions.loadResearch import AddResearch
+from .functions.loadResearch import AddResearch, getResearchHistory, getMainResearchsList
 from .models import *
 # Create your views here.
 
@@ -41,19 +41,14 @@ class LoadResearch(View):
 class WatchResearch(View):
     """Просмотр списка исследований в системе"""
     def getResearchList(request, researchType):
-        researchList = Research.objects.filter()
+        researchList = getMainResearchsList(researchType)
         return render(request, "research/researchList.html", {
             'researchList': researchList,
             'researchType': researchType,
         })
 
     def getResearch(request, researchId):
-        research = Research.objects.get(id=researchId)
-        filesList = Files.objects.filter(research=research)
-        history = []
-        for historyResearch in Research.objects.filter(identityCode=research.identityCode):
-            historyFiles = Files.objects.filter(research=research)
-            history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
+        research, filesList, history = getResearchHistory(researchId)
         return render(request, "research/research.html", {
             'research': research,
             'filesList': filesList,

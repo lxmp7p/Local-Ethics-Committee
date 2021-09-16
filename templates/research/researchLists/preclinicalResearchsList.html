@@ -9,7 +9,7 @@
   <tbody>
     {% for research in researchList %}
       <tr>
-        <th scope="row">{{ research.protocol_number }}</th>
+        <th scope="row">{{ research.work_name }}</th>
         <td>{{ research.owner }}</td>
         <td>
         <form action="{% url 'watchResearch' research.id %}">
