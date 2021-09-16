@@ -2,8 +2,7 @@ from .models import Research
 from django.http import JsonResponse, HttpResponse
 
 def get_research_info(request):
-    """Проверка доступности логина"""
-    print(request.GET)
+    """Выдача основной информации об исследовании"""
     research = Research.objects.get(id=request.GET.get('relationResearchId'))
     if research.type == 'clinicalResearch':
         researhInfo = {
@@ -16,5 +15,4 @@ def get_research_info(request):
             "customerContacts": research.customer_contacts,
             "duration": research.duration,
         }
-    print(researhInfo)
     return JsonResponse(researhInfo)

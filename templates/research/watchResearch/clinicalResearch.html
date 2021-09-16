@@ -21,27 +21,4 @@
         <h1>Срок проведения исследования</h1>
         {{ research.duration }}
     </div>
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Название документа</th>
-      <th scope="col">Версия</th>
-      <th scope="col">Дата</th>
-      <th scope="col">Открыть</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for file in filesList %}
-    <tr>
-      <td>
-        {{ file.name }} 
-      </td>
-      <td>{{ file.version }} </td>
-      <td>{{ file.date }} </td>
-      <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
-    </tr>
-    {% endfor %}
-    {{ history }}
-  </tbody>
-</table>
 </div>
