@@ -41,6 +41,7 @@ class Logout(View):
         logout(request)
         return redirect('login')
 
+
 class Index(View):
     """Регистрация нового пользователя в системе"""
     def get(self, request):

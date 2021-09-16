@@ -1,5 +1,9 @@
 <div class="col-sm text-center">
     <div class="d-inline">
+        {% if research.date_accepted %}
+          <h2>Дата принятия</h2>
+          {{ research.date_accepted }}
+        {% endif %}
         <h1>Номер протокола</h1>
         {{ research.protocol_number }}
         <h1>Название протокола</h1>
@@ -37,6 +41,7 @@
       <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
     </tr>
     {% endfor %}
+    {{ history }}
   </tbody>
 </table>
 </div>
