@@ -11,9 +11,9 @@ import random
 
 now = datetime.datetime.now()
 
-def AddResearch(request=None, researchType=None, requestType=None):
+def AddResearch(request=None, researchType=None, requestType=None, relationshipStatus=None):
     dateAccepted = 's'
-    if requestType == "secondRelationRequest":
+    if relationshipStatus == "true":
         parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
         dateAccepted = request.POST.get("date_accepted")
         if request.POST.get("date_accepted") == '':
