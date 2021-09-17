@@ -11,9 +11,9 @@ import random
 
 now = datetime.datetime.now()
 
-def AddResearch(request=None, researchType=None, requestType=None):
+def AddResearch(request=None, researchType=None, requestType=None, relationshipStatus=None):
     dateAccepted = 's'
-    if requestType == "secondRelationRequest":
+    if relationshipStatus == "true":
         parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
         dateAccepted = request.POST.get("date_accepted")
         if request.POST.get("date_accepted") == '':
@@ -131,7 +131,10 @@ def getMainResearchsList(researchType):
             for research in researchList:
                 if notFiltredResearch.identityCode == research.identityCode:
                     have = True
-                    if notFiltredResearch.date_accepted > research.date_accepted:
+                    if research.date_accepted == None:
+                        research = notFiltredResearch
+                        have = False
+                    elif notFiltredResearch.date_accepted > research.date_accepted:
                         research = notFiltredResearch
                         have = False
             if not have:

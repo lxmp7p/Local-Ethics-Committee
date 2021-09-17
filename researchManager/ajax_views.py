@@ -4,8 +4,7 @@ from django.http import JsonResponse, HttpResponse
 def get_research_info(request):
     """Выдача основной информации об исследовании"""
     research = Research.objects.get(id=request.GET.get('relationResearchId'))
-    if research.type == 'clinicalResearch':
-        researhInfo = {
+    researhInfo = {
             "protocolNumber": research.protocol_number,
             "protocolName": research.protocol_name,
             "drugName": research.drug_name,
@@ -14,5 +13,11 @@ def get_research_info(request):
             "customer": research.customer,
             "customerContacts": research.customer_contacts,
             "duration": research.duration,
-        }
+            "name_research": research.name_research,
+            "managers": research.managers,
+            "specialization": research.specialization,
+            "executor": research.executor,
+            "division": research.division,
+            "work_name": research.work_name,
+    }
     return JsonResponse(researhInfo)

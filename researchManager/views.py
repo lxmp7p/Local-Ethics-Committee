@@ -14,24 +14,21 @@ class ResearchListView(View):
     def watchResearch(request):
         return render(request, "research/researchType.html", {"method":"watchResearch"})
 
-    def getResearchRequestTypeList(request, researchType):
-        return render(request, "research/researchRequestType.html", {'researchType': researchType})
-
 
 class LoadResearch(View):
     """Загрузка исследования"""
-    def get(self, request, researchType, requestType):
+    def get(self, request, researchType):
         researchList = None
-        if requestType == 'secondRelationRequest':
-            researchList = Research.objects.filter(type=researchType)
+        researchList = getMainResearchsList(researchType)
         return render(request, "research/loadResearch.html", {
             'researchType': researchType,
-            'requestType': requestType,
             'researchList': researchList,
         })
 
-    def post(self, request, researchType, requestType):
-        AddResearch(request=request, researchType=researchType, requestType=requestType)
+    def post(self, request, researchType):
+        requestType = request.POST.get('typeRequest')
+        relationshipStatus = request.POST.get('relationshipStatus')
+        AddResearch(request=request, researchType=researchType, requestType=requestType, relationshipStatus=relationshipStatus)
         return render(request, "research/loadResearch.html", {
             'researchType': researchType,
             'requestType': requestType,
