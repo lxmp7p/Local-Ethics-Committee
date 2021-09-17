@@ -131,7 +131,10 @@ def getMainResearchsList(researchType):
             for research in researchList:
                 if notFiltredResearch.identityCode == research.identityCode:
                     have = True
-                    if notFiltredResearch.date_accepted > research.date_accepted:
+                    if research.date_accepted == None:
+                        research = notFiltredResearch
+                        have = False
+                    elif notFiltredResearch.date_accepted > research.date_accepted:
                         research = notFiltredResearch
                         have = False
             if not have:

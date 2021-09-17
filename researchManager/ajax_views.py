@@ -3,6 +3,7 @@ from django.http import JsonResponse, HttpResponse
 
 def get_research_info(request):
     """Выдача основной информации об исследовании"""
+    research = Research.objects.get(id=request.GET.get('relationResearchId'))
     researhInfo = {
             "protocolNumber": research.protocol_number,
             "protocolName": research.protocol_name,
