@@ -1,0 +1,94 @@
+{% load static %}
+        <div class="researchInfo">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_number" name="protocol_number" placeholder="Номер протокола">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_name" name="protocol_name" placeholder="Название протокола">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="drug_name" name="drug_name" placeholder="Название препарата">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="main_researcher" name="main_researcher" placeholder="Главный исследователь">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="research_center" name="research_center" placeholder="Исследовательский центр">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer" name="customer" placeholder="Заказчик исследования">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer_contacts" name="customer_contacts" placeholder="Контактные данные заказчика">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="duration" name="duration" placeholder="Срок проведение исследования">
+        </div>
+
+        <hr>
+        <h1>Письмо в ЛЭК</h1>
+        <div class="letter" id="letter">
+            <div class="letter_form" id="letter_form">
+                <input type="file" name="letter">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="letter_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="letter_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='letter_form', parentId='letter')">Добавить поле</button>
+
+        <hr>
+        <h1>Список членов команды</h1>
+        <div class="member_list" id="member_list">
+            <div class="member_list_form" id="member_list_form">
+                <input type="file" name="member_list">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="member_list_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="member_list_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='member_list_form', parentId='member_list')">Добавить поле</button>
+
+
+        <hr>
+        <h1>Разрешение МЗ РФ</h1>
+        <div class="permit" id="permit">
+            <div class="permit_form" id="permit_form">
+                <input type="file" name="permit">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="permit_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="permit_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='permit_form', parentId='permit')">Добавить поле</button>
+
+        <hr>
+        <h1>Протокол исследования</h1>
+        <div class="protocol" id="protocol">
+            <div class="protocol_form" id="protocol_form">
+                <input type="file" name="protocol">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="protocol_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="protocol_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='protocol_form', parentId='protocol')">Добавить поле</button>
+
+        <hr>
+        <h1>Форма информированого листка</h1>
+        <div class="inform_list" id="inform_list">
+            <div class="inform_list_form" id="inform_list_form">
+                <input type="file" name="inform_list">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="inform_list_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="inform_list_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='inform_list_form', parentId='inform_list')">Добавить поле</button>
+
+
+        <hr>
+        <h1>Брошюра исследователя</h1>
+        <div class="brochure_researcher" id="brochure_researcher">
+            <div class="brochure_researcher_form" id="brochure_researcher_form">
+                <input type="file" name="brochure_researcher">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="brochure_researcher_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="brochure_researcher_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='brochure_researcher_form', parentId='brochure_researcher')">Добавить поле</button>
+
+        <hr>
+        <h1>Договор страхования</h1>
+        <div class="insurance_contract" id="insurance_contract">
+            <div class="insurance_contract_form" id="insurance_contract_form">
+                <input type="file" name="insurance_contract">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="insurance_contract_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="insurance_contract_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button>
+
+    </div>
+<script src="{% static 'js/fileInput.js' %}"></script>
+<script src="{% static 'js/loadForm.js' %}"></script>

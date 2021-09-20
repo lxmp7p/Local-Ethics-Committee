@@ -1,0 +1,24 @@
+<div class="col-sm text-center">
+    <div class="d-inline">
+        {% if research.date_accepted %}
+          <h2>Дата принятия</h2>
+          {{ research.date_accepted }}
+        {% endif %}
+        <h1>Номер протокола</h1>
+        {{ research.protocol_number }}
+        <h1>Название протокола</h1>
+        {{ research.protocol_name }}
+        <h1>Название препарата</h1>
+        {{ research.drug_name }}
+        <h1>Главный исследователь</h1>
+        {{ research.main_researcher }}
+        <h1>Исследовательский центр</h1>
+        {{ research.research_center }}
+        <h1>Заказчик исследования</h1>
+        {{ research.customer }}
+        <h1>Контактные данные заказчика</h1>
+        {{ research.customer_contacts }}
+        <h1>Срок проведения исследования</h1>
+        {{ research.duration }}
+    </div>
+</div>

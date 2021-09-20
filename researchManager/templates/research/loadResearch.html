@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-sm">
+        {% if researchType == "clinicalResearch" %}
+            <h1 class='text-center'>Клиническое исследование</h1>
+        {% endif %}
+
+        {% if researchType == "preclinicalResearch" %}
+            <h1 class='text-center'>Доклиническое исследование</h1>
+        {% endif %}
+
+        {% if researchType == "initiativeResearch" %}
+            <h1 class='text-center'>Инициативное исследование</h1>
+        {% endif %}
+
+        {% if researchType == "dissertationWork" %}
+            <h1 class='text-center'>Диссертационная работа</h1>
+        {% endif %}
+
+        {% include "research/loadForms/setCalendar.html" %}
+
+        {% if researchType == "clinicalResearch" %}
+            {% include "research/loadForms/clinicalResearchLoadForm.html" %}
+        {% endif %}
+
+        {% if researchType == "preclinicalResearch" %}
+            {% include "research/loadForms/preclinicalResearchLoadForm.html" %}
+        {% endif %}
+
+        {% if researchType == "initiativeResearch" %}
+            {% include "research/loadForms/initiativeResearchLoadForm.html" %}
+        {% endif %}
+
+        {% if researchType == "dissertationWork" %}
+            {% include "research/loadForms/dissertationWorkLoadForm.html" %}
+        {% endif %}
+
+
+        <h1>Дополнительные файлы</h1>
+        <div class="another_document" id="another_document">
+            <div class="another_document_form" id="another_document_form">
+                <input type="file" name="another_document">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="another_document_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="another_document_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='another_document_form', parentId='another_document')">Добавить поле</button>
+        <button type="submit">Конец</button>
+        <input hidden="true" value="1" name="research">
+    </div>
+</form>
+{% endblock %}

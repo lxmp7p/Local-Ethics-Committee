@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<table class="table table-dark">
+    <tbody>
+        {% if method == "loadResearch" %}
+        <tr>
+            <td><a href="{% url 'loadResearch' 'clinicalResearch' %}">Клиническое исследование</a></td>
+            <td><a href="{% url 'loadResearch' 'preclinicalResearch' %}">Доклиническое исследование</a></td>
+            <td><a href="{% url 'loadResearch' 'initiativeResearch' %}">Инициативное исследование</a></td>
+            <td><a href="{% url 'loadResearch' 'dissertationWork' %}">Диссертационная работа</a></td>
+        </tr>
+        {% endif %}
+        {% if method == "watchResearch" %}
+        <tr>
+            <td><a href="{% url 'WatchResearchList' 'clinicalResearch' %}">Клиническое исследование</a></td>
+            <td><a href="{% url 'WatchResearchList' 'preclinicalResearch' %}">Доклиническое исследование</a></td>
+            <td><a href="{% url 'WatchResearchList' 'initiativeResearch' %}">Инициативное исследование</a></td>
+            <td><a href="{% url 'WatchResearchList' 'dissertationWork' %}">Диссертационная работа</a></td>
+        </tr>
+        {% endif %}
+  </tbody>
+</table>
+{% endblock %}

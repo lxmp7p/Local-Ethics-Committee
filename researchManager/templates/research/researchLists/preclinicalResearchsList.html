@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Номер протокола</th>
+      <th scope="col">Владелец</th>
+      <th scope="col">Открыть</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for research in researchList %}
+      <tr>
+        <th scope="row">{{ research.work_name }}</th>
+        <td>{{ research.owner }}</td>
+        <td>
+        <form action="{% url 'watchResearch' research.id %}">
+          <button type="submit" class="btn btn-info">Открыть</button></td>
+        </form>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,57 @@
+{% load static %}
+    <div id="loadForm">
+        <div class="researchInfo">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="work_name" placeholder="Название работы">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="division" placeholder="Название подразделения">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="executor" placeholder="Ответственный исполнитель работы">
+        </div>
+
+        <hr>
+        <h1>Письмо-обращение на имя председателя КЭ</h1>
+        <div class="letter_of_appeal" id="letter_of_appeal">
+            <div class="letter_of_appeal_form" id="letter_of_appeal_form">
+                <input type="file" name="letter_of_appeal">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="letter_of_appeal_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="letter_of_appeal_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='letter_of_appeal_form', parentId='letter_of_appeal')">Добавить поле</button>
+
+
+        <hr>
+        <h1>Протокол исследования</h1>
+        <div class="research_protocol" id="research_protocol">
+            <div class="research_protocol_form" id="research_protocol_form">
+                <input type="file" name="research_protocol">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="research_protocol_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="research_protocol_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='research_protocol_form', parentId='research_protocol')">Добавить поле</button>
+
+        <hr>
+        <h1>Краткая аннотация на используемые лекарственные препараты</h1>
+        <div class="annotation" id="annotation">
+            <div class="annotation_form" id="annotation_form">
+                <input type="file" name="annotation">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="annotation_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="annotation_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='annotation_form', parentId='annotation')">Добавить поле</button>
+
+        <hr>
+        <h1>Профессиональные автобиографии исследователей</h1>
+        <div class="autobiography" id="autobiography">
+            <div class="autobiography_form" id="autobiography_form">
+                <input type="file" name="autobiography">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="autobiography_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="autobiography_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='autobiography_form', parentId='autobiography')">Добавить поле</button>
+
+    </div>
+
+<script src="{% static 'js/fileInput.js' %}"></script>
+<script src="{% static 'js/loadForm.js' %}"></script>
