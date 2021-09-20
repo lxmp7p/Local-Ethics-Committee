@@ -11,9 +11,9 @@ import random
 
 now = datetime.datetime.now()
 
-def AddResearch(request=None, researchType=None, requestType=None):
+def AddResearch(request=None, researchType=None, requestType=None, relationshipStatus=None):
     dateAccepted = 's'
-    if requestType == "secondRelationRequest":
+    if relationshipStatus == "true":
         parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
         dateAccepted = request.POST.get("date_accepted")
         if request.POST.get("date_accepted") == '':
@@ -23,6 +23,7 @@ def AddResearch(request=None, researchType=None, requestType=None):
         identityCode = createIdentityCode()
         dateAccepted = None
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
+    folderName = getValidPath(folderName)
     saveFiles(request.FILES, request.POST, folderName, researchId)
 
 
@@ -82,7 +83,7 @@ def getFileInfo(filesInfo, file):
 
 def saveFiles(files, filesInfo, folderName, researchId):
     """Сохранение файлов и запись в БД информации о них"""
-    folder_name = f'/{str(now.strftime("%Y"))}/{folderName}/'
+    folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
     fs = FileSystemStorage()
     fs.base_location = fs.base_location + folder_name
     filesInfo = filesInfo.copy()
@@ -91,7 +92,7 @@ def saveFiles(files, filesInfo, folderName, researchId):
         fileList = files.getlist(file)
         for myFile in fileList:
             # Удаляем нежелательные символы в имена файла
-            filename = re.sub('[!@#$*]', '', myFile.name)
+            filename = getValidPath(myFile.name)
             # Сохранение файла на сервере
             fs.save(filename, myFile)
             # Запись данных в БД
@@ -107,3 +108,42 @@ def createIdentityCode():
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
     size = 8
     return ''.join(random.choice(chars) for x in range(size,20))
+
+
+def getResearchHistory(researchId):
+    """Выдает текущее исследование, список файлов и историю"""
+    research = Research.objects.get(id=researchId)
+    filesList = Files.objects.filter(research=research)
+    history = []
+    relatedResearchs = Research.objects.filter(identityCode=research.identityCode).order_by('-date_accepted')
+    for historyResearch in relatedResearchs:
+        historyFiles = Files.objects.filter(research=research)
+        history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
+    return research, filesList, history
+
+
+def getMainResearchsList(researchType):
+    """Выдает список самых новых исследований с уникальным identityCode"""
+    allResearch = Research.objects.filter(type=researchType).order_by('-date_accepted')
+    researchList = []
+    for notFiltredResearch in allResearch:
+        if researchList:
+            have = False
+            for research in researchList:
+                if notFiltredResearch.identityCode == research.identityCode:
+                    have = True
+                    if research.date_accepted == None:
+                        research = notFiltredResearch
+                        have = False
+                    elif notFiltredResearch.date_accepted > research.date_accepted:
+                        research = notFiltredResearch
+                        have = False
+            if not have:
+                researchList.append(notFiltredResearch)
+                have = False
+        else: 
+            researchList.append(allResearch[0])
+    return researchList
+
+def getValidPath(path):
+    return re.sub('[!@#$*/\\\\ ]', '-', path)
