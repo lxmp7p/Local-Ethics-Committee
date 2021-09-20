@@ -79,6 +79,8 @@ def getFileInfo(filesInfo, file):
     if filesInfo.get(file + '_version'):
         version = filesInfo[file+'_version'].pop(0)[0:]
     name = file
+    if filesInfo.get(file + '_name'):
+        name = filesInfo[file + '_name'].pop(0)[0:]
     return date, version, name, filesInfo
 
 def saveFiles(files, filesInfo, folderName, researchId):

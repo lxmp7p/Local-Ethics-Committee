@@ -42,6 +42,7 @@
         <div class="another_document" id="another_document">
             <div class="another_document_form" id="another_document_form">
                 <input type="file" name="another_document">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Название документа" name="another_document_name">
                 <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="another_document_version">
                 <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="another_document_date">
             </div>
@@ -49,6 +50,7 @@
         <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='another_document_form', parentId='another_document')">Добавить поле</button>
         <button type="submit">Конец</button>
         <input hidden="true" value="1" name="research">
+        </div>
     </div>
 </form>
 {% endblock %}
