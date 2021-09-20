@@ -1,0 +1,112 @@
+<div>
+        <button type="button" class="btn btn-secondary" id="firstResearchBtn" onclick="firstResearch()">Первичная заявка</button>
+        <button type="button" class="btn btn-secondary" id="secondResearchBtn" onclick="secondResearch()">Вторичная заявка</button>
+</div>
+<br>
+<div>
+        <button type="button" class="btn btn-secondary" id="relationshipTrueBtn" onclick="relationshipTrue()">С привязкой</button>
+        <button type="button" class="btn btn-secondary" id="relationshipFalseBtn" onclick="relationshipFalse()">Без привязки</button>
+</div>
+<br>
+<div id='relationshipDiv' hidden="true">
+        <button type="button" class="btn btn-secondary" id="old_version_button" onclick="date_accepted_set_visible_false()">Старое исследование</button>
+        <button type="button" class="btn btn-info" id="new_version_button" onclick="date_accepted_set_visible_true()">Новое исследование</button>
+        <select name="relationResearchId" id="relationResearchId" class="js-selectize" placeholder="Выберите исследование">
+        <br>
+        <option value=""></option>
+                {% for research in researchList %}
+                <option value="{{ research.id }}">{{ research.protocol_number }}</option>
+                {% endfor %}
+        </select>
+<div class='calendar' id='date' hidden="true" >
+        Дата заседания:
+        <input placeholder="Дата заседания" name="date_accepted" class="form-control" type="date" id="dateInput">
+</div>
+<script>
+        function date_accepted_set_visible_false()
+        {
+            document.getElementById("date").hidden = false
+            document.getElementById("new_version_button").disabled = false
+            document.getElementById("old_version_button").disabled = true
+            document.getElementById("dateInput").required =true
+        }
+        function date_accepted_set_visible_true()
+        {
+            document.getElementById("date").hidden = true
+            document.getElementById("old_version_button").disabled = false
+            document.getElementById("new_version_button").disabled = true
+            document.getElementById("dateInput").required = false
+        }
+</script>
+
+<div id="loadForm">
+<button type="button" class="btn btn-warning" id="getInfoBtn">Внести данные из привязаного исследования</button>
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+$("#getInfoBtn").click(function(){
+    var id = $('#relationResearchId').val();
+    console.log(id);
+    $.ajax({
+        url: "/research/ajax/get_research_info/",
+        type: 'GET', // This is the default though, you don't actually need to always mention it
+        data:{
+            relationResearchId: id,
+        },
+        success: function(data) {
+            $('#protocol_number').val(data.protocolNumber);
+            $('#protocol_name').val(data.protocolName);
+            $('#drug_name').val(data.drugName);
+            $('#main_researcher').val(data.mainResearcher);
+            $('#research_center').val(data.researchCenter);
+            $('#customer').val(data.customer);
+            $('#customer_contacts').val(data.customerContacts);
+            $('#duration').val(data.duration);
+
+            $('#name_research').val(data.protocolNumber);
+            $('#managers').val(data.protocolName);
+            $('#specialization').val(data.drugName);
+            $('#executor').val(data.mainResearcher);
+            $('#division').val(data.researchCenter);
+            $('#work_name').val(data.customer);
+        },
+        failure: function(data) { 
+            alert('Got an error dude');
+        }
+    });
+})
+});
+</script>
+
+
+<input name="typeRequest" id="typeRequest" hidden="true">
+<input name="relationshipStatus" id="relationshipStatus" hidden="true">
+
+<script>
+    function firstResearch() {
+        document.getElementById('firstResearchBtn').disabled = true
+        document.getElementById('secondResearchBtn').disabled = false
+        document.getElementById('typeRequest').value = 'firstRequest'
+    }
+
+    function secondResearch() {
+        document.getElementById('firstResearchBtn').disabled = false
+        document.getElementById('secondResearchBtn').disabled = true
+        document.getElementById('typeRequest').value = 'secondRequest'
+    }
+
+     function relationshipTrue() {
+        document.getElementById('relationshipTrueBtn').disabled = true
+        document.getElementById('relationshipFalseBtn').disabled = false
+        document.getElementById('relationshipStatus').value = 'true'
+        document.getElementById('relationshipDiv').hidden = false
+    }
+
+    function relationshipFalse() {
+        document.getElementById('relationshipTrueBtn').disabled = false
+        document.getElementById('relationshipFalseBtn').disabled = true
+        document.getElementById('relationshipStatus').value = 'false'
+        document.getElementById('relationshipDiv').hidden = true
+    }
+</script>       

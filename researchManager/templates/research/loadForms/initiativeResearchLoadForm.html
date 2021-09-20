@@ -1,14 +1,9 @@
 {% load static %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% include "research/loadForms/setCalendar.html" %}
     <div id="loadForm">
         <div class="researchInfo">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="work_name" placeholder="Название работы">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="work_name" placeholder="Специальность">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="division" placeholder="Название подразделения">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="executor" placeholder="Ответственный исполнитель работы">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="work_name" placeholder="Научные руководители">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_research" placeholder="Название исследования">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="main_researcher" placeholder="Главные исследователи">
+            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="division" placeholder="Наименование подразделения">
         </div>
 
         <hr>
@@ -99,11 +94,6 @@
             </div>
         </div>
         <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='approval_form', parentId='approval')">Добавить поле</button>
-
-        <button type="submit">Конец</button>
-        <input hidden="true" value="1" name="research">
-    </div>
-</form>
 
 <script src="{% static 'js/fileInput.js' %}"></script>
 <script src="{% static 'js/loadForm.js' %}"></script>

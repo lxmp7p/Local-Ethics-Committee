@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if research.type == "clinicalResearch" %}
+  {% include "research/watchResearch/clinicalResearch.html" %}
+{% endif %}
+
+{% if research.type == "preclinicalResearch" %}
+  {% include "research/watchResearch/preclinicalResearch.html" %}
+{% endif %}
+
+{% if research.type == "initiativeResearch" %}
+  {% include "research/watchResearch/initiativeResearch.html" %}
+{% endif %}
+
+{% if research.type == "doclinicalResearch" %}
+  {% include "research/watchResearch/doclinicalResearch.html" %}
+{% endif %}
+
+{% if filesList %}
+  <div class="col-12 text-center">
+    <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">Название документа</th>
+              <th scope="col">Версия</th>
+              <th scope="col">Дата</th>
+              <th scope="col">Открыть</th>
+            </tr>
+        </thead>
+      <tbody>
+      {% for file in filesList %}
+        <tr>
+          <td>{{ file.name }}</td>
+          <td>{{ file.version }} </td>
+          <td>{{ file.date }} </td>
+          <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+
+<div class="col-12 text-center">
+      <table class="table" >
+        <thead>
+          <tr >
+            <th scope="col">Номер протокола</th>
+            <th scope="col">Дата заседания</th>
+            <th scope="col">Открыть</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for relatedResearch in history %}
+          {% if relatedResearch.historyResearch == research %}
+              <tr class="table-success">
+          {% else %}
+              <tr>
+          {% endif %}
+              <th scope="row">{{relatedResearch.historyResearch}}</th>
+              <td>{{relatedResearch.historyResearch.date_accepted}}</td>
+              <td>
+          {% if relatedResearch.historyResearch != research %}
+              <form action="{% url 'watchResearch' relatedResearch.historyResearch.id %}">
+                <button type="submit" class="btn btn-info">Открыть</button></td>
+              </form>
+          {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+  </div>
+
+{% endblock %}
