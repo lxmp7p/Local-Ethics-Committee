@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 
 from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm
@@ -7,7 +8,7 @@ import re
 from collections import defaultdict
 import string
 import random
-
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE # these are action flags from the docs
 
 now = datetime.datetime.now()
 
@@ -25,6 +26,16 @@ def AddResearch(request=None, researchType=None, requestType=None):
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
     saveFiles(request.FILES, request.POST, folderName, researchId)
 
+def get_typeResearch(typeEng):
+    if typeEng == 'clinicalResearch':
+        return "Клиническое исследование"
+    if typeEng == 'preclinicalResearch':
+        return "Доклиническое исследование"
+    if typeEng == 'initiativeResearch':
+        return "Инициативное исследование"
+    if typeEng == 'dissertationWork':
+        return "Диссертационная работа"
+    raise ValueError('Undefined type Research: {}'.format(str))
 
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
@@ -57,6 +68,31 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.date_accepted=dateAccepted
         informationForm.save()
     researchId = Research.objects.all().last()
+
+    researchList = getMainResearchsList(researchType)
+
+    for research in researchList:
+        if informationForm.identityCode == research.identityCode:
+            LogEntry.objects.log_action(
+                user_id=request.user.id,
+                content_type_id=ContentType.objects.get_for_model(Research).pk,
+                bject_repr=informationForm.protocol_number, 
+                object_id=researchId.id,
+                change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+                action_flag=CHANGE)
+        else:
+            LogEntry.objects.log_action(
+                user_id=request.user.id,
+                content_type_id=ContentType.objects.get_for_model(Research).pk,
+                bject_repr=informationForm.protocol_number, 
+                object_id=researchId.id,
+                change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+                action_flag=ADDITION)
+   
+    
+
+    
+
     return folderName, researchId.id
 
 def AddPreclinicalResearch(request, idResearch):
