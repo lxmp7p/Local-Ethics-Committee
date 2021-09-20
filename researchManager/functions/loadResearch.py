@@ -37,6 +37,8 @@ def get_typeResearch(typeEng):
         return "Диссертационная работа"
     raise ValueError('Undefined type Research: {}'.format(str))
 
+
+
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
     Добавление клинического исследования
@@ -66,32 +68,36 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.owner=request.user.username
         informationForm.type=researchType
         informationForm.date_accepted=dateAccepted
+        
+        researchList = getMainResearchsList(researchType)
+        checkidentityCode = False
+        for research in researchList:
+            if informationForm.identityCode == research.identityCode:
+                checkidentityCode = True
+                break
+        
         informationForm.save()
     researchId = Research.objects.all().last()
 
-    researchList = getMainResearchsList(researchType)
-
-    for research in researchList:
-        if informationForm.identityCode == research.identityCode:
-            LogEntry.objects.log_action(
-                user_id=request.user.id,
-                content_type_id=ContentType.objects.get_for_model(Research).pk,
-                bject_repr=informationForm.protocol_number, 
-                object_id=researchId.id,
-                change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-                action_flag=CHANGE)
-        else:
-            LogEntry.objects.log_action(
-                user_id=request.user.id,
-                content_type_id=ContentType.objects.get_for_model(Research).pk,
-                bject_repr=informationForm.protocol_number, 
-                object_id=researchId.id,
-                change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-                action_flag=ADDITION)
-   
     
-
     
+    if checkidentityCode == True:
+        LogEntry.objects.log_action(
+            user_id=request.user.id,
+            content_type_id=ContentType.objects.get_for_model(Research).pk,
+            object_repr=informationForm.protocol_number, 
+            object_id=researchId.id,
+            change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+            action_flag=CHANGE)
+    else:
+        LogEntry.objects.log_action(
+            user_id=request.user.id,
+            content_type_id=ContentType.objects.get_for_model(Research).pk,
+            object_repr=informationForm.protocol_number, 
+            object_id=researchId.id,
+            change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+            action_flag=ADDITION)
+
 
     return folderName, researchId.id
 
@@ -107,7 +113,7 @@ def getFileInfo(filesInfo, file):
         name = filesInfo[file + '_name'].pop(0)[0:]
     return date, version, name, filesInfo
 
-def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
+def saveFiles(files, filesInfo, folderName, researchId):
     """Сохранение файлов и запись в БД информации о них"""
    # if parentResearch:
       #  Files.objects.aggregate(Max('research'))
