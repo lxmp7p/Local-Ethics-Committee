@@ -24,7 +24,7 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
         dateAccepted = None
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
     folderName = getValidPath(folderName)
-    saveFiles(request.FILES, request.POST, folderName, researchId)
+    saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
 
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
@@ -71,8 +71,11 @@ def getFileInfo(filesInfo, file):
         name = filesInfo[file + '_name'].pop(0)[0:]
     return date, version, name, filesInfo
 
-def saveFiles(files, filesInfo, folderName, researchId):
+def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
+   # if parentResearch:
+      #  Files.objects.aggregate(Max('research'))
+       # parentFiles = Files.objects.all(research_id=parentResearch)
     folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
     fs = FileSystemStorage()
     fs.base_location = fs.base_location + folder_name
