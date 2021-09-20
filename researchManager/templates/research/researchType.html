@@ -4,10 +4,10 @@
     <tbody>
         {% if method == "loadResearch" %}
         <tr>
-            <td><a href="{% url 'researchRequestTypeList' 'clinicalResearch' %}">Клиническое исследование</a></td>
-            <td><a href="{% url 'researchRequestTypeList' 'preclinicalResearch' %}">Доклиническое исследование</a></td>
-            <td><a href="{% url 'researchRequestTypeList' 'initiativeResearch' %}">Инициативное исследование</a></td>
-            <td><a href="{% url 'researchRequestTypeList' 'dissertationWork' %}">Диссертационная работа</a></td>
+            <td><a href="{% url 'loadResearch' 'clinicalResearch' %}">Клиническое исследование</a></td>
+            <td><a href="{% url 'loadResearch' 'preclinicalResearch' %}">Доклиническое исследование</a></td>
+            <td><a href="{% url 'loadResearch' 'initiativeResearch' %}">Инициативное исследование</a></td>
+            <td><a href="{% url 'loadResearch' 'dissertationWork' %}">Диссертационная работа</a></td>
         </tr>
         {% endif %}
         {% if method == "watchResearch" %}

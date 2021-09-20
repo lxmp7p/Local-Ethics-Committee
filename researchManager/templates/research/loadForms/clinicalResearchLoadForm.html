@@ -1,38 +1,4 @@
 {% load static %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% include "research/loadForms/setCalendar.html" %}
-    <div id="loadForm">
-        <button type="button" class="btn btn-warning" id="getInfoBtn">Внести данные из привязаного исследования</button>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $("#getInfoBtn").click(function(){
-            var id = $('#relationResearchId').val();
-            console.log(id);
-            $.ajax({
-                url: "/research/ajax/get_research_info/",
-                type: 'GET', // This is the default though, you don't actually need to always mention it
-                data:{
-                    relationResearchId: id,
-                },
-                success: function(data) {
-                    $('#protocol_number').val(data.protocolNumber);
-                    $('#protocol_name').val(data.protocolName);
-                    $('#drug_name').val(data.drugName);
-                    $('#main_researcher').val(data.mainResearcher);
-                    $('#research_center').val(data.researchCenter);
-                    $('#customer').val(data.customer);
-                    $('#customer_contacts').val(data.customerContacts);
-                    $('#duration').val(data.duration);
-                    console.log(data.protocolNumber);
-                },
-                failure: function(data) { 
-                    alert('Got an error dude');
-                }
-            });
-        })
-    });
-    </script>
         <div class="researchInfo">
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_number" name="protocol_number" placeholder="Номер протокола">
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_name" name="protocol_name" placeholder="Название протокола">
@@ -79,6 +45,17 @@
         <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='permit_form', parentId='permit')">Добавить поле</button>
 
         <hr>
+        <h1>Протокол исследования</h1>
+        <div class="protocol" id="protocol">
+            <div class="protocol_form" id="protocol_form">
+                <input type="file" name="protocol">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="protocol_version">
+                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="protocol_date">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='protocol_form', parentId='protocol')">Добавить поле</button>
+
+        <hr>
         <h1>Форма информированого листка</h1>
         <div class="inform_list" id="inform_list">
             <div class="inform_list_form" id="inform_list_form">
@@ -111,11 +88,6 @@
             </div>
         </div>
         <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button>
-
-        <button type="submit">Конец</button>
-        <input hidden="true" value="1" name="research">
-    </div>
-</form>
 
 <script src="{% static 'js/fileInput.js' %}"></script>
 <script src="{% static 'js/loadForm.js' %}"></script>

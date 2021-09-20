@@ -1,7 +1,4 @@
 {% load static %}
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% include "research/loadForms/setCalendar.html" %}
     <div id="loadForm">
         <div class="researchInfo">
             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="work_name" placeholder="Название работы">
@@ -53,11 +50,6 @@
             </div>
         </div>
         <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='autobiography_form', parentId='autobiography')">Добавить поле</button>
-
-        <button type="submit">Конец</button>
-        <input hidden="true" value="1" name="research">
-    </div>
-</form>
 
 <script src="{% static 'js/fileInput.js' %}"></script>
 <script src="{% static 'js/loadForm.js' %}"></script>

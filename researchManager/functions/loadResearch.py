@@ -12,9 +12,9 @@ from django.contrib.admin.models import LogEntry, ADDITION, CHANGE # these are a
 
 now = datetime.datetime.now()
 
-def AddResearch(request=None, researchType=None, requestType=None):
+def AddResearch(request=None, researchType=None, requestType=None, relationshipStatus=None):
     dateAccepted = 's'
-    if requestType == "secondRelationRequest":
+    if relationshipStatus == "true":
         parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
         dateAccepted = request.POST.get("date_accepted")
         if request.POST.get("date_accepted") == '':
@@ -95,17 +95,6 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
 
     return folderName, researchId.id
 
-def AddPreclinicalResearch(request, idResearch):
-    """Добавление доклинического исследования"""
-    work_name = None
-    informationForm = PreclinicalResearchInformationForm(request.POST)
-    if informationForm.is_valid():
-        informationForm = informationForm.save(commit=False)
-
-        informationForm.info_research_id = idResearch
-        informationForm.save()
-    return work_name
-
 def getFileInfo(filesInfo, file):
     """Выдает информацию и пути к файлу, а так же название документа, версию и его дату"""
     date, version, name = '', '', ''
@@ -114,11 +103,16 @@ def getFileInfo(filesInfo, file):
     if filesInfo.get(file + '_version'):
         version = filesInfo[file+'_version'].pop(0)[0:]
     name = file
+    if filesInfo.get(file + '_name'):
+        name = filesInfo[file + '_name'].pop(0)[0:]
     return date, version, name, filesInfo
 
-def saveFiles(files, filesInfo, folderName, researchId):
+def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
-    folder_name = f'/{str(now.strftime("%Y"))}/{folderName}/'
+   # if parentResearch:
+      #  Files.objects.aggregate(Max('research'))
+       # parentFiles = Files.objects.all(research_id=parentResearch)
+    folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
     fs = FileSystemStorage()
     fs.base_location = fs.base_location + folder_name
     filesInfo = filesInfo.copy()
@@ -127,7 +121,7 @@ def saveFiles(files, filesInfo, folderName, researchId):
         fileList = files.getlist(file)
         for myFile in fileList:
             # Удаляем нежелательные символы в имена файла
-            filename = re.sub('[!@#$*]', '', myFile.name)
+            filename = getValidPath(myFile.name)
             # Сохранение файла на сервере
             fs.save(filename, myFile)
             # Запись данных в БД
@@ -138,12 +132,10 @@ def saveFiles(files, filesInfo, folderName, researchId):
                 date=date, version=version, name=name
             )
 
-
 def createIdentityCode():
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
     size = 8
     return ''.join(random.choice(chars) for x in range(size,20))
-
 
 def getResearchHistory(researchId):
     """Выдает текущее исследование, список файлов и историю"""
@@ -156,7 +148,6 @@ def getResearchHistory(researchId):
         history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
     return research, filesList, history
 
-
 def getMainResearchsList(researchType):
     """Выдает список самых новых исследований с уникальным identityCode"""
     allResearch = Research.objects.filter(type=researchType).order_by('-date_accepted')
@@ -167,7 +158,10 @@ def getMainResearchsList(researchType):
             for research in researchList:
                 if notFiltredResearch.identityCode == research.identityCode:
                     have = True
-                    if notFiltredResearch.date_accepted > research.date_accepted:
+                    if research.date_accepted or notFiltredResearch.date_accepted == None:
+                        research = notFiltredResearch
+                        have = False
+                    elif notFiltredResearch.date_accepted > research.date_accepted:
                         research = notFiltredResearch
                         have = False
             if not have:
@@ -176,3 +170,6 @@ def getMainResearchsList(researchType):
         else: 
             researchList.append(allResearch[0])
     return researchList
+
+def getValidPath(path):
+    return re.sub('[!@#$*/\\\\ ]', '-', path)

@@ -1,0 +1,18 @@
+<div class="col-sm text-center">
+    <div class="d-inline">
+        {% if research.date_accepted %}
+          <h2>Дата принятия</h2>
+          {{ research.date_accepted }}
+        {% endif %}
+        <h1>Название работы</h1>
+        {{ research.work_name }}
+        <h1>Специальность</h1>
+        {{ research.specialization }}
+        <h1>Название подразделения</h1>
+        {{ research.division }}
+        <h1>Ответственный исполнитель работы</h1>
+        {{ research.executor }}
+        <h1>Научные руководители</h1>
+        {{ research.main_researcher }}
+    </div>
+</div>
