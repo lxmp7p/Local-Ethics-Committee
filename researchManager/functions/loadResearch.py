@@ -13,16 +13,15 @@ from django.contrib.admin.models import LogEntry, ADDITION, CHANGE # these are a
 now = datetime.datetime.now()
 
 def AddResearch(request=None, researchType=None, requestType=None, relationshipStatus=None):
-    dateAccepted = 's'
+    parentResearch = None
+    dateAccepted = None
+    if request.POST.get("date_accepted"):
+        dateAccepted = request.POST.get("date_accepted")
     if relationshipStatus == "true":
         parentResearch = Research.objects.filter(id=request.POST.get("relationResearchId")).order_by('-date_accepted').last()
-        dateAccepted = request.POST.get("date_accepted")
-        if request.POST.get("date_accepted") == '':
-            dateAccepted = None
         identityCode = parentResearch.identityCode
     else:
         identityCode = createIdentityCode()
-        dateAccepted = None
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
     folderName = getValidPath(folderName)
     saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
@@ -105,7 +104,9 @@ def getFileInfo(filesInfo, file):
 
 def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
-    folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/{str(parentResearch.version + 1)}/')
+    folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
+    if parentResearch and parentResearch.version:
+        folder_name += (f"{parentResearch.version + 1}/")
     fs = FileSystemStorage()
     fs.base_location = fs.base_location + folder_name
     filesInfo = filesInfo.copy()

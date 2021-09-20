@@ -13,7 +13,7 @@ class ClinicalResearchInformationForm(forms.ModelForm):
         fields = (
             'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
             "protocol_name", "drug_name", "main_researcher", "research_center",
-            "customer", "customer_contacts", "duration",  "protocol_number", 
+            "customer", "customer_contacts", "duration",  "protocol_number", "identityCode"
         )
 
 
@@ -23,7 +23,7 @@ class PreclinicalResearchInformationForm(forms.ModelForm):
         model = Research
         fields = (
             'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
-            "work_name", "division", "executor",
+            "work_name", "division", "executor", "identityCode"
         )
 
 
@@ -33,7 +33,7 @@ class InitiativeResearchInformationForm(forms.ModelForm):
         model = Research
         fields = (
             'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
-            "name_research", "main_researcher", "division",
+            "name_research", "main_researcher", "division", "identityCode"
         )
 
 
@@ -43,7 +43,7 @@ class DissertationWorkInformationForm(forms.ModelForm):
         model = Research
         fields = (
             'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
-            "name_research", "main_researcher", "division",
+            "name_research", "main_researcher", "division", "identityCode"
         )
 
 

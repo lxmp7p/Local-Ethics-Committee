@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-
+  {% csrf_token %}
 {% if research.type == "clinicalResearch" %}
   {% include "research/watchResearch/clinicalResearch.html" %}
 {% endif %}
@@ -26,6 +26,7 @@
               <th scope="col">Версия</th>
               <th scope="col">Дата</th>
               <th scope="col">Открыть</th>
+              <th scope="col">Удалить</th>
             </tr>
         </thead>
       <tbody>
@@ -34,14 +35,17 @@
           <td>{{ file.name }}</td>
           <td>{{ file.version }} </td>
           <td>{{ file.date }} </td>
-          <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
+          <form method="POST" action="{research.id file.id}">
+            {% csrf_token %}
+            <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
+              <td><button class="btn btn-danger" type="submit" name="idFile">Удалить</button></td>
         </tr>
-      {% endfor %}
+      </form>
+        {% endfor %}
       </tbody>
     </table>
   </div>
 {% endif %}
-
 <div class="col-12 text-center">
       <table class="table" >
         <thead>
@@ -72,5 +76,8 @@
         </tbody>
       </table>
   </div>
-
+</tr>
+</tbody>
+</table>
+</div>
 {% endblock %}
