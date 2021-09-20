@@ -101,10 +101,6 @@ def createIdentityCode():
     size = 8
     return ''.join(random.choice(chars) for x in range(size,20))
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a99bd6f4173409fcb56d7cd86c793064cf4599aa
 def getResearchHistory(researchId):
     """Выдает текущее исследование, список файлов и историю"""
     research = Research.objects.get(id=researchId)
@@ -116,10 +112,6 @@ def getResearchHistory(researchId):
         history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
     return research, filesList, history
 
-<<<<<<< HEAD
-=======
-
->>>>>>> a99bd6f4173409fcb56d7cd86c793064cf4599aa
 def getMainResearchsList(researchType):
     """Выдает список самых новых исследований с уникальным identityCode"""
     allResearch = Research.objects.filter(type=researchType).order_by('-date_accepted')
@@ -130,11 +122,7 @@ def getMainResearchsList(researchType):
             for research in researchList:
                 if notFiltredResearch.identityCode == research.identityCode:
                     have = True
-<<<<<<< HEAD
                     if research.date_accepted or notFiltredResearch.date_accepted == None:
-=======
-                    if research.date_accepted == None:
->>>>>>> a99bd6f4173409fcb56d7cd86c793064cf4599aa
                         research = notFiltredResearch
                         have = False
                     elif notFiltredResearch.date_accepted > research.date_accepted:
@@ -145,11 +133,7 @@ def getMainResearchsList(researchType):
                 have = False
         else: 
             researchList.append(allResearch[0])
-<<<<<<< HEAD
     return researchList
 
 def getValidPath(path):
     return re.sub('[!@#$*/\\\\ ]', '-', path)
-=======
-    return researchList
->>>>>>> a99bd6f4173409fcb56d7cd86c793064cf4599aa
