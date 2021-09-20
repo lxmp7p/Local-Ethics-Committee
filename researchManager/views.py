@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.contenttypes.models import ContentType
+from django.http import request
 from django.shortcuts import render, HttpResponse
 from django.views.generic import View
 from .functions.loadResearch import AddResearch, getResearchHistory, getMainResearchsList
