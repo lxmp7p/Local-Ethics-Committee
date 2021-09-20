@@ -26,7 +26,6 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
     folderName = getValidPath(folderName)
     saveFiles(request.FILES, request.POST, folderName, researchId)
 
-
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
     Добавление клинического исследования
@@ -59,17 +58,6 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.save()
     researchId = Research.objects.all().last()
     return folderName, researchId.id
-
-def AddPreclinicalResearch(request, idResearch):
-    """Добавление доклинического исследования"""
-    work_name = None
-    informationForm = PreclinicalResearchInformationForm(request.POST)
-    if informationForm.is_valid():
-        informationForm = informationForm.save(commit=False)
-
-        informationForm.info_research_id = idResearch
-        informationForm.save()
-    return work_name
 
 def getFileInfo(filesInfo, file):
     """Выдает информацию и пути к файлу, а так же название документа, версию и его дату"""
@@ -105,12 +93,10 @@ def saveFiles(files, filesInfo, folderName, researchId):
                 date=date, version=version, name=name
             )
 
-
 def createIdentityCode():
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
     size = 8
     return ''.join(random.choice(chars) for x in range(size,20))
-
 
 def getResearchHistory(researchId):
     """Выдает текущее исследование, список файлов и историю"""
@@ -123,7 +109,6 @@ def getResearchHistory(researchId):
         history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
     return research, filesList, history
 
-
 def getMainResearchsList(researchType):
     """Выдает список самых новых исследований с уникальным identityCode"""
     allResearch = Research.objects.filter(type=researchType).order_by('-date_accepted')
@@ -134,7 +119,7 @@ def getMainResearchsList(researchType):
             for research in researchList:
                 if notFiltredResearch.identityCode == research.identityCode:
                     have = True
-                    if research.date_accepted == None:
+                    if research.date_accepted or notFiltredResearch.date_accepted == None:
                         research = notFiltredResearch
                         have = False
                     elif notFiltredResearch.date_accepted > research.date_accepted:
