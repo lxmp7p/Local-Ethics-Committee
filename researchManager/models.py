@@ -24,6 +24,8 @@ class Research(models.Model):
     customer = models.CharField("Заказчик", max_length=500, null=True, blank=True)
     customer_contacts = models.CharField("Контактные данные заказчика", max_length=500, null=True, blank=True)
     duration = models.DateTimeField("Дата окончания исследования", null=True, blank=True)
+    version = models.IntegerField("Версия", null=True, blank=True)
+    
 
     class Meta:
         verbose_name = "Исследование"

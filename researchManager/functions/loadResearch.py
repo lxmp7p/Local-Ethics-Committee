@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 
 from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm
@@ -7,14 +8,14 @@ import re
 from collections import defaultdict
 import string
 import random
-
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE # these are action flags from the docs
 
 now = datetime.datetime.now()
 
 def AddResearch(request=None, researchType=None, requestType=None, relationshipStatus=None):
     dateAccepted = 's'
     if relationshipStatus == "true":
-        parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
+        parentResearch = Research.objects.filter(id=request.POST.get("relationResearchId")).order_by('-date_accepted').last()
         dateAccepted = request.POST.get("date_accepted")
         if request.POST.get("date_accepted") == '':
             dateAccepted = None
@@ -25,6 +26,17 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
     folderName = getValidPath(folderName)
     saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
+
+def get_typeResearch(typeEng):
+    if typeEng == 'clinicalResearch':
+        return "Клиническое исследование"
+    if typeEng == 'preclinicalResearch':
+        return "Доклиническое исследование"
+    if typeEng == 'initiativeResearch':
+        return "Инициативное исследование"
+    if typeEng == 'dissertationWork':
+        return "Диссертационная работа"
+    raise ValueError('Undefined type Research: {}'.format(str))
 
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
@@ -57,6 +69,26 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.date_accepted=dateAccepted
         informationForm.save()
     researchId = Research.objects.all().last()
+
+    researchList = getMainResearchsList(researchType)
+
+    for research in researchList:
+        if informationForm.identityCode == research.identityCode:
+            LogEntry.objects.log_action(
+                user_id=request.user.id,
+                content_type_id=ContentType.objects.get_for_model(Research).pk,
+                object_repr=informationForm.protocol_number, 
+                object_id=researchId.id,
+                change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+                action_flag=CHANGE)
+        else:
+            LogEntry.objects.log_action(
+                user_id=request.user.id,
+                content_type_id=ContentType.objects.get_for_model(Research).pk,
+                object_repr=informationForm.protocol_number, 
+                object_id=researchId.id,
+                change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+                action_flag=ADDITION)
     return folderName, researchId.id
 
 def getFileInfo(filesInfo, file):
@@ -73,14 +105,17 @@ def getFileInfo(filesInfo, file):
 
 def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
-   # if parentResearch:
-      #  Files.objects.aggregate(Max('research'))
-       # parentFiles = Files.objects.all(research_id=parentResearch)
-    folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
+    folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/{str(parentResearch.version + 1)}/')
     fs = FileSystemStorage()
     fs.base_location = fs.base_location + folder_name
     filesInfo = filesInfo.copy()
     myDict = dict(filesInfo.lists())
+    if parentResearch:
+        for file in Files.objects.filter(research=parentResearch):
+            Files.objects.create(
+                file=file.file, research_id=researchId,
+                date=file.date, version=file.version, name=file.name
+            )
     for file in files:
         fileList = files.getlist(file)
         for myFile in fileList:
