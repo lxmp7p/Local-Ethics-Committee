@@ -55,7 +55,3 @@ class WatchResearch(View):
             'filesList': filesList,
             'history': history,
         })
-<<<<<<< HEAD
-=======
-
->>>>>>> editNewVersion

@@ -10,13 +10,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-<<<<<<< HEAD
-        migrations.RemoveField(
-            model_name='research',
-            name='version',
-        ),
-=======
->>>>>>> editNewVersion
         migrations.AlterField(
             model_name='files',
             name='id',

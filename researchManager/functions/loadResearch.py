@@ -23,7 +23,8 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
     else:
         identityCode = createIdentityCode()
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
-    saveFiles(request.FILES, request.POST, folderName, researchId)
+    folderName = getValidPath(folderName)
+    saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
 
 def get_typeResearch(typeEng):
     if typeEng == 'clinicalResearch':
@@ -82,38 +83,26 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
     researchList = getMainResearchsList(researchType)
 
     for research in researchList:
+        if not request.user.id:
+            user_id = 2
+        else: 
+            user_id = request.user.id
         if informationForm.identityCode == research.identityCode:
             LogEntry.objects.log_action(
-                user_id=request.user.id,
+                user_id=user_id,
                 content_type_id=ContentType.objects.get_for_model(Research).pk,
-<<<<<<< HEAD
-                bject_repr=informationForm.protocol_number, 
-=======
                 object_repr=informationForm.protocol_number, 
->>>>>>> editNewVersion
                 object_id=researchId.id,
                 change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
                 action_flag=CHANGE)
         else:
             LogEntry.objects.log_action(
-                user_id=request.user.id,
+                user_id=user_id,
                 content_type_id=ContentType.objects.get_for_model(Research).pk,
-<<<<<<< HEAD
-                bject_repr=informationForm.protocol_number, 
-                object_id=researchId.id,
-                change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-                action_flag=ADDITION)
-   
-    
-
-    
-
-=======
                 object_repr=informationForm.protocol_number, 
                 object_id=researchId.id,
                 change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
                 action_flag=ADDITION)
->>>>>>> editNewVersion
     return folderName, researchId.id
 
 def getFileInfo(filesInfo, file):
@@ -184,6 +173,7 @@ def getMainResearchsList(researchType):
             for research in researchList:
                 if notFiltredResearch.identityCode == research.identityCode:
                     have = True
+                else:
                     if research.date_accepted or notFiltredResearch.date_accepted == None:
                         research = notFiltredResearch
                         have = False
