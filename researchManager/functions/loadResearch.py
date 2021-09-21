@@ -26,28 +26,6 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
     folderName = getValidPath(folderName)
     saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
 
-def get_typeResearch(typeEng):
-    if typeEng == 'clinicalResearch':
-        return "Клиническое исследование"
-    if typeEng == 'preclinicalResearch':
-        return "Доклиническое исследование"
-    if typeEng == 'initiativeResearch':
-        return "Инициативное исследование"
-    if typeEng == 'dissertationWork':
-        return "Диссертационная работа"
-    raise ValueError('Undefined type Research: {}'.format(str))
-
-def get_typeResearch(typeEng):
-    if typeEng == 'clinicalResearch':
-        return "Клиническое исследование"
-    if typeEng == 'preclinicalResearch':
-        return "Доклиническое исследование"
-    if typeEng == 'initiativeResearch':
-        return "Инициативное исследование"
-    if typeEng == 'dissertationWork':
-        return "Диссертационная работа"
-    raise ValueError('Undefined type Research: {}'.format(str))
-
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
     Добавление клинического исследования
@@ -74,35 +52,12 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             folderName = informationForm.work_name
         informationForm.type_request=requestType 
         informationForm.identityCode=identityCode
-        informationForm.owner=request.user.username
+        informationForm.owner=request.user
         informationForm.type=researchType
         informationForm.date_accepted=dateAccepted
         informationForm.save()
     researchId = Research.objects.all().last()
-
     researchList = getMainResearchsList(researchType)
-
-    for research in researchList:
-        if not request.user.id:
-            user_id = 2
-        else: 
-            user_id = request.user.id
-        if informationForm.identityCode == research.identityCode:
-            LogEntry.objects.log_action(
-                user_id=user_id,
-                content_type_id=ContentType.objects.get_for_model(Research).pk,
-                object_repr=informationForm.protocol_number, 
-                object_id=researchId.id,
-                change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-                action_flag=CHANGE)
-        else:
-            LogEntry.objects.log_action(
-                user_id=user_id,
-                content_type_id=ContentType.objects.get_for_model(Research).pk,
-                object_repr=informationForm.protocol_number, 
-                object_id=researchId.id,
-                change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-                action_flag=ADDITION)
     return folderName, researchId.id
 
 def getFileInfo(filesInfo, file):
@@ -120,6 +75,7 @@ def getFileInfo(filesInfo, file):
 def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
     folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
+    print(folder_name)
     if parentResearch and parentResearch.version:
         folder_name += (f"{parentResearch.version + 1}/")
     fs = FileSystemStorage()
