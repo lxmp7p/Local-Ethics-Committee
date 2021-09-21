@@ -35,10 +35,10 @@
           <td>{{ file.name }}</td>
           <td>{{ file.version }} </td>
           <td>{{ file.date }} </td>
-          <form method="POST" action="{research.id file.id}">
+          <form method="POST">
             {% csrf_token %}
             <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
-              <td><button class="btn btn-danger" type="submit" name="idFile">Удалить</button></td>
+              <td><button class="btn btn-danger" type="submit" name="idFile" value='{{ file.id }}'>Удалить</button></td>
         </tr>
       </form>
         {% endfor %}

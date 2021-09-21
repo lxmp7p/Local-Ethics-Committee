@@ -8,15 +8,6 @@ from .models import *
 # Create your views here.
 
 
-class Research(View):
-    def renderResearchWatch(request, researchId):
-        research, filesList, history = getResearchHistory(researchId)
-        return render(request, "research/research.html", {
-            'research': research,
-            'filesList': filesList,
-            'history': history,
-        })
-
 class ResearchListView(View):
     """Переход к нужному типу исследования"""
     def loadResearch(request):
@@ -46,7 +37,7 @@ class LoadResearch(View):
         })
 
 
-class WatchResearch(Research):
+class WatchResearch(View):
     """Просмотр списка исследований в системе"""
     def getResearchList(request, researchType):
         researchList = getMainResearchsList(researchType)
@@ -56,5 +47,12 @@ class WatchResearch(Research):
         })
 
     def getResearch(request, researchId):
-        return Research.renderResearchWatch(request, researchId)
+        if request.POST:
+            Files.objects.get(id=request.POST.get("idFile")).delete()
+        research, filesList, history = getResearchHistory(researchId)
+        return render(request, "research/research.html", {
+            'research': research,
+            'filesList': filesList,
+            'history': history,
+        })
 

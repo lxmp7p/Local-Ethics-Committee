@@ -97,7 +97,7 @@ def getFileInfo(filesInfo, file):
         date = filesInfo[file + '_date'].pop(0)[0:]
     if filesInfo.get(file + '_version'):
         version = filesInfo[file+'_version'].pop(0)[0:]
-    name = file
+    name = getFilename(file)
     if filesInfo.get(file + '_name'):
         name = filesInfo[file + '_name'].pop(0)[0:]
     return date, version, name, filesInfo
@@ -173,3 +173,18 @@ def getMainResearchsList(researchType):
 
 def getValidPath(path):
     return re.sub('[!@#$*/\\\\ ]', '-', path)
+
+def getFilename(filenameEng):
+    filenameRu = "Неизвестный файл"
+    filenameWordlist = {
+        "letter": "Письмо в лэк",
+        "member_list": "Список членов команды",
+        "permit": "Разрешение МЗ РФ",
+        "inform_list": "Информационный листок пациента",
+        "brochure_researcher": "Брошюра исследователя",
+        "protocol": "Протокол исследования",
+    } 
+    for key in filenameWordlist:
+        if key == filenameEng:
+            filenameRu = filenameWordlist.get(key)
+    return filenameRu
