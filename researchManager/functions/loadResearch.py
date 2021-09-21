@@ -13,18 +13,28 @@ from django.contrib.admin.models import LogEntry, ADDITION, CHANGE # these are a
 now = datetime.datetime.now()
 
 def AddResearch(request=None, researchType=None, requestType=None, relationshipStatus=None):
-    dateAccepted = 's'
-    if relationshipStatus == "true":
-        parentResearch = Research.objects.get(id=request.POST.get("relationResearchId"))
+    parentResearch = None
+    dateAccepted = None
+    if request.POST.get("date_accepted"):
         dateAccepted = request.POST.get("date_accepted")
-        if request.POST.get("date_accepted") == '':
-            dateAccepted = None
+    if relationshipStatus == "true":
+        parentResearch = Research.objects.filter(id=request.POST.get("relationResearchId")).order_by('-date_accepted').last()
         identityCode = parentResearch.identityCode
     else:
         identityCode = createIdentityCode()
-        dateAccepted = None
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
     saveFiles(request.FILES, request.POST, folderName, researchId)
+
+def get_typeResearch(typeEng):
+    if typeEng == 'clinicalResearch':
+        return "Клиническое исследование"
+    if typeEng == 'preclinicalResearch':
+        return "Доклиническое исследование"
+    if typeEng == 'initiativeResearch':
+        return "Инициативное исследование"
+    if typeEng == 'dissertationWork':
+        return "Диссертационная работа"
+    raise ValueError('Undefined type Research: {}'.format(str))
 
 def get_typeResearch(typeEng):
     if typeEng == 'clinicalResearch':
@@ -76,7 +86,11 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             LogEntry.objects.log_action(
                 user_id=request.user.id,
                 content_type_id=ContentType.objects.get_for_model(Research).pk,
+<<<<<<< HEAD
                 bject_repr=informationForm.protocol_number, 
+=======
+                object_repr=informationForm.protocol_number, 
+>>>>>>> editNewVersion
                 object_id=researchId.id,
                 change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
                 action_flag=CHANGE)
@@ -84,6 +98,7 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             LogEntry.objects.log_action(
                 user_id=request.user.id,
                 content_type_id=ContentType.objects.get_for_model(Research).pk,
+<<<<<<< HEAD
                 bject_repr=informationForm.protocol_number, 
                 object_id=researchId.id,
                 change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
@@ -93,6 +108,12 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
 
     
 
+=======
+                object_repr=informationForm.protocol_number, 
+                object_id=researchId.id,
+                change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+                action_flag=ADDITION)
+>>>>>>> editNewVersion
     return folderName, researchId.id
 
 def getFileInfo(filesInfo, file):
@@ -102,21 +123,26 @@ def getFileInfo(filesInfo, file):
         date = filesInfo[file + '_date'].pop(0)[0:]
     if filesInfo.get(file + '_version'):
         version = filesInfo[file+'_version'].pop(0)[0:]
-    name = file
+    name = getFilename(file)
     if filesInfo.get(file + '_name'):
         name = filesInfo[file + '_name'].pop(0)[0:]
     return date, version, name, filesInfo
 
 def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
-   # if parentResearch:
-      #  Files.objects.aggregate(Max('research'))
-       # parentFiles = Files.objects.all(research_id=parentResearch)
     folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
+    if parentResearch and parentResearch.version:
+        folder_name += (f"{parentResearch.version + 1}/")
     fs = FileSystemStorage()
     fs.base_location = fs.base_location + folder_name
     filesInfo = filesInfo.copy()
     myDict = dict(filesInfo.lists())
+    if parentResearch:
+        for file in Files.objects.filter(research=parentResearch):
+            Files.objects.create(
+                file=file.file, research_id=researchId,
+                date=file.date, version=file.version, name=file.name
+            )
     for file in files:
         fileList = files.getlist(file)
         for myFile in fileList:
@@ -173,3 +199,18 @@ def getMainResearchsList(researchType):
 
 def getValidPath(path):
     return re.sub('[!@#$*/\\\\ ]', '-', path)
+
+def getFilename(filenameEng):
+    filenameRu = "Неизвестный файл"
+    filenameWordlist = {
+        "letter": "Письмо в лэк",
+        "member_list": "Список членов команды",
+        "permit": "Разрешение МЗ РФ",
+        "inform_list": "Информационный листок пациента",
+        "brochure_researcher": "Брошюра исследователя",
+        "protocol": "Протокол исследования",
+    } 
+    for key in filenameWordlist:
+        if key == filenameEng:
+            filenameRu = filenameWordlist.get(key)
+    return filenameRu

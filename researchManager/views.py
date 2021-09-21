@@ -47,9 +47,15 @@ class WatchResearch(View):
         })
 
     def getResearch(request, researchId):
+        if request.POST:
+            Files.objects.get(id=request.POST.get("idFile")).delete()
         research, filesList, history = getResearchHistory(researchId)
         return render(request, "research/research.html", {
             'research': research,
             'filesList': filesList,
             'history': history,
         })
+<<<<<<< HEAD
+=======
+
+>>>>>>> editNewVersion

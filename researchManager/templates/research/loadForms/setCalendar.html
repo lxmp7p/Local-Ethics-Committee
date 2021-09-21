@@ -1,26 +1,32 @@
 <div>
-        <button type="button" class="btn btn-secondary" id="firstResearchBtn" onclick="firstResearch()">Первичная заявка</button>
-        <button type="button" class="btn btn-secondary" id="secondResearchBtn" onclick="secondResearch()">Вторичная заявка</button>
+    <button type="button" class="btn btn-secondary" id="firstResearchBtn" onclick="firstResearch()">Первичная заявка</button>
+    <button type="button" class="btn btn-secondary" id="secondResearchBtn" onclick="secondResearch()">Вторичная заявка</button>
 </div>
+
 <br>
+
 <div>
-        <button type="button" class="btn btn-secondary" id="relationshipTrueBtn" onclick="relationshipTrue()">С привязкой</button>
-        <button type="button" class="btn btn-secondary" id="relationshipFalseBtn" onclick="relationshipFalse()">Без привязки</button>
+    <button type="button" class="btn btn-secondary" id="relationshipTrueBtn" onclick="relationshipTrue()">С привязкой</button>
+    <button type="button" class="btn btn-secondary" id="relationshipFalseBtn" onclick="relationshipFalse()">Без привязки</button>
 </div>
+
 <br>
+
 <div id='relationshipDiv' hidden="true">
-        <button type="button" class="btn btn-secondary" id="old_version_button" onclick="date_accepted_set_visible_false()">Старое исследование</button>
-        <button type="button" class="btn btn-info" id="new_version_button" onclick="date_accepted_set_visible_true()">Новое исследование</button>
-        <select name="relationResearchId" id="relationResearchId" class="js-selectize" placeholder="Выберите исследование">
+    <select name="relationResearchId" id="relationResearchId" class="js-selectize" placeholder="Выберите исследование">
         <br>
         <option value=""></option>
-                {% for research in researchList %}
+            {% for research in researchList %}
                 <option value="{{ research.id }}">{{ research.protocol_number }}</option>
-                {% endfor %}
-        </select>
+            {% endfor %}
+    </select>
+    <button type="button" class="btn btn-warning" id="getInfoBtn">Внести данные из привязаного исследования</button>
+</div>
+    <button type="button" class="btn btn-secondary" id="old_version_button" onclick="date_accepted_set_visible_false()">Старое исследование</button>
+    <button type="button" class="btn btn-info" id="new_version_button" onclick="date_accepted_set_visible_true()">Новое исследование</button>
 <div class='calendar' id='date' hidden="true" >
-        Дата заседания:
-        <input placeholder="Дата заседания" name="date_accepted" class="form-control" type="date" id="dateInput">
+    Дата заседания:
+    <input placeholder="Дата заседания" name="date_accepted" class="form-control" type="date" id="dateInput">
 </div>
 <script>
         function date_accepted_set_visible_false()
@@ -40,7 +46,6 @@
 </script>
 
 <div id="loadForm">
-<button type="button" class="btn btn-warning" id="getInfoBtn">Внести данные из привязаного исследования</button>
 </div>
 </div>
 <script type="text/javascript">
