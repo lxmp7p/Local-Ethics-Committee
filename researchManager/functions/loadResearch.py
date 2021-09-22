@@ -90,7 +90,6 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.save()
     researchId = Research.objects.all().last()
 
-<<<<<<< HEAD
     researchList = getMainResearchsList(researchType)
 
     for research in researchList:
@@ -114,7 +113,6 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
                 object_id=researchId.id,
                 change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
                 action_flag=ADDITION)
-=======
     
     
     if checkidentityCode == True:
@@ -133,9 +131,6 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             object_id=researchId.id,
             change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
             action_flag=ADDITION)
-
-
->>>>>>> origin/layout
     return folderName, researchId.id
 
 def getFileInfo(filesInfo, file):
@@ -150,7 +145,7 @@ def getFileInfo(filesInfo, file):
         name = filesInfo[file + '_name'].pop(0)[0:]
     return date, version, name, filesInfo
 
-def saveFiles(files, filesInfo, folderName, researchId):
+def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
     folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
     if parentResearch and parentResearch.version:
