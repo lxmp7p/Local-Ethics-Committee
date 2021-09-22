@@ -5,3 +5,9 @@
     cursor: pointer;
 }
 
+.navmen{
+    background-color:white;
+    border: solid;
+    border-color: #303030;
+    border-radius: 30px;
+}

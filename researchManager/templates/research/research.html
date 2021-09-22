@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% block content %}
+
   {% csrf_token %}
 {% if research.type == "clinicalResearch" %}
   {% include "research/watchResearch/clinicalResearch.html" %}
