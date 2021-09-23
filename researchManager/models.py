@@ -1,12 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from datetime import date
 # Create your models here.
 class Research(models.Model):
     """Исследования"""
     type = models.CharField("Тип исследования", max_length=50, null=True, blank=True)
     type_request = models.CharField("Тип заявки", max_length=50, null=True, blank=True)
-    owner = models.CharField("ОВНЕР", max_length=50, null=True, blank=True)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     identityCode = models.CharField("Код исследования", max_length=50, null=True, blank=True)
     date_accepted = models.DateField("Дата одобрения", blank=True, null=True, default="2021-05-05")
     date_created = models.DateTimeField("Дата загрузки в систему", auto_now_add=True, null=True, blank=True)
@@ -25,6 +25,7 @@ class Research(models.Model):
     customer_contacts = models.CharField("Контактные данные заказчика", max_length=500, null=True, blank=True)
     duration = models.DateTimeField("Дата окончания исследования", null=True, blank=True)
     version = models.IntegerField("Версия", null=True, blank=True)
+    addedOnMeeting = models.BooleanField("Добавленно на заседании", default=False)
     
 
     class Meta:
@@ -32,7 +33,40 @@ class Research(models.Model):
         verbose_name_plural = "Исследования"
 
     def __str__(self):
-        return self.protocol_number
+        if self.type == "clinicalResearch":
+            return self.protocol_number
+        if self.type == "preclinicalResearch":
+            return self.work_name
+        if self.type == "initiativeResearch":
+            return self.name_research
+        if self.type == "dissertationWorksList":
+            return self.work_name
+
+    def getType(self):
+        if self.type == "clinicalResearch":
+            return "Клиническое исследование"
+        if self.type == "preclinicalResearch":
+            return "Доклиническое исследование"
+        if self.type == "initiativeResearch":
+            return "Инициативное исследование"
+        if self.type == "dissertationWorksList":
+            return "Диссертационная работа"
+
+    def getDescription(self):
+        if self.type == "clinicalResearch":
+            return self.protocol_name
+        if self.type == "preclinicalResearch":
+            return self.work_name
+        if self.type == "initiativeResearch":
+            return self.name_research
+        if self.type == "dissertationWorksList":
+            return self.work_name
+
+    def getTypeRequest(self):
+        if self.type == "firstRequest":
+            return "Первичная заявка"
+        if self.type == "secondRequest":
+            return "Вторичная заявка"
 
 
 class Files(models.Model):

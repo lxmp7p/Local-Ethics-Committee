@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<script type="text/javascript" src="{% static 'js/createMeeting.js' %}"></script>
+<form method="POST" enctype="multipart/form-data" class="meetingForm">
+    {% csrf_token %}    
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Название</th>
+                        <th scope="col">Тип</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody id='researchList'>
+                    {% for research in researchOnMeetinList %}
+                    <tr>
+                        <th scope="row"><a href="{% url 'watchResearch' research.id %}" target="_blank">{{ research }}</a></th>
+                        <td>{{ research.getType }}</td>
+                        <td><button type="button"  id="{{ research.id }}" class="btn btn-primary" onclick="addInMeetingList(this, 'researchInMeeting', '{{ research }}', '{{ research.id }}')">Добавить</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-5 text-center">
+            <h3>Список исследований</h3>
+            <hr>
+           <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Исследование</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody id="researchInMeeting">
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Список пользователей</h3>
+            <hr>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Пользователь</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody id="userInMeeting">
+                    <tr>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            <hr>
+            <div class="createMenu" id="createMenu">
+                <input type="date" name="date" class="text-center" required style=" width: 80%">
+                <br><br>
+                <input type="time" name="time" class="text-center" required style=" width: 80%">
+                <br><br>
+                <button class="btn btn-success" onclick="setResearchAndUserInPost()">Создать заседание</button>
+            </div>
+        </div>
+
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Пользователь</th>
+                        <th scope="col">Действие</th>
+                    </tr>
+                </thead>
+                <tbody id="userList">
+                    {% for user in userList %}
+                    <tr>
+                        <th scope="row">{{ user.get_full_name }}</th>
+                        <td><button type="button" class="btn btn-primary" id="{{ user.id }}" onclick="addInMeetingList(this, 'userInMeeting', '{{ user }}', '{{ user.id }}')">Добавить</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
+{% endblock %}
