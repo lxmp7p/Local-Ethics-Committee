@@ -1,35 +1,67 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
-
-<div class="container">
+{% include 'inc/_menu.html' %}
+<div class="container">  
     <div class="row">
     {% if method == "loadResearch" %}
       <div  class="col-sm-3">
-        <a href="{% url 'loadResearch' 'clinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" > Клиническое исследование</a>
+        <a href="{% url 'loadResearch' 'clinicalResearch' %}">          
+          <img class="img-fluid" src="{% static 'img/Clinical_studies_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Clinical_studies_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Clinical_studies_Not_Active.png' %}'" />
+        </a>
       </div>
       <div class="col-sm-3">
-        <a href="{% url 'loadResearch' 'preclinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Доклиническое исследование</a>
+        <a href="{% url 'loadResearch' 'preclinicalResearch' %}">          
+          <img class="img-fluid" src="{% static 'img/Preclinical_Studies_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Preclinical_Studies_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Preclinical_Studies_Not_Active.png' %}'" />
+        </a>
       </div>
       <div class="col-sm-3">       
-        <a href="{% url 'loadResearch' 'initiativeResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Инициативное исследование</a>
+        <a href="{% url 'loadResearch' 'initiativeResearch' %}">          
+          <img class="img-fluid" src="{% static 'img/Initiative_Research_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Initiative_Research_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Initiative_Research_Not_Active.png' %}'" />
+        </a>
       </div>
       <div class="col-sm-3">       
-        <a href="{% url 'loadResearch' 'dissertationWork' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Диссертационная работа</a>
+        <a href="{% url 'loadResearch' 'dissertationWork' %}">
+          <img class="img-fluid" src="{% static 'img/Dissertation_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Dissertation_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Dissertation_Not_Active.png' %}'" />
+        </a>
       </div>
       {% endif %}
-      {% if method == "watchResearch" %}
-      <div class="col-sm-3">
-        <a href="{% url 'WatchResearchList' 'clinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Клиническое исследование</a>
+      {% if method == "watchResearch" %}      
+      <div  class="col-sm-3">
+        <a href="{% url 'WatchResearchList' 'clinicalResearch' %}">          
+          <img class="img-fluid" src="{% static 'img/Clinical_studies_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Clinical_studies_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Clinical_studies_Not_Active.png' %}'" />
+        </a>
       </div>
       <div class="col-sm-3">
-        <a href="{% url 'WatchResearchList' 'preclinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Доклиническое исследование</a>
+        <a href="{% url 'WatchResearchList' 'preclinicalResearch' %}">          
+          <img class="img-fluid" src="{% static 'img/Preclinical_Studies_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Preclinical_Studies_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Preclinical_Studies_Not_Active.png' %}'" />
+        </a>
       </div>
       <div class="col-sm-3">       
-        <a href="{% url 'WatchResearchList' 'initiativeResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Инициативное исследование</a>
+        <a href="{% url 'WatchResearchList' 'initiativeResearch' %}">          
+          <img class="img-fluid" src="{% static 'img/Initiative_Research_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Initiative_Research_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Initiative_Research_Not_Active.png' %}'" />
+        </a>
       </div>
       <div class="col-sm-3">       
-        <a href="{% url 'WatchResearchList' 'dissertationWork' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Диссертационная работа</a>
+        <a href="{% url 'WatchResearchList' 'dissertationWork' %}">
+          <img class="img-fluid" src="{% static 'img/Dissertation_Not_Active.png' %}" 
+          onmouseover="this.src='{% static 'img/Dissertation_Active.png' %}'" 
+          onmouseout="this.src='{% static 'img/Dissertation_Not_Active.png' %}'" />
+        </a>
       </div>
       {% endif %}
     </div>

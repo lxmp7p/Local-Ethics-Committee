@@ -5,3 +5,47 @@
     cursor: pointer;
 }
 
+
+
+
+.menu {
+	width: 100%;
+	display: table;
+    border: solid;
+    
+    border-color: #303030;
+    border-radius: 25px;
+    padding:  0;
+}
+.menu ul {
+	display: table-row;
+    
+    
+}
+.menu li {
+	display: table-cell;
+    width: 25%;
+    cursor: pointer;
+	
+}
+.menu ul li:hover  {
+	background: #303030;    
+    border: solid;
+    border-width: 0px 0px 0px 0px;
+    border-color: #303030;
+    border-radius: 25px;
+}
+.menu li:hover > a {
+	color: white;
+}
+
+.menu li a {
+	display: block;
+	color: #303030;
+	text-align: center;
+    margin:  5px;
+    text-decoration: none;
+    
+}
+
+

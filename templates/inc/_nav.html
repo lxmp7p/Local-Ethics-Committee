@@ -1,15 +1,14 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class='form-inline'>
-  <a class="navbar-brand"  href="{% url 'index' %}">Главная</a>
+  <a class="navbar-brand"  href="{% url 'index' %}">Меню</a>
     <div class="dropdown">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Исследования
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'researchTypeList' %}">Загрузка исследований</a>
         <a class="dropdown-item" href="{% url 'ResearchTypeListViewForWatch' %}">Список исследований в системе</a>
       </div>
     </div>
   </div>
     <a href="{% url 'logout' %}">{{ request.user.get_full_name }}</a>
-</nav>
+</nav> <br>
