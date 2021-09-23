@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
+{% load static %}
+<script type="text/javascript" src="{% static 'js/createMeeting.js' %}"></script>
+<form method="POST" enctype="multipart/form-data" class="meetingForm">
+    {% csrf_token %}    
     <div class="row">
         <div class="col">
             <table class="table">
@@ -55,6 +58,14 @@
                     </tr>
                 </tbody>
             </table>
+            <hr>
+            <div class="createMenu" id="createMenu">
+                <input type="date" name="date" class="text-center" required style=" width: 80%">
+                <br><br>
+                <input type="time" name="time" class="text-center" required style=" width: 80%">
+                <br><br>
+                <button class="btn btn-success" onclick="setResearchAndUserInPost()">Создать заседание</button>
+            </div>
         </div>
 
         <div class="col">
@@ -75,41 +86,6 @@
                 </tbody>
             </table>
         </div>
+    </div>
 </form>
-
-<script>
-    function addInMeetingList(self, listId, object, objectId){
-        self.disabled = true;
-        var table = document.getElementById(listId);
-        var faucet1 = 1;
-        var tr = document.createElement("tr");
-        if (faucet1 == 1) {
-            if (listId == 'researchInMeeting') {
-                tr.innerHTML = '<td id="'+ objectId +'_research1">' + object + '</td> <td id="'+ objectId +'_research2"><button type="button" researchId="'+ objectId + '" class="btn btn-danger" onclick="deleteInMeetingList(this, `research`, '+ objectId + ')">Удалить</button></td>';
-            }
-            else {
-                tr.innerHTML = '<td id="'+ objectId +'_user1">' + object + '</td> <td id="'+ objectId +'_user2"><button type="button" class="btn btn-danger" onclick="deleteInMeetingList(this, `user`, '+ objectId + ')">Удалить</button></td>';
-            } 
-            table.appendChild(tr);
-        }
-        else {
-            console.log('error');
-        }
-    }
-
-    function deleteInMeetingList(self, type, object){
-        if (type == "research") {
-            var button = $("tbody#researchList").find("button#" + object)[0];
-            $("#"+ object + "_research1").remove();
-            $("#"+ object + "_research2").remove();
-            console.log(object + "_research1")
-        }
-        else {
-            var button = $("tbody#userList").find("button#" + object)[0];
-            $("#"+ object + "_user1").remove();
-            $("#"+ object + "_user2").remove();
-        }
-        button.disabled = false;
-    }
-</script>
 {% endblock %}

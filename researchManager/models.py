@@ -25,6 +25,7 @@ class Research(models.Model):
     customer_contacts = models.CharField("Контактные данные заказчика", max_length=500, null=True, blank=True)
     duration = models.DateTimeField("Дата окончания исследования", null=True, blank=True)
     version = models.IntegerField("Версия", null=True, blank=True)
+    addedOnMeeting = models.BooleanField("Добавленно на заседании", default=False)
     
 
     class Meta:
@@ -50,6 +51,22 @@ class Research(models.Model):
             return "Инициативное исследование"
         if self.type == "dissertationWorksList":
             return "Диссертационная работа"
+
+    def getDescription(self):
+        if self.type == "clinicalResearch":
+            return self.protocol_name
+        if self.type == "preclinicalResearch":
+            return self.work_name
+        if self.type == "initiativeResearch":
+            return self.name_research
+        if self.type == "dissertationWorksList":
+            return self.work_name
+
+    def getTypeRequest(self):
+        if self.type == "firstRequest":
+            return "Первичная заявка"
+        if self.type == "secondRequest":
+            return "Вторичная заявка"
 
 
 class Files(models.Model):

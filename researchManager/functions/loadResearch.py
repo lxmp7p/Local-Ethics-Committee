@@ -75,7 +75,6 @@ def getFileInfo(filesInfo, file):
 def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
     folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
-    print(folder_name)
     if parentResearch and parentResearch.version:
         folder_name += (f"{parentResearch.version + 1}/")
     fs = FileSystemStorage()
@@ -141,6 +140,7 @@ def getMainResearchsList(researchType):
                 have = False
         else: 
             researchList.append(allResearch[0])
+        print(researchList)
     return researchList
 
 def getValidPath(path):
