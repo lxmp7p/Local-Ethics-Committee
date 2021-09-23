@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Дата проведения</th>
+      <th scope="col">Время</th>
+      <th scope="col">Повестка</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for meeting in meetingList %}
+      <tr>
+        <th scope="row">{{ meeting.date }}</th>
+        <td>{{ meeting.time }}</td>
+        <td><a class="btn btn-success" href="../media/{{ meeting.subpoena }}" target="_blank">Открыть</a></td>
+        </tr>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -11,9 +11,8 @@
 </div>
 
 <br>
-
 <div id='relationshipDiv' hidden="true">
-    <select name="relationResearchId" id="relationResearchId" class="js-selectize" placeholder="Выберите исследование">
+    <select name="relationResearchId" id="relationResearchId" id='beast' class="js-selectize" placeholder="Выберите исследование">
         <br>
         <option value=""></option>
             {% for research in researchList %}
@@ -115,3 +114,5 @@ $("#getInfoBtn").click(function(){
         document.getElementById('relationshipDiv').hidden = true
     }
 </script>       
+
+

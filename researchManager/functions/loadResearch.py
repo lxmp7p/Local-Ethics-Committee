@@ -26,6 +26,8 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
     folderName = getValidPath(folderName)
     saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
 
+<<<<<<< HEAD
+=======
 def get_typeResearch(typeEng):
     if typeEng == 'clinicalResearch':
         return "Клиническое исследование"
@@ -50,6 +52,7 @@ def get_typeResearch(typeEng):
 
 
 
+>>>>>>> main
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
     Добавление клинического исследования
@@ -76,7 +79,7 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             folderName = informationForm.work_name
         informationForm.type_request=requestType 
         informationForm.identityCode=identityCode
-        informationForm.owner=request.user.username
+        informationForm.owner=request.user
         informationForm.type=researchType
         informationForm.date_accepted=dateAccepted
         
@@ -89,8 +92,9 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         
         informationForm.save()
     researchId = Research.objects.all().last()
-
     researchList = getMainResearchsList(researchType)
+<<<<<<< HEAD
+=======
 
     for research in researchList:
         if not request.user.id:
@@ -131,6 +135,7 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             object_id=researchId.id,
             change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
             action_flag=ADDITION)
+>>>>>>> main
     return folderName, researchId.id
 
 def getFileInfo(filesInfo, file):
@@ -213,6 +218,7 @@ def getMainResearchsList(researchType):
                 have = False
         else: 
             researchList.append(allResearch[0])
+        print(researchList)
     return researchList
 
 def getValidPath(path):

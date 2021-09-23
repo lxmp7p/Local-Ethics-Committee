@@ -9,6 +9,16 @@
         <a class="dropdown-item" href="{% url 'ResearchTypeListViewForWatch' %}">Список исследований в системе</a>
       </div>
     </div>
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Заседания
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="{% url 'createMeeting' %}">Создать заседание</a>
+         <a class="dropdown-item" href="{% url 'meetingList' %}">Список заседаний</a>
+      </div>
+    </div>
   </div>
     <a href="{% url 'logout' %}">{{ request.user.get_full_name }}</a>
 </nav> <br>
