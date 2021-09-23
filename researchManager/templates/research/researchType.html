@@ -1,23 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-<table class="table table-dark">
-    <tbody>
-        {% if method == "loadResearch" %}
-        <tr>
-            <td><a href="{% url 'loadResearch' 'clinicalResearch' %}">Клиническое исследование</a></td>
-            <td><a href="{% url 'loadResearch' 'preclinicalResearch' %}">Доклиническое исследование</a></td>
-            <td><a href="{% url 'loadResearch' 'initiativeResearch' %}">Инициативное исследование</a></td>
-            <td><a href="{% url 'loadResearch' 'dissertationWork' %}">Диссертационная работа</a></td>
-        </tr>
-        {% endif %}
-        {% if method == "watchResearch" %}
-        <tr>
-            <td><a href="{% url 'WatchResearchList' 'clinicalResearch' %}">Клиническое исследование</a></td>
-            <td><a href="{% url 'WatchResearchList' 'preclinicalResearch' %}">Доклиническое исследование</a></td>
-            <td><a href="{% url 'WatchResearchList' 'initiativeResearch' %}">Инициативное исследование</a></td>
-            <td><a href="{% url 'WatchResearchList' 'dissertationWork' %}">Диссертационная работа</a></td>
-        </tr>
-        {% endif %}
-  </tbody>
-</table>
+{% load static %}
+
+<div class="container">
+    <div class="row">
+    {% if method == "loadResearch" %}
+      <div  class="col-sm-3">
+        <a href="{% url 'loadResearch' 'clinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" > Клиническое исследование</a>
+      </div>
+      <div class="col-sm-3">
+        <a href="{% url 'loadResearch' 'preclinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Доклиническое исследование</a>
+      </div>
+      <div class="col-sm-3">       
+        <a href="{% url 'loadResearch' 'initiativeResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Инициативное исследование</a>
+      </div>
+      <div class="col-sm-3">       
+        <a href="{% url 'loadResearch' 'dissertationWork' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Диссертационная работа</a>
+      </div>
+      {% endif %}
+      {% if method == "watchResearch" %}
+      <div class="col-sm-3">
+        <a href="{% url 'WatchResearchList' 'clinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Клиническое исследование</a>
+      </div>
+      <div class="col-sm-3">
+        <a href="{% url 'WatchResearchList' 'preclinicalResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Доклиническое исследование</a>
+      </div>
+      <div class="col-sm-3">       
+        <a href="{% url 'WatchResearchList' 'initiativeResearch' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Инициативное исследование</a>
+      </div>
+      <div class="col-sm-3">       
+        <a href="{% url 'WatchResearchList' 'dissertationWork' %}"><img src="{% static 'img/image_not_found.png' %}" class="img-thumbnail" >Диссертационная работа</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+
 {% endblock %}
