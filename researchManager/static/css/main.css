@@ -1,0 +1,30 @@
+#addFieldButton {
+  margin: 30px;
+}
+
+.research_protocol_form,
+.information_leaflet_form,
+.professional_autobiographies_form,
+.registration_card_form,
+.technical_task_form,
+.calendar_plan,
+.costings_form,
+.approval_form,
+.professional_autobiographies_form,
+.information_leaflet_form,
+.professional_autobiographies_form,
+.calendar_plan_form,
+.letter_of_appeal_form,
+.research_protocol_form,
+.annotation_form,
+.autobiography_form,
+.letter_form,
+.member_list_form,
+.permit_form,
+.protocol_form,
+.inform_list_form,
+.brochure_researcher_form,
+.insurance_contract_form,
+.another_document_form {
+    margin: 30px;
+}
