@@ -1,24 +1,20 @@
-<nav class="navbar navbar-dark bg-dark">
-  <div class='form-inline'>
-  <a class="navbar-brand"  href="{% url 'index' %}">Меню</a>
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Исследования
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'ResearchTypeListViewForWatch' %}">Список исследований в системе</a>
-      </div>
-    </div>
+{% load static %}
 
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Заседания
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="{% url 'createMeeting' %}">Создать заседание</a>
-         <a class="dropdown-item" href="{% url 'meetingList' %}">Список заседаний</a>
-      </div>
+<div class="container">
+  <div class='form-inline'>
+    <a class="navbar-brand "  href="{% url 'index' %}"><img class="img-fluid" src="{% static 'img/logo.png' %}" ></a>
+    <div class="navbar-toggler ml-auto">
+        {{ request.user.get_full_name }}
+        <button class="navbar-toggler ml-auto custom-toggler" id="dropdownmenu" type="button" data-toggle="dropdown"  >
+          <span class="navbar-toggler-icon "></span>
+        </button>
+        <div class="dropdown-menu" id="dropdownmenu">
+          <a class="dropdown-item" style="color: black"  href="{% url 'ResearchTypeListViewForWatch' %}">Список исследований в системе</a>
+          <a class="dropdown-item" style="color: black" href="{% url 'createMeeting' %}">Создать заседание</a>
+          <a class="dropdown-item" style="color: black" href="{% url 'logout' %}">Выход</a>
+        </div>
     </div>
   </div>
-    <a href="{% url 'logout' %}">{{ request.user.get_full_name }}</a>
-</nav> <br>
+
+
+</div><br>

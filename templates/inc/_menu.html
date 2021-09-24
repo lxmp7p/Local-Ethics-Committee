@@ -4,8 +4,9 @@
         <ul>
             <li><a href="#">Приглашение на заседание</a></li>
             <li><a href="#">Экспертиза</a> </li>
-            <li><a href="#">Заседания</a></a>
-            <li><a href="{% url 'researchTypeList' %}">Подача документов</a></li>
+            <li onclick="location.href='{% url 'meetingList' %}'"><a href="{% url 'meetingList' %}">Заседания</a></li>
+            <li onclick="location.href='{% url 'researchTypeList' %}'"><a href="{% url 'researchTypeList' %}">Подача документов</a></li>
+            
       </ul>
     </div></br>
 </div>
