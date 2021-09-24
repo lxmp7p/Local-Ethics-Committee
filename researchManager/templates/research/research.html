@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 
   {% csrf_token %}
@@ -18,6 +17,7 @@
 {% if research.type == "doclinicalResearch" %}
   {% include "research/watchResearch/doclinicalResearch.html" %}
 {% endif %}
+
 
 {% if filesList %}
   <div class="col-12 text-center">

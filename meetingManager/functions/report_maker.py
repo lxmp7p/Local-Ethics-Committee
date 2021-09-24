@@ -102,8 +102,8 @@ def createDoc(reportInfoList, id_meeting, date, time):
 			row_cells[1].text = text
 		document.add_heading('', 0)
 		document.add_page_break()
-		path = os.path.dirname(__file__) + '\\..\\..\\media\\reports\\'   + str(now.strftime("%d-%m-%Y-%H-%M-%S")) + '\\'
-		pathFromBd = f'reports/{str(now.strftime("%d-%m-%Y-%H-%M-%S"))}/subpoena.docx'
+		path = os.path.dirname(__file__) + '\\..\\..\\media\\reports\\'   + str(now.strftime("%d-%m-%Y-%H")) + '\\'
+		pathFromBd = f'reports/{str(now.strftime("%d-%m-%Y-%H"))}/subpoena.docx'
 		if not os.path.exists(path):
 			os.mkdir(path)
 	document.save(f'{path}/subpoena.docx')

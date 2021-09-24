@@ -1,99 +1,277 @@
 {% load static %}
-    <div id="loadForm">
-        <div class="researchInfo">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_research" placeholder="Название исследования">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="main_researcher" placeholder="Главные исследователи">
-            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="division" placeholder="Наименование подразделения">
-        </div>
-
-        <hr>
-        <h1>Аннотация на используемые препараты</h1>
-        <div class="professional_autobiographies" id="professional_autobiographies">
-            <div class="professional_autobiographies_form" id="professional_autobiographies_form">
-                <input type="file" name="professional_autobiographies">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="professional_autobiographies_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="professional_autobiographies_date">
+<div id="page4" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="name_research" placeholder="Название исследования">
+                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="main_researcher" placeholder="Главные исследователи">
+                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="division" placeholder="Наименование подразделения">
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='professional_autobiographies_form', parentId='professional_autobiographies')">Добавить поле</button>
-
-
-        <hr>
-        <h1>Информационный листок и согласие</h1>
-        <div class="information_leaflet" id="information_leaflet">
-            <div class="information_leaflet_form" id="information_leaflet_form">
-                <input type="file" name="information_leaflet">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="information_leaflet_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="information_leaflet_date">
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page4', 'page3')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page4', 'page5')">Далее</button>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='information_leaflet_form', parentId='information_leaflet')">Добавить поле</button>
+    </div>
+</div>
 
-        <hr>
-        <h1>Профессиональные автобиографии</h1>
-        <div class="professional_autobiographies" id="professional_autobiographies">
-            <div class="professional_autobiographies_form" id="professional_autobiographies_form">
-                <input type="file" name="professional_autobiographies">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="professional_autobiographies_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="professional_autobiographies_date">
+<div id="page5" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Аннотация на используемые препараты</h1>
+                    <div class="professional_autobiographies" id="professional_autobiographies">
+                        <div class="professional_autobiographies_form" id="professional_autobiographies_form">
+                            <input type="file" class="form-control" name="professional_autobiographies">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="professional_autobiographies_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="professional_autobiographies_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='professional_autobiographies_form', parentId='professional_autobiographies')">Добавить поле</button>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='professional_autobiographies_form', parentId='professional_autobiographies')">Добавить поле</button>
-
-        <hr>
-        <h1>Индивидуальная регистрационная карта пациента</h1>
-        <div class="registration_card" id="registration_card">
-            <div class="registration_card_form" id="registration_card_form">
-                <input type="file" name="registration_card">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="registration_card_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="registration_card_date">
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page5', 'page4')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page5', 'page6')">Далее</button>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='registration_card_form', parentId='registration_card')">Добавить поле</button>
+    </div>
+</div>
 
-        <hr>
-        <h1>Техническое задание</h1>
-        <div class="technical_task" id="technical_task">
-            <div class="technical_task_form" id="technical_task_form">
-                <input type="file" name="technical_task">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="technical_task_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="technical_task_date">
+<div id="page6" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Информационный листок и согласие</h1>
+                    <div class="information_leaflet" id="information_leaflet">
+                        <div class="information_leaflet_form" id="information_leaflet_form">
+                            <input type="file" class="form-control" name="information_leaflet">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="information_leaflet_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="information_leaflet_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='information_leaflet_form', parentId='information_leaflet')">Добавить поле</button>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='technical_task_form', parentId='technical_task')">Добавить поле</button>
-
-        <hr>
-        <h1>Календарный план</h1>
-        <div class="calendar_plan" id="calendar_plan">
-            <div class="calendar_plan_form" id="calendar_plan_form">
-                <input type="file" name="calendar_plan">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="calendar_plan_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="calendar_plan_date">
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page6', 'page5')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page6', 'page7')">Далее</button>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='calendar_plan_form', parentId='calendar_plan')">Добавить поле</button>
+    </div>
+</div>
 
-        <hr>
-        <h1>Смета расходов</h1>
-        <div class="costings" id="costings">
-            <div class="costings_form" id="costings_form">
-                <input type="file" name="costings">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="costings_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="costings_date">
+<div id="page7" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Профессиональные автобиографии</h1>
+                    <div class="professional_autobiographies" id="professional_autobiographies">
+                        <div class="professional_autobiographies_form" id="professional_autobiographies_form">
+                            <input type="file" class="form-control" name="professional_autobiographies">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="professional_autobiographies_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="professional_autobiographies_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='professional_autobiographies_form', parentId='professional_autobiographies')">Добавить поле</button>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='costings_form', parentId='costings')">Добавить поле</button>
-
-        <hr>
-        <h1>Одобрение</h1>
-        <div class="approval" id="approval">
-            <div class="approval_form" id="approval_form">
-                <input type="file" name="approval">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="approval_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="approval_date">
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page7', 'page6')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page7', 'page8')">Далее</button>
+                </div>
             </div>
         </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='approval_form', parentId='approval')">Добавить поле</button>
+    </div>
+</div>
+
+<div id="page8" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Индивидуальная регистрационная карта пациента</h1>
+                    <div class="registration_card" id="registration_card">
+                        <div class="registration_card_form" id="registration_card_form">
+                            <input type="file" class="form-control" name="registration_card">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="registration_card_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="registration_card_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='registration_card_form', parentId='registration_card')">Добавить поле</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page8', 'page7')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page8', 'page9')">Далее</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page9" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Техническое задание</h1>
+                    <div class="technical_task" id="technical_task">
+                        <div class="technical_task_form" id="technical_task_form">
+                            <input type="file" class="form-control" name="technical_task">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="technical_task_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="technical_task_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='technical_task_form', parentId='technical_task')">Добавить поле</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page9', 'page8')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page9', 'page10')">Далее</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page10" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Календарный план</h1>
+                    <div class="calendar_plan" id="calendar_plan">
+                        <div class="calendar_plan_form" id="calendar_plan_form">
+                            <input type="file" class="form-control" name="calendar_plan">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="calendar_plan_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="calendar_plan_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='calendar_plan_form', parentId='calendar_plan')">Добавить поле</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page10', 'page9')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page10', 'page11')">Далее</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="page11" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Смета расходов</h1>
+                    <div class="costings" id="costings">
+                        <div class="costings_form" id="costings_form">
+                            <input type="file" class="form-control" name="costings">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="costings_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="costings_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='costings_form', parentId='costings')">Добавить поле</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page11', 'page10')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page11', 'page12')">Далее</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="page12" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <h1>Одобрение</h1>
+                    <div class="approval" id="approval">
+                        <div class="approval_form" id="approval_form">
+                            <input type="file" class="form-control" name="approval">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="approval_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="approval_date">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='approval_form', parentId='approval')">Добавить поле</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page12', 'page11')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page12', 'pageAnotherFiles')">Далее</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script src="{% static 'js/fileInput.js' %}"></script>
 <script src="{% static 'js/loadForm.js' %}"></script>
