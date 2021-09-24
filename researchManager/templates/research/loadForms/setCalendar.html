@@ -1,32 +1,88 @@
-<div>
-    <button type="button" class="btn btn-secondary" id="firstResearchBtn" onclick="firstResearch()">Первичная заявка</button>
-    <button type="button" class="btn btn-secondary" id="secondResearchBtn" onclick="secondResearch()">Вторичная заявка</button>
+
+<div id="page1">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-dark active" aria-pressed="true" id="firstResearchBtn" onclick="firstResearch()">Первичная заявка</button>
+                    <button type="button" class="btn btn-outline-dark active" aria-pressed="true" id="secondResearchBtn" onclick="secondResearch()">Вторичная заявка</button>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1"></div>
+                <div class="col-4 "><button type="button" class="btn btn-outline-dark" onclick="changePage('page1', 'page2')">Далее</button></div>
+                <div class="col-lg-1">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<br>
 
-<div>
-    <button type="button" class="btn btn-secondary" id="relationshipTrueBtn" onclick="relationshipTrue()">С привязкой</button>
-    <button type="button" class="btn btn-secondary" id="relationshipFalseBtn" onclick="relationshipFalse()">Без привязки</button>
+<div id="page2" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-dark active" aria-pressed="true" id="relationshipTrueBtn" onclick="relationshipTrue()">С привязкой</button>
+                    <button type="button" class="btn btn-outline-dark active" aria-pressed="true" id="relationshipFalseBtn" onclick="relationshipFalse()">Без привязки</button>
+                    <br><br>
+                    <div id='relationshipDiv' hidden="true">
+                        <select name="relationResearchId" id="relationResearchId" id='beast' class="js-selectize" placeholder="Выберите исследование">
+                            <option value=""></option>
+                            {% for research in researchList %}
+                            <option value="{{ research.id }}">{{ research.protocol_number }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page2', 'page1')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page2', 'page3'), checkRelationship()">Далее</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<br>
-<div id='relationshipDiv' hidden="true">
-    <select name="relationResearchId" id="relationResearchId" id='beast' class="js-selectize" placeholder="Выберите исследование">
-        <br>
-        <option value=""></option>
-            {% for research in researchList %}
-                <option value="{{ research.id }}">{{ research.protocol_number }}</option>
-            {% endfor %}
-    </select>
-    <button type="button" class="btn btn-warning" id="getInfoBtn">Внести данные из привязаного исследования</button>
-</div>
-    <button type="button" class="btn btn-secondary" id="old_version_button" onclick="date_accepted_set_visible_false()">Старое исследование</button>
-    <button type="button" class="btn btn-info" id="new_version_button" onclick="date_accepted_set_visible_true()">Новое исследование</button>
-<div class='calendar' id='date' hidden="true" >
-    Дата заседания:
-    <input placeholder="Дата заседания" name="date_accepted" class="form-control" type="date" id="dateInput">
-</div>
+
+<div id="page3" hidden="true">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="btn btn-outline-dark active" aria-pressed="true" id="old_version_button" onclick="date_accepted_set_visible_false()">Старое исследование</button>
+                    <button type="button" class="btn btn-outline-dark active" aria-pressed="true" id="new_version_button" onclick="date_accepted_set_visible_true()">Новое исследование</button>
+                    <div class='calendar' id='date' hidden="true" >
+                        Дата заседания:
+                        <input placeholder="Дата заседания" name="date_accepted" class="form-control" type="date" id="dateInput">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row justify-content-md-center"> 
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page3', 'page2')">Назад</button>
+                </div>
+                <div class="col-4 "></div>
+                <div class="col-lg-1">
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page3', 'page4')">Далее</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+
 <script>
         function date_accepted_set_visible_false()
         {
@@ -47,6 +103,15 @@
 <div id="loadForm">
 </div>
 </div>
+
+
+<script>
+    $("#relationResearchId").selectize({
+      create: true,
+      sortField: "text",
+    });
+</script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 $("#getInfoBtn").click(function(){
@@ -74,6 +139,8 @@ $("#getInfoBtn").click(function(){
             $('#executor').val(data.mainResearcher);
             $('#division').val(data.researchCenter);
             $('#work_name').val(data.customer);
+
+            $("#getInfoBtn")[0].disabled = true;
         },
         failure: function(data) { 
             alert('Got an error dude');

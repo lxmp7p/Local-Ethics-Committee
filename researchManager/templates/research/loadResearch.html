@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<form method="POST" enctype="multipart/form-data">
+{% load static %}
+<script type="text/javascript" src="{% static 'js/loadFiles.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+<form method="POST" enctype="multipart/form-data" class="text-center" id="formLoad">
     {% csrf_token %}
     <div class="col-sm">
         {% if researchType == "clinicalResearch" %}
@@ -17,7 +20,7 @@
 
         {% if researchType == "dissertationWork" %}
             <h1 class='text-center'>Диссертационная работа</h1>
-        {% endif %}
+        {% endif %}s
 
         {% include "research/loadForms/setCalendar.html" %}
 
@@ -37,19 +40,36 @@
             {% include "research/loadForms/dissertationWorkLoadForm.html" %}
         {% endif %}
 
-
-        <h1>Дополнительные файлы</h1>
-        <div class="another_document" id="another_document">
-            <div class="another_document_form" id="another_document_form">
-                <input type="file" name="another_document">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Название документа" name="another_document_name">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="another_document_version">
-                <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="another_document_date">
+        <div id="pageAnotherFiles" hidden="true">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h1>Дополнительные файлы</h1>
+                            <div class="another_document" id="another_document">
+                                <div class="another_document_form" id="another_document_form">
+                                    <input type="file" class="form-control" name="another_document">
+                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Название документа" name="another_document_name">
+                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="another_document_version">
+                                    <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="another_document_date">
+                                </div>
+                            </div>
+                            <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='another_document_form', parentId='another_document')">Добавить поле</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <div class="row justify-content-md-center"> 
+                        <div class="col-lg-1">
+                            <button type="button" class="btn btn-outline-dark" onclick="changePage('pageAnotherFiles', 'page11')">Назад</button>
+                        </div>
+                        <div class="col-4 "></div>
+                        <div class="col-lg-1">
+                            <button type="submit" class="btn btn-success">Конец</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <button type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='another_document_form', parentId='another_document')">Добавить поле</button>
-        <button type="submit">Конец</button>
-        <input hidden="true" value="1" name="research">
         </div>
     </div>
 </form>

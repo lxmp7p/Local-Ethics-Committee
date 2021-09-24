@@ -9,7 +9,7 @@ def createMeeting(request):
 	meeting = Meeting.objects.create(
 		date=request.POST.get("date"),
 		time=request.POST.get("time"),
-		subpoena = f'reports/{str(now.strftime("%d-%m-%Y-%H-%M-%S"))}/subpoena.docx',
+		subpoena = f'reports/{str(now.strftime("%d-%m-%Y-%H"))}/subpoena.docx',
 	)
 	researchList = []
 	for research in request.POST.getlist("researchIdList"):
