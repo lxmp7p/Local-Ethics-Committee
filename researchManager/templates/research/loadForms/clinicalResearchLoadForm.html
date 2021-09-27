@@ -6,14 +6,14 @@
                 <div class="col">
                     <button type="button" class="btn btn-outline-dark active" aria-pressed="true" id="getInfoBtn" hidden="true">Внести данные из привязаного исследования</button>
                     <div class="researchInfo">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_number" name="protocol_number" placeholder="Номер протокола">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_name" name="protocol_name" placeholder="Название протокола">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="drug_name" name="drug_name" placeholder="Название препарата">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="main_researcher" name="main_researcher" placeholder="Главный исследователь">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="research_center" name="research_center" placeholder="Исследовательский центр">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer" name="customer" placeholder="Заказчик исследования">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer_contacts" name="customer_contacts" placeholder="Контактные данные заказчика">
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="duration" name="duration" placeholder="Срок проведение исследования">
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_number" name="protocol_number" placeholder="Номер протокола" required>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_name" name="protocol_name" placeholder="Название протокола" required>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="drug_name" name="drug_name" placeholder="Название препарата" required>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="main_researcher" name="main_researcher" placeholder="Главный исследователь" required>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="research_center" name="research_center" placeholder="Исследовательский центр" required >
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer" name="customer" placeholder="Заказчик исследования" required>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer_contacts" name="customer_contacts" placeholder="Контактные данные заказчика" required>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="duration" name="duration" placeholder="Срок проведение исследования" required>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-4 "></div>
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-dark" onclick="changePage('page4', 'page5')">Далее</button>
+                    <button type="button" class="btn btn-dark" onclick="checkError()">Далее</button>
                 </div>
             </div>
         </div>
@@ -79,7 +79,7 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="member_list_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='member_list_form', parentId='member_list')">Добавить поле</button>
+                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='member_list_form', parentId='member_list')">Добавить поле</button>
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="permit_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='permit_form', parentId='permit')">Добавить поле</button>
+                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='permit_form', parentId='permit')">Добавить поле</button>
                 </div>
             </div>
         </div>
@@ -143,7 +143,7 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="protocol_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='protocol_form', parentId='protocol')">Добавить поле</button>
+                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='protocol_form', parentId='protocol')">Добавить поле</button>
                 </div>
             </div>
         </div>
@@ -175,7 +175,7 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="inform_list_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='inform_list_form', parentId='inform_list')">Добавить поле</button>
+                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='inform_list_form', parentId='inform_list')">Добавить поле</button>
                 </div>
             </div>
         </div>
@@ -207,7 +207,7 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="brochure_researcher_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='brochure_researcher_form', parentId='brochure_researcher')">Добавить поле</button>
+                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='brochure_researcher_form', parentId='brochure_researcher')">Добавить поле</button>
                 </div>
             </div>
         </div>
@@ -240,7 +240,7 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="insurance_contract_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button>
+                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button>
                 </div>
             </div>
         </div>

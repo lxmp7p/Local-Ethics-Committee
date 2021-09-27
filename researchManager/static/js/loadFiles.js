@@ -12,4 +12,19 @@ function checkRelationship(){
 	}
 }
 
+function checkError() {
+	errorSatus = false;
+	$("#page4 input").each(function() {
+	    if (!this.value) {
+	        errorSatus = true;
+	    }    
+	});
+	if (errorSatus) {
+		$("#error")[0].innerHTML = "Поля обязательны для заполнения!";
+	}
+	else {
+		$("#error")[0].innerHTML = "";
+		changePage('page4', 'page5');
+	}
+}
 
