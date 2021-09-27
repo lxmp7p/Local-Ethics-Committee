@@ -34,13 +34,17 @@ class Research(models.Model):
 
     def __str__(self):
         if self.type == "clinicalResearch":
-            return self.protocol_number
+            name = self.protocol_name
         if self.type == "preclinicalResearch":
-            return self.work_name
+            name = self.work_name
         if self.type == "initiativeResearch":
-            return self.name_research
+            name = self.name_research
         if self.type == "dissertationWorksList":
-            return self.work_name
+            name = self.work_name
+        if len(name) > 100:
+            return name[:150] + '...'
+        else:
+            return name
 
     def getType(self):
         if self.type == "clinicalResearch":

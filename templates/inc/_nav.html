@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class='form-inline'>
-    <a class="navbar-brand "  href="{% url 'index' %}"><img class="img-fluid" src="{% static 'img/logo.png' %}" ></a>
+    <a class="navbar-brand "  href="{% url 'index' %}"><img class="logo" id="logo" src="{% static 'img/logo.png' %}" ></a>
     <div class="navbar-toggler ml-auto">
         {{ request.user.get_full_name }}
         <button class="navbar-toggler ml-auto custom-toggler" id="dropdownmenu" type="button" data-toggle="dropdown"  >
