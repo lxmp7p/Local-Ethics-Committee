@@ -54,3 +54,24 @@ function deleteInMeetingList(self, type, object){
     }
     button.disabled = false;
 }   
+
+function filterResearchList(self){
+    $("#researchListTable tr").each(function() {
+        filterType = self.id.slice(0, -6);
+        if ($(this).attr('id') != filterType) {
+            this.hidden = true;
+        }
+        if ($(this).attr('id') == filterType) {
+            this.hidden = false;
+        }
+        if (filterType == 'allRequests') {
+            this.hidden = false;
+        }
+    });
+
+    $("#filterPanel button:disabled").each(function() {
+        ($(this.disabled = false))
+    });
+
+    self.disabled = true;
+};

@@ -33,6 +33,7 @@ class Research(models.Model):
         verbose_name_plural = "Исследования"
 
     def __str__(self):
+        MAX_LENGTH = 70
         if self.type == "clinicalResearch":
             name = self.protocol_name
         if self.type == "preclinicalResearch":
@@ -41,8 +42,8 @@ class Research(models.Model):
             name = self.name_research
         if self.type == "dissertationWorksList":
             name = self.work_name
-        if len(name) > 100:
-            return name[:150] + '...'
+        if len(name) > MAX_LENGTH:
+            return name[:MAX_LENGTH] + '...'
         else:
             return name
 

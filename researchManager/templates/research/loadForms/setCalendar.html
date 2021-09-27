@@ -118,7 +118,6 @@
 $(document).ready(function() {
 $("#getInfoBtn").click(function(){
     var id = $('#relationResearchId').val();
-    console.log(id);
     $.ajax({
         url: "/research/ajax/get_research_info/",
         type: 'GET', // This is the default though, you don't actually need to always mention it

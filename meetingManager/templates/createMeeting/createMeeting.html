@@ -7,9 +7,11 @@
     <div class="row">
         <div class="col">
             <table class="table">
-                <button type="button" class="btn btn-outline-dark">Все</button>
-                <button type="button" class="btn btn-outline-dark">Первичные</button>
-                <button type="button" class="btn btn-outline-dark">Вторичные</button>
+                <div id="filterPanel">
+                    <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="allRequestsFilter" onclick="filterResearchList(this)" disabled>Все</button>
+                    <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="firstRequestFilter" onclick="filterResearchList(this)">Первичные</button>
+                    <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="secondRequestFilter" onclick="filterResearchList(this)">Вторичные</button>
+                </div>
                 <thead>
                     <tr>
                         <th scope="col">Название</th>
@@ -17,9 +19,9 @@
                         <th scope="col">Действие</th>
                     </tr>
                 </thead>
-                <tbody id='researchList'>
+                <tbody id='researchListTable'>
                     {% for research in researchOnMeetinList %}
-                    <tr>
+                    <tr id="{{research.type_request}}">
                         <th scope="row"><a href="{% url 'watchResearch' research.id %}" target="_blank">{{ research }}</a></th>
                         <td>{{ research.getType }}</td>
                         <td><button type="button"  id="{{ research.id }}" class="btn btn-primary" onclick="addInMeetingList(this, 'researchInMeeting', '{{ research }}', '{{ research.id }}')">Добавить</button></td>
