@@ -19,7 +19,7 @@
                         <th scope="col">Действие</th>
                     </tr>
                 </thead>
-                <tbody id='researchListTable'>
+                <tbody id='researchList'>
                     {% for research in researchOnMeetinList %}
                     <tr id="{{research.type_request}}">
                         <th scope="row"><a href="{% url 'watchResearch' research.id %}" target="_blank">{{ research }}</a></th>

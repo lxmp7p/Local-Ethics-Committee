@@ -44,6 +44,7 @@ function addInMeetingList(self, listId, object, objectId){
 function deleteInMeetingList(self, type, object){
     if (type == "research") {
         var button = $("tbody#researchList").find("button#" + object)[0];
+        console.log(object)
         $("#"+ object + "_research1").remove();
         $("#"+ object + "_research2").remove();
     }
@@ -56,7 +57,7 @@ function deleteInMeetingList(self, type, object){
 }   
 
 function filterResearchList(self){
-    $("#researchListTable tr").each(function() {
+    $("#researchList tr").each(function() {
         filterType = self.id.slice(0, -6);
         if ($(this).attr('id') != filterType) {
             this.hidden = true;
