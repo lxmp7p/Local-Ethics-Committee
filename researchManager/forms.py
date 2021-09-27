@@ -15,6 +15,7 @@ class ClinicalResearchInformationForm(forms.ModelForm):
             "protocol_name", "drug_name", "main_researcher", "research_center",
             "customer", "customer_contacts", "duration",  "protocol_number", "identityCode",
         )
+        
 
 
 class PreclinicalResearchInformationForm(forms.ModelForm):

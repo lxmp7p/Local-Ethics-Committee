@@ -6,6 +6,7 @@ from docx import Document
 from docx.shared import Inches
 from docx.shared import Pt
 import datetime
+import time as getTime
 
 now = datetime.datetime.now()
 
@@ -88,6 +89,7 @@ def createDoc(reportInfoList, id_meeting, date, time):
 	document.add_page_break()
 	for reportInfo in reportInfoList:
 		document.add_paragraph(reportInfo.type_research)
+		print(reportInfo.type_research)
 		records = reportInfo.getBodyRecords()
 		table = document.add_table(rows=1, cols=2)
 		for type, text in records:
@@ -106,11 +108,13 @@ def createDoc(reportInfoList, id_meeting, date, time):
 		pathFromBd = f'reports/{str(now.strftime("%d-%m-%Y-%H"))}/subpoena.docx'
 		if not os.path.exists(path):
 			os.mkdir(path)
-	document.save(f'{path}/subpoena.docx')
+	document.save(f'{path}/subpoena{str(round(getTime.time() * 1000))}.docx')
+	reportInfoList = []
 
-def getReportInfoList(researchList, mail, organization, id_meeting, date, time, reportInfoList=[]): #На вход кидаем список исследований в заседании
+def getReportInfoList(researchList, mail, organization, id_meeting, date, time): #На вход кидаем список исследований в заседании
 	#Помещаем все в цикл по списку исследований в заседании
 	#Убираем все от сюда до следущего коммента
+	reportInfoList = []
 	for research in researchList:
 		type_research = research.getTypeRequest()
 		description = research.getDescription()
@@ -151,6 +155,5 @@ def createReport(researchList, meeting):
 	date = str(meeting.date)
 	time = str(meeting.time)
 	#Конец данных
-
 	reportInfoList = getReportInfoList(researchList, mail, organization, id_meeting, date, time)
 	createDoc(reportInfoList, id_meeting, date, time)

@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-4 "></div>
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page4', 'page5')">Далее</button>
+                    <button type="button" class="btn btn-dark" onclick="changePage('page4', 'page5')">Далее</button>
                 </div>
             </div>
         </div>
@@ -43,10 +43,10 @@
                         <div class="letter_form" id="letter_form">
                             <input type="file" class="form-control"  name="letter">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="letter_version">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="letter_date">
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" class="datepicker" name="letter_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='letter_form', parentId='letter')">Добавить поле</button>
+                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='letter_form', parentId='letter')">Добавить поле</button>
                 </div>
             </div>
         </div>
@@ -64,6 +64,7 @@
     </div>
 </div>
 
+
 <div id="page6" hidden="true">
     <div class="card">
         <div class="card-body">
@@ -75,7 +76,7 @@
                         <div class="member_list_form" id="member_list_form">
                             <input type="file" class="form-control"  name="member_list">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="member_list_version">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="member_list_date">
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="member_list_date">
                         </div>
                     </div>
                     <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='member_list_form', parentId='member_list')">Добавить поле</button>
@@ -107,7 +108,7 @@
                         <div class="permit_form" id="permit_form">
                             <input type="file" class="form-control"  name="permit">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="permit_version">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="permit_date">
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="permit_date">
                         </div>
                     </div>
                     <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='permit_form', parentId='permit')">Добавить поле</button>
@@ -139,7 +140,7 @@
                         <div class="protocol_form" id="protocol_form">
                             <input type="file" class="form-control"  name="protocol">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="protocol_version">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="protocol_date">
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="protocol_date">
                         </div>
                     </div>
                     <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='protocol_form', parentId='protocol')">Добавить поле</button>
@@ -171,7 +172,7 @@
                         <div class="inform_list_form" id="inform_list_form">
                             <input type="file" class="form-control"  name="inform_list">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="inform_list_version">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="inform_list_date">
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="inform_list_date">
                         </div>
                     </div>
                     <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='inform_list_form', parentId='inform_list')">Добавить поле</button>
@@ -203,7 +204,7 @@
                         <div class="brochure_researcher_form" id="brochure_researcher_form">
                             <input type="file" class="form-control"  name="brochure_researcher">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="brochure_researcher_version">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="brochure_researcher_date">
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="brochure_researcher_date">
                         </div>
                     </div>
                     <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='brochure_researcher_form', parentId='brochure_researcher')">Добавить поле</button>
@@ -236,7 +237,7 @@
                         <div class="insurance_contract_form" id="insurance_contract_form">
                             <input type="file" class="form-control"  name="insurance_contract">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="insurance_contract_version">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" name="insurance_contract_date">
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="insurance_contract_date">
                         </div>
                     </div>
                     <button id="addFieldButton" type="button" class="btn btn-warning" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button>
@@ -259,3 +260,8 @@
 
 <script src="{% static 'js/fileInput.js' %}"></script>
 <script src="{% static 'js/loadForm.js' %}"></script>
+<script>
+$(function(){
+    $("#datepicker").datepicker();
+});
+</script>
