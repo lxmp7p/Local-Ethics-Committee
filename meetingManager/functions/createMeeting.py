@@ -28,3 +28,7 @@ def createMeeting(request):
 			meeting=meeting,
 	)
 	return meeting, researchList
+
+
+#def getNormalDate(invalidDate):
+	#invalidDate = 2021-09-27

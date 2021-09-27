@@ -41,8 +41,10 @@ class ReportInfo(object):
 
 	def getDocListString(self):
 		docListString = ''
+		count = 1
 		for doc in self.doc_list:
-			docListString += doc + '\n\n'
+			docListString += str(count) + ') ' + doc + '\n\n'
+			count += 1
 		return docListString
 
 	def getBodyRecords(self):
@@ -89,7 +91,6 @@ def createDoc(reportInfoList, id_meeting, date, time):
 	document.add_page_break()
 	for reportInfo in reportInfoList:
 		document.add_paragraph(reportInfo.type_research)
-		print(reportInfo.type_research)
 		records = reportInfo.getBodyRecords()
 		table = document.add_table(rows=1, cols=2)
 		for type, text in records:
@@ -152,7 +153,7 @@ def createReport(researchList, meeting):
 	mail = 'lec@niioncologii.ru'
 	organization = 'ФГБУ «НМИЦ онкологии им. Н.Н. Петрова» \nМинздрава России'
 	id_meeting = str(meeting.id)
-	date = str(meeting.date)
+	date = str(meeting.date.day) + '.' + str(meeting.date.month) + '.' + str(meeting.date.year)
 	time = str(meeting.time)
 	#Конец данных
 	reportInfoList = getReportInfoList(researchList, mail, organization, id_meeting, date, time)
