@@ -1,20 +1,15 @@
-<table class="custom_table">
+<table class="custom_table table-hover">
   <thead>
     <tr>
       <th>Номер протокола</th>
       <th>Владелец</th>
-      <th>Открыть</th>
     </tr>
   </thead>
   <tbody>
     {% for research in researchList %}
-      <tr>
+      <tr style="cursor: pointer" onclick="window.location.href='{% url 'watchResearch' research.id %}'; return false">
         <td>{{ research.protocol_number }}</th>
         <td>{{ research.owner }}</td>
-        <td>
-        <form action="{% url 'watchResearch' research.id %}">
-          <button type="submit" class="btn btn-info">Открыть</button></td>
-        </form>
       </tr>
     {% endfor %}
   </tbody>
