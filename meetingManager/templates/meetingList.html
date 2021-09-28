@@ -1,24 +1,38 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
 {% include 'inc/_menu.html' %}
-<table class="table">
-  <thead>
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-5"></div>
+    <div class="col-5"></div>
+    <div class="col"><a class="custom_button"  href="{% url 'createMeeting' %}">Создать заседание</a></div>
+    <div class="col-1"></div>
+  </div>
+
+<table class="custom_table table-hover" >
+  <thead  >
     <tr>
-      <th scope="col">Дата проведения</th>
-      <th scope="col">Время</th>
-      <th scope="col">Повестка</th>
+      <th >Дата проведения</th>
+      <th>Время</th>
+      <!-- <th scope="col">Повестка</th> -->
     </tr>
   </thead>
   <tbody>
     {% for meeting in meetingList %}
-      <tr>
-        <th scope="row">{{ meeting.date }}</th>
+      <tr style="cursor: pointer" onclick="window.location.href='../media/{{ meeting.subpoena }}'; return false" target="_blank">
+        <td >{{ meeting.date }}</th>
         <td>{{ meeting.time }}</td>
-        <td><a class="btn btn-success" href="../media/{{ meeting.subpoena }}" target="_blank">Открыть</a></td>
+        <!-- <td><a class="btn btn-success" href="../media/{{ meeting.subpoena }}" target="_blank">Открыть</a></td> -->
         </tr>
       </tr>
     {% endfor %}
   </tbody>
 </table>
+</div>
+
+
 {% endblock %}

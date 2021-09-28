@@ -1,20 +1,16 @@
-<table class="table">
+<table class="custom_table table-hover">
   <thead>
     <tr>
-      <th scope="col">Название работы</th>
-      <th scope="col">Владелец</th>
-      <th scope="col">Открыть</th>
+      <th>Название работы</th>
+      <th >Владелец</th>
     </tr>
   </thead>
   <tbody>
     {% for research in researchList %}
-      <tr>
-        <th scope="row">{{ research.work_name }}</th>
+      <tr style="cursor: pointer" onclick="window.location.href='{% url 'watchResearch' research.id %}'; return false" >
+        <th >{{ research.work_name }}</th>
         <td>{{ research.owner }}</td>
-        <td>
-        <form action="{% url 'watchResearch' research.id %}">
-          <button type="submit" class="btn btn-info">Открыть</button></td>
-        </form>
+        <td>        
       </tr>
     {% endfor %}
   </tbody>
