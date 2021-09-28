@@ -6,7 +6,6 @@ from docx import Document
 from docx.shared import Inches
 from docx.shared import Pt
 import datetime
-import time as getTime
 
 now = datetime.datetime.now()
 
@@ -66,13 +65,7 @@ class ReportInfo(object):
 		)
 		return records
 
-def createDoc(reportInfoList, id_meeting, date, time):
-	'''
-	reportInfoList = [report.object, report.object...]
-	id_meeting = 7
-	date = '06.11.2000'
-	time = 17:00
-	'''
+def createDoc(reportInfoList, id_meeting, date, time, randNumber):
 	document = Document()
 	document.add_heading('ПОВЕСТКА ОЧЕРЕДНОГО ЗАСЕДАНИЯ КОМИТЕТА ПО ЭТИКЕ при ФГБУ «НМИЦ онкологии им. Н.Н. Петрова» Минздрава России', 0)
 	document.add_heading('', 0)
@@ -106,10 +99,10 @@ def createDoc(reportInfoList, id_meeting, date, time):
 		document.add_heading('', 0)
 		document.add_page_break()
 		path = os.path.dirname(__file__) + '\\..\\..\\media\\reports\\'   + str(now.strftime("%d-%m-%Y-%H")) + '\\'
-		pathFromBd = f'reports/{str(now.strftime("%d-%m-%Y-%H"))}/subpoena.docx'
+		pathFromBd = f'reports/{str(now.strftime("%d-%m-%Y-%H"))}/subpoena{randNumber}.docx'
 		if not os.path.exists(path):
 			os.mkdir(path)
-	document.save(f'{path}/subpoena{str(round(getTime.time() * 1000))}.docx')
+	document.save(f'{path}/subpoena{randNumber}.docx')
 	reportInfoList = []
 
 def getReportInfoList(researchList, mail, organization, id_meeting, date, time): #На вход кидаем список исследований в заседании
@@ -148,7 +141,7 @@ def getReportInfoList(researchList, mail, organization, id_meeting, date, time):
 	return reportInfoList
 
 
-def createReport(researchList, meeting):
+def createReport(researchList, meeting, randNumber):
 	#Данные о заседании
 	mail = 'lec@niioncologii.ru'
 	organization = 'ФГБУ «НМИЦ онкологии им. Н.Н. Петрова» \nМинздрава России'
@@ -157,4 +150,4 @@ def createReport(researchList, meeting):
 	time = str(meeting.time)
 	#Конец данных
 	reportInfoList = getReportInfoList(researchList, mail, organization, id_meeting, date, time)
-	createDoc(reportInfoList, id_meeting, date, time)
+	createDoc(reportInfoList, id_meeting, date, time, randNumber)

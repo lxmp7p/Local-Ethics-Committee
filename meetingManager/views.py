@@ -30,8 +30,8 @@ class CreateMeeting(Meeting):
 		})
 
 	def post(self, request):
-		meeting, researchListInMeeting = createMeeting(request)
-		getReportInfoList = createReport(researchListInMeeting, meeting)
+		meeting, researchListInMeeting, randNumber = createMeeting(request)	#rund number need to save valid name subpoena
+		getReportInfoList = createReport(researchListInMeeting, meeting, randNumber)
 		return render(request, "createMeeting/createMeeting.html", {
 			"researchOnMeetinList": Meeting.getNotAcceptedResearch(),
 			"userList": Meeting.getUserList(),

@@ -1,24 +1,41 @@
-<div class="col-sm text-center">
-    <div class="d-inline">
-        {% if research.date_accepted %}
-          <h2>Дата принятия</h2>
-          {{ research.date_accepted }}
-        {% endif %}
-        <h1>Номер протокола</h1>
-        {{ research.protocol_number }}
-        <h1>Название протокола</h1>
-        {{ research.protocol_name }}
-        <h1>Название препарата</h1>
-        {{ research.drug_name }}
-        <h1>Главный исследователь</h1>
-        {{ research.main_researcher }}
-        <h1>Исследовательский центр</h1>
-        {{ research.research_center }}
-        <h1>Заказчик исследования</h1>
-        {{ research.customer }}
-        <h1>Контактные данные заказчика</h1>
-        {{ research.customer_contacts }}
-        <h1>Срок проведения исследования</h1>
-        {{ research.duration }}
-    </div>
-</div>
+{% if research.date_accepted %}
+    <table class="table">
+      <tbody>
+        <tr>
+          <th>Дата принятия</th>
+          <td>{{ research.date_accepted }}</td>
+        </tr>
+        <tr>
+          <th>Номер протокола</th>
+          <td>{{ research.protocol_number }}</td>
+        </tr>
+        <tr>
+          <th>Название протокола</th>
+          <td>{{ research.protocol_name }}</td>
+        </tr>
+        <tr>
+          <th>Название препарата</th>
+          <td>{{ research.drug_name }}</td>
+        </tr>
+        <tr>
+          <th>Главный исследователь</th>
+          <td>{{ research.main_researcher }}</td>
+        </tr>
+        <tr>
+          <th>Исследовательский центр</th>
+          <td>{{ research.research_center }}</td>
+        </tr>
+        <tr>
+        <th>Заказчик исследования</th>
+          <td>{{ research.customer }}</td>
+        </tr>
+        <tr>
+        <th>Контактные данные заказчика</th>
+          <td>{{ research.customer_contacts }}</td>
+        </tr>
+        <th>Срок проведения исследования</th>
+          <td>{{ research.duration }}</td>
+        </tr>
+      </tbody>
+    </table>
+{% endif %}

@@ -1,15 +1,17 @@
 from ..models import Meeting, MeetingData
 from researchManager.models import Research
 import datetime
+import time as getTime
 
 now = datetime.datetime.now()
 
 
 def createMeeting(request):
+	randNumber = str(round(getTime.time() * 1000))
 	meeting = Meeting.objects.create(
 		date=request.POST.get("date"),
 		time=request.POST.get("time"),
-		subpoena = f'reports/{str(now.strftime("%d-%m-%Y-%H"))}/subpoena.docx',
+		subpoena = f'reports/{str(now.strftime("%d-%m-%Y-%H"))}/subpoena{randNumber}.docx',
 	)
 	researchList = []
 	for research in request.POST.getlist("researchIdList"):
@@ -27,7 +29,7 @@ def createMeeting(request):
 			usersInMeeting_id=user,
 			meeting=meeting,
 	)
-	return meeting, researchList
+	return meeting, researchList, randNumber
 
 
 #def getNormalDate(invalidDate):
