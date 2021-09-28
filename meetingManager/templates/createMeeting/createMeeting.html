@@ -9,16 +9,13 @@
     {% csrf_token %}    
     <div class="row">
         <div class="col">
-<<<<<<< HEAD
             <table class="table">
                 <div id="filterPanel">
                     <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="allRequestsFilter" onclick="filterResearchList(this)" disabled>Все</button>
                     <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="firstRequestFilter" onclick="filterResearchList(this)">Первичные</button>
                     <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="secondRequestFilter" onclick="filterResearchList(this)">Вторичные</button>
                 </div>
-=======
             <table class="custom_table_meeting table-hover">
->>>>>>> origin/layout
                 <thead>
                     <tr>
                         <th scope="col">Название</th>
@@ -28,13 +25,7 @@
                 </thead>
                 <tbody id='researchList'>
                     {% for research in researchOnMeetinList %}
-<<<<<<< HEAD
-                    <tr id="{{research.type_request}}">
-                        <th scope="row"><a href="{% url 'watchResearch' research.id %}" target="_blank">{{ research }}</a></th>
-                        <td>{{ research.getType }}</td>
-                        <td><button type="button"  id="{{ research.id }}" class="btn btn-primary" onclick="addInMeetingList(this, 'researchInMeeting', '{{ research }}', '{{ research.id }}')">Добавить</button></td>
-=======
-                    <tr >
+                    <tr>
                         <td style="cursor: pointer" onclick="window.location.href='{% url 'watchResearch' research.id %}'; return false" target="_blank" scope="row">{{ research }}</td>
                         <td style="cursor: pointer" onclick="window.location.href='{% url 'watchResearch' research.id %}'; return false" target="_blank">{{ research.getType }}</td>
                         <td>
@@ -45,7 +36,6 @@
                                 </svg>
                             </button>
                         </td>
->>>>>>> origin/layout
                     </tr>
                     {% endfor %}
                 </tbody>

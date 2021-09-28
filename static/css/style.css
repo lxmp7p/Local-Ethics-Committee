@@ -141,14 +141,6 @@ h1 {
 
 }
 
-<<<<<<< HEAD
-#searchInput {
-width: 300px;
-}
-=======
-
-
-
 
 .custom_table_meeting {
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
@@ -179,4 +171,4 @@ width: 300px;
       .custom_table_meeting tr:nth-child(even) {
         background: #F6F6F6;
       }
->>>>>>> origin/layout
+
