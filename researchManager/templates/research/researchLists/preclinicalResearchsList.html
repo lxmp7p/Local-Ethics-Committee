@@ -1,16 +1,18 @@
-<table class="custom_table table-hover">
+
   <thead>
     <tr>
-      <th >Номер протокола</th>
-      <th>Владелец</th>      
+        <th >Номер протокола</th>
+        <th>Владелец</th>
+        <th>Дата загрузки</th>
     </tr>
   </thead>
   <tbody>
     {% for research in researchList %}
       <tr style="cursor: pointer" onclick="window.location.href='{% url 'watchResearch' research.id %}'; return false">
-        <th>{{ research.work_name }}</th>
-        <td>{{ research.owner }}</td>        
+        <td>{{ research.work_name }}</td>
+        <td>{{ research.owner }}</td>
+        <td>{{ research.date_created }}</td>
       </tr>
     {% endfor %}
   </tbody>
-</table>
+

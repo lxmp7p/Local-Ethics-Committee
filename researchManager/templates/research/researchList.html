@@ -1,20 +1,69 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
 
-{% if researchType == "clinicalResearch" %}
-  {% include "research/researchLists/clinicalResearchsList.html" %}
-{% endif %}
+<div class="filter_container custom_table table-hover">
+    <div id="filterPanel">
+        <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="clinicalResearch" disabled>Клинические исследования</button>
+        <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="preclinicalResearch">Доклинические исследования</button>
+        <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="initiativeResearch">Инициативные исследования</button>
+        <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="dissertationWork">Диссертационные работы</button>
+    </div>
+    <div class="input-group mt-4 text-center" id="divSearch">
+        <input type="text" class="form-control text-center w-50" aria-label="Поиск" aria-describedby="inputGroup-sizing-default" id="searchInput" placeholder="Поиск">
+    </div>
 
-{% if researchType == "preclinicalResearch" %}
-  {% include "research/researchLists/preclinicalResearchsList.html" %}
-{% endif %}
+</div>
+    <div id="researchInfo">
+        <table class="custom_table table-hover" id="researchList">
+        {% if researchType == "clinicalResearch" %}
+          {% include "research/researchLists/clinicalResearchsList.html" %}
+        {% endif %}
 
-{% if researchType == "initiativeResearch" %}
-  {% include "research/researchLists/initiativeResearchsList.html" %}
-{% endif %}
+        {% if researchType == "preclinicalResearch" %}
+          {% include "research/researchLists/preclinicalResearchsList.html" %}
+        {% endif %}
 
-{% if researchType == "dissertationWork" %}
-  {% include "research/researchLists/dissertationWorksList.html" %}
-{% endif %}
+        {% if researchType == "initiativeResearch" %}
+          {% include "research/researchLists/initiativeResearchsList.html" %}
+        {% endif %}
 
+        {% if researchType == "dissertationWork" %}
+          {% include "research/researchLists/dissertationWorksList.html" %}
+        {% endif %}
+        </table>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $(".filter").click(function(){
+            var thisBtn = this;
+            $.ajax({
+                url: "/research/WatchResearchList/" + this.id,
+                type: 'GET', // This is the default though, you don't actually need to always mention it
+                success: function(data) {
+                    $("#researchInfo").replaceWith($('#researchInfo', $(data)));
+                    $("#filterPanel button:disabled")[0].disabled = false;
+                    thisBtn.disabled = true;
+                },
+                failure: function(data) {
+                    console.log("error")
+                }
+            });
+        });
+    });
+
+    $(document).ready(function(){
+      $("#searchInput").on("keyup", function() {
+        var  value = $(this).val().toLowerCase();
+
+        $("#researchList tbody tr").filter(function() {
+            console.log($(this).text());
+           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+
+</script>
 {% endblock %}

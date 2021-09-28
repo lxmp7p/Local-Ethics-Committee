@@ -29,7 +29,7 @@ class User(AbstractUser):
     registration_accepted = models.CharField('Подтвердить регистрацию',max_length=10)
 
     def __str__(self):
-        return self.username
+        return self.get_full_name()
 
     class Meta(object):
         unique_together = ('username',)

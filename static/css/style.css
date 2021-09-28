@@ -55,14 +55,12 @@
 #logo {
   height: 60px;
 }
-<<<<<<< HEAD
 
 
 h1 {
   font-family: Montserrat;
 }
-=======
- 
+
 .field__file-button {
   width: 130px;
   height: 60px;
@@ -139,4 +137,6 @@ h1 {
 
 }
 
->>>>>>> layout
+#searchInput {
+width: 300px;
+}
