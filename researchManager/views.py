@@ -10,12 +10,8 @@ from .models import *
 
 class ResearchListView(View):
     """Переход к нужному типу исследования"""
-    def loadResearch(request):
-        return render(request, "research/researchType.html", {"method":"loadResearch"})
-
-    def watchResearch(request):
-        return render(request, "research/researchType.html", {"method":"watchResearch"})
-
+    def get(self, request):
+        return render(request, "research/researchType.html")
 
 class LoadResearch(View):
     """Загрузка исследования"""
@@ -35,7 +31,6 @@ class LoadResearch(View):
             'researchType': researchType,
             'requestType': requestType,
         })
-
 
 class WatchResearch(View):
     """Просмотр списка исследований в системе"""
