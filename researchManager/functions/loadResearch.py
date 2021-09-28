@@ -89,45 +89,45 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
     researchId = Research.objects.all().last()
     researchList = getMainResearchsList(researchType)
 
-    for research in researchList:
-        if not request.user.id:
-            user_id = 2
-        else: 
-            user_id = request.user.id
-        if informationForm.identityCode == research.identityCode:
-            LogEntry.objects.log_action(
-                user_id=user_id,
-                content_type_id=ContentType.objects.get_for_model(Research).pk,
-                object_repr=informationForm.protocol_number, 
-                object_id=researchId.id,
-                change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-                action_flag=CHANGE)
-        else:
-            LogEntry.objects.log_action(
-                user_id=user_id,
-                content_type_id=ContentType.objects.get_for_model(Research).pk,
-                object_repr=informationForm.protocol_number, 
-                object_id=researchId.id,
-                change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-                action_flag=ADDITION)
+    # for research in researchList:
+    #     if not request.user.id:
+    #         user_id = 2
+    #     else: 
+    #         user_id = request.user.id
+    #     if informationForm.identityCode == research.identityCode:
+    #         LogEntry.objects.log_action(
+    #             user_id=user_id,
+    #             content_type_id=ContentType.objects.get_for_model(Research).pk,
+    #             object_repr=informationForm.protocol_number, 
+    #             object_id=researchId.id,
+    #             change_message=informationForm.type_request + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+    #             action_flag=CHANGE)
+    #     else:
+    #         LogEntry.objects.log_action(
+    #             user_id=user_id,
+    #             content_type_id=ContentType.objects.get_for_model(Research).pk,
+    #             object_repr=informationForm.protocol_number, 
+    #             object_id=researchId.id,
+    #             change_message='Добавил ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+    #             action_flag=ADDITION)
     
     
-    if checkidentityCode == True:
-        LogEntry.objects.log_action(
-            user_id=request.user.id,
-            content_type_id=ContentType.objects.get_for_model(Research).pk,
-            object_repr=informationForm.protocol_number, 
-            object_id=researchId.id,
-            change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-            action_flag=CHANGE)
-    else:
-        LogEntry.objects.log_action(
-            user_id=request.user.id,
-            content_type_id=ContentType.objects.get_for_model(Research).pk,
-            object_repr=informationForm.protocol_number, 
-            object_id=researchId.id,
-            change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
-            action_flag=ADDITION)
+    # if checkidentityCode == True:
+    #     LogEntry.objects.log_action(
+    #         user_id=request.user.id,
+    #         content_type_id=ContentType.objects.get_for_model(Research).pk,
+    #         object_repr=informationForm.protocol_number, 
+    #         object_id=researchId.id,
+    #         change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+    #         action_flag=CHANGE)
+    # else:
+    #     LogEntry.objects.log_action(
+    #         user_id=request.user.id,
+    #         content_type_id=ContentType.objects.get_for_model(Research).pk,
+    #         object_repr=informationForm.protocol_number, 
+    #         object_id=researchId.id,
+    #         change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + informationForm.protocol_number, 
+    #         action_flag=ADDITION)
     return folderName, researchId.id
 
 def getFileInfo(filesInfo, file):
