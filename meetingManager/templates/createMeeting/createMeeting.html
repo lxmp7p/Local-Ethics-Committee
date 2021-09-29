@@ -4,116 +4,132 @@
 {% block content %}
 {% load static %}
 <div class="container">
-<script type="text/javascript" src="{% static 'js/createMeeting.js' %}"></script>
-<form method="POST" enctype="multipart/form-data" class="meetingForm">
-    {% csrf_token %}    
-    <div class="row">
-        <div class="col">
-            <table class="table">
-                <div id="filterPanel">
-                    <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="allRequestsFilter" onclick="filterResearchList(this)" disabled>Все</button>
-                    <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="firstRequestFilter" onclick="filterResearchList(this)">Первичные</button>
-                    <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true" id="secondRequestFilter" onclick="filterResearchList(this)">Вторичные</button>
-                </div>
-            <table class="custom_table_meeting table-hover">
-                <thead>
-                    <tr>
-                        <th>Название</th>
-                        <th >Тип</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody id='researchList'>
-                    {% for research in researchOnMeetinList %}
-                    <tr>
-                        <td style="cursor: pointer" onclick="window.open('{% url 'watchResearch' research.id %}')" >{{ research }})</td>
-                        <td style="cursor: pointer" onclick="window.open('{% url 'watchResearch' research.id %}')" >{{ research.getType }}</td>
-                        <td>
-                            <button type="button"  id="{{ research.id }}" class="btn" onclick="addInMeetingList(this, 'researchInMeeting', '{{ research }}', '{{ research.id }}')">
-                                <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-clipboard-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                                    <path fill-rule="evenodd" d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zM8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z"/>
-                                </svg>
-                            </button>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+    <script type="text/javascript" src="{% static 'js/createMeeting.js' %}"></script>
+    <form method="POST" enctype="multipart/form-data" class="meetingForm">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <div id="filterPanel">
+                        <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true"
+                            id="allRequestsFilter" onclick="filterResearchList(this)" disabled>Все</button>
+                        <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true"
+                            id="firstRequestFilter" onclick="filterResearchList(this)">Первичные</button>
+                        <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true"
+                            id="secondRequestFilter" onclick="filterResearchList(this)">Вторичные</button>
+                    </div>
+                    <table class="custom_table_meeting table-hover">
+                        <thead>
+                            <tr>
+                                <th>Название</th>
+                                <th>Тип</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id='researchList'>
+                            {% for research in researchOnMeetinList %}
+                            <tr>
+                                <td style="cursor: pointer"
+                                    onclick="window.open('{% url 'watchResearch' research.id %}')">{{ research }})</td>
+                                <td style="cursor: pointer"
+                                    onclick="window.open('{% url 'watchResearch' research.id %}')">{{ research.getType
+                                    }}</td>
+                                <td>
+                                    <button type="button" id="{{ research.id }}" class="btn"
+                                        onclick="addInMeetingList(this, 'researchInMeeting', '{{ research }}', '{{ research.id }}')">
+                                        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-clipboard-plus"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                                            <path fill-rule="evenodd"
+                                                d="M9.5 1h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3zM8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+            </div>
 
-        <div class="col-5 text-center">
-            <h3>Список исследований</h3>
-            <hr>
-           <table class="custom_table_meeting">
-                <thead>
-                    <tr>
-                        <th colspan="2" >Выбранные исследования</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="researchInMeeting">
-                    <tr>
-                        
-                    </tr>
-                </tbody>
-            </table>
+            <div class="col-5 text-center">
+                <h3>Список исследований</h3>
+                <hr>
+                <table class="custom_table_meeting">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Выбранные исследования</th>
 
-            <h3>Список пользователей</h3>
-            <hr>
-            <table class="custom_table_meeting">
-                <thead>
-                    <tr>
-                        <th colspan="2" >Члены комиссии</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="userInMeeting">
-                    <tr>
-                        
-                    </tr>
-                </tbody>
-            </table>
-            <hr>
-            <div class="createMenu" id="createMenu">
-                <input type="date" name="date" class="text-center" required style=" width: 80%">
-                <br><br>
-                <input type="time" name="time" class="text-center" required style=" width: 80%">
-                <br><br>
-                <button class="custom_button" onclick="setResearchAndUserInPost()">
-                    <svg width="30px" height="30px" viewBox="0 0 16 18" class="bi bi-plus-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
-                        <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z"/>
+                        </tr>
+                    </thead>
+                    <tbody id="researchInMeeting">
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Список пользователей</h3>
+                <hr>
+                <table class="custom_table_meeting">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Члены комиссии</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="userInMeeting">
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
+                <hr>
+                <div class="createMenu" id="createMenu">
+                    <input type="date" name="date" class="text-center" required style=" width: 100%">
+                    <br><br>
+                    <input type="time" name="time" class="text-center" required style=" width: 100%">
+                    <br><br>
+                    <button class="custom_button" onclick="setResearchAndUserInPost()">
+                        <svg width="30px" height="30px" viewBox="0 0 16 18" class="bi bi-plus-circle"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z" />
+                            <path fill-rule="evenodd"
+                                d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8.5V12a.5.5 0 0 1-1 0V8z" />
                         </svg>
                         Создать заседание
-                </button>
+                    </button>
+                </div>
+            </div>
+
+            <div class="col">
+                <table class="custom_table_meeting table-hover">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Пользователи</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userList">
+                        {% for user in userList %}
+                        <tr>
+                            <td scope="row">{{ user.get_full_name }}</td>
+                            <td><button type="button" class="btn" id="{{ user.id }}"
+                                    onclick="addInMeetingList(this, 'userInMeeting', '{{ user }}', '{{ user.id }}')">
+                                    <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                        <path fill-rule="evenodd"
+                                            d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z" />
+                                    </svg>
+                                </button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
-
-        <div class="col">
-            <table class="custom_table_meeting table-hover">
-                <thead>
-                    <tr>
-                        <th colspan="2" >Пользователи</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="userList">
-                    {% for user in userList %}
-                    <tr>
-                        <td scope="row">{{ user.get_full_name }}</td>
-                        <td><button type="button" class="btn" id="{{ user.id }}" onclick="addInMeetingList(this, 'userInMeeting', '{{ user }}', '{{ user.id }}')">
-                            <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
-                                <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
-                            </svg>
-                        </button></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</form>
+    </form>
 </div>
 {% endblock %}
