@@ -39,8 +39,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="member_list_date">
                         </div>
                     </div>
-                   <button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='letter_of_appeal_form', parentId='letter_of_appeal')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='letter_of_appeal_form', parentId='letter_of_appeal')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='letter_of_appeal_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
@@ -70,8 +74,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="research_protocol_date">
                         </div>
                     </div>
-                   <button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='research_protocol_form', parentId='research_protocol')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='research_protocol_form', parentId='research_protocol')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='research_protocol_form')">Удалить поле</button></div>            
             </div>
         </div>
         <div class="card-header">
@@ -101,8 +109,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="annotation_date">
                         </div>
                     </div>
-                   <button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='annotation_form', parentId='annotation')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='annotation_form', parentId='annotation')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='annotation_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
@@ -112,14 +124,14 @@
                 </div>
                 <div class="col-4 "></div>
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page7', 'page8')">Далее</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page7', 'lastPage')">Далее</button>
                 </div>
             </div>
         </div>
     </div> 
 </div>
 
-<div id="page8" hidden="true">
+<div id="lastPage" hidden="true">
     <div class="card">
         <div class="card-body">
             <div class="row">
@@ -132,18 +144,22 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="autobiography_date">
                         </div>
                     </div>
-                   <button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='autobiography_form', parentId='autobiography')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button type="button" id="addFieldButton" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='autobiography_form', parentId='autobiography')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='autobiography_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
             <div class="row justify-content-md-center"> 
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page8', 'page7')">Назад</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('lastPage', 'page7')">Назад</button>
                 </div>
                 <div class="col-4 "></div>
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page8', 'pageAnotherFiles')">Далее</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('lastPage', 'pageAnotherFiles')">Далее</button>
                 </div>
             </div>
         </div>

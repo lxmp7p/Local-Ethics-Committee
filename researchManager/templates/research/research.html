@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-  {% csrf_token %}
+{% csrf_token %}
 {% if research.type == "clinicalResearch" %}
   {% include "research/watchResearch/clinicalResearch.html" %}
 {% endif %}
@@ -21,18 +21,18 @@
 
 {% if filesList %}
   <div class="col-12 text-center">
-    <table class="table">
-        <thead>
-            <tr>
-              <th scope="col">Название документа</th>
-              <th scope="col">Версия</th>
-              <th scope="col">Дата</th>
-              <th scope="col">Открыть</th>
-              <th scope="col">Удалить</th>
-            </tr>
-        </thead>
+    <table style="font-size:13pt; width:100%" class="custom_table">
+      <thead>
+        <tr>
+          <th scope="col">Название документа</th>
+          <th scope="col">Версия</th>
+          <th scope="col">Дата</th>
+          <th scope="col">Открыть</th>
+          <th scope="col">Удалить</th>
+        </tr>
+      </thead>
       <tbody>
-      {% for file in filesList %}
+        {% for file in filesList %}
         <tr>
           <td>{{ file.name }}</td>
           <td>{{ file.version }} </td>
@@ -40,43 +40,41 @@
           <form method="POST">
             {% csrf_token %}
             <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
-              <td><button class="btn btn-danger" type="submit" name="idFile" value='{{ file.id }}'>Удалить</button></td>
-        </tr>
-      </form>
+            <td><button class="btn btn-danger" type="submit" name="idFile" value='{{ file.id }}'>Удалить</button></td>
+          </tr>
+        </form>
         {% endfor %}
       </tbody>
     </table>
   </div>
 {% endif %}
 <div class="col-12 text-center">
-      <table class="table" >
-        <thead>
-          <tr >
-            <th scope="col">Номер протокола</th>
-            <th scope="col">Дата заседания</th>
-            <th scope="col">Открыть</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for relatedResearch in history %}
-          {% if relatedResearch.historyResearch == research %}
-              <tr class="table-success">
-          {% else %}
-              <tr>
-          {% endif %}
-              <th scope="row">{{relatedResearch.historyResearch}}</th>
-              <td>{{relatedResearch.historyResearch.date_accepted}}</td>
-              <td>
-          {% if relatedResearch.historyResearch != research %}
-              <form action="{% url 'watchResearch' relatedResearch.historyResearch.id %}">
-                <button type="submit" class="btn btn-info">Открыть</button></td>
-              </form>
-          {% endif %}
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+  <table class="table" >
+    <thead>
+      <tr >
+        <th scope="col">Номер протокола</th>
+        <th scope="col">Дата заседания</th>
+        <th scope="col">Открыть</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for relatedResearch in history %}
+        {% if relatedResearch.historyResearch == research %}
+          <tr class="table-success">
+        {% else %}
+          <tr>
+        {% endif %}
+          <th scope="row">{{relatedResearch.historyResearch}}</th>
+          <td>{{relatedResearch.historyResearch.date_accepted}}</td>
+          <td>
+            {% if relatedResearch.historyResearch != research %}
+                <button type="submit" class="btn btn-info" onclick="javascript:document.location.href='{% url 'watchResearch' relatedResearch.historyResearch.id %}'">Открыть</button></td>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 </tr>
 </tbody>

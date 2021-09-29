@@ -1,3 +1,7 @@
+body {
+  font-family: 'Ruda', sans-serif;
+}
+
 .password-icon {
     float: right;
     position: relative;
@@ -82,7 +86,6 @@ h1 {
 }
 
 .custom_table {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 16pt;
     border-collapse: collapse;
     text-align: center;
@@ -143,7 +146,6 @@ h1 {
 
 
 .custom_table_meeting {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     border-collapse: collapse;
     text-align: center;
     margin: auto;

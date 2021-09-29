@@ -46,8 +46,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" class="datepicker" name="letter_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='letter_form', parentId='letter')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='letter_form', parentId='letter')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='letter_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
@@ -70,7 +74,6 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-    
                     <h3>Список членов команды</h3><hr>
                     <div class="member_list" id="member_list">
                         <div class="member_list_form" id="member_list_form">
@@ -79,7 +82,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="member_list_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='member_list_form', parentId='member_list')">Добавить поле</button>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='member_list_form', parentId='member_list')">Добавить поле</button></div>
+                    <div class="col"></div>
+                    <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='member_list_form')">Удалить поле</button>
                 </div>
             </div>
         </div>
@@ -102,17 +110,21 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    
+
                     <h3>Разрешение МЗ РФ</h3><hr>
                     <div class="permit" id="permit">
                         <div class="permit_form" id="permit_form">
                             <input type="file" class="form-control"  name="permit">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="permit_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Номер разрешения" name="permit_version">
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="permit_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='permit_form', parentId='permit')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='permit_form', parentId='permit')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='permit_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
@@ -134,7 +146,6 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    
                     <h3>Протокол исследования</h3><hr>
                     <div class="protocol" id="protocol">
                         <div class="protocol_form" id="protocol_form">
@@ -143,8 +154,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="protocol_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='protocol_form', parentId='protocol')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='protocol_form', parentId='protocol')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='protocol_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
@@ -166,7 +181,6 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    
                     <h3>Форма информированого листка</h3><hr>
                     <div class="inform_list" id="inform_list">
                         <div class="inform_list_form" id="inform_list_form">
@@ -175,8 +189,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="inform_list_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='inform_list_form', parentId='inform_list')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='inform_list_form', parentId='inform_list')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='inform_list_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
@@ -194,11 +212,10 @@
 </div>
 
 <div id="page10" hidden="true">
-<div class="card">
+    <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    
                     <h3>Брошюра исследователя</h3><hr>
                     <div class="brochure_researcher" id="brochure_researcher">
                         <div class="brochure_researcher_form" id="brochure_researcher_form">
@@ -207,8 +224,12 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="brochure_researcher_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='brochure_researcher_form', parentId='brochure_researcher')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='brochure_researcher_form', parentId='brochure_researcher')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='brochure_researcher_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
@@ -218,7 +239,7 @@
                 </div>
                 <div class="col-4 "></div>
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page10', 'page11')">Далее</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page10', 'lastPage')">Далее</button>
                 </div>
             </div>
         </div>
@@ -226,12 +247,11 @@
 </div>
 
 
-<div id="page11" hidden="true">
+<div id="lastPage" hidden="true">
     <div class="card">
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    
                     <h3>Договор страхования</h3><hr>
                     <div class="insurance_contract" id="insurance_contract">
                         <div class="insurance_contract_form" id="insurance_contract_form">
@@ -240,18 +260,22 @@
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="insurance_contract_date">
                         </div>
                     </div>
-                    <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='insurance_contract_form', parentId='insurance_contract')">Добавить поле</button></div>
+                <div class="col"></div>
+                <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='insurance_contract_form')">Удалить поле</button></div>
             </div>
         </div>
         <div class="card-header">
             <div class="row justify-content-md-center"> 
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page11', 'page10')">Назад</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('lastPage', 'page10')">Назад</button>
                 </div>
                 <div class="col-4 "></div>
                 <div class="col-lg-1">
-                    <button type="button" class="btn btn-outline-dark" onclick="changePage('page11', 'pageAnotherFiles')">Далее</button>
+                    <button type="button" class="btn btn-outline-dark" onclick="changePage('lastPage', 'pageAnotherFiles')">Далее</button>
                 </div>
             </div>
         </div>

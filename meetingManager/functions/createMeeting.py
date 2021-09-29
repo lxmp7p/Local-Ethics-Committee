@@ -21,6 +21,7 @@ def createMeeting(request):
 		)
 		objResearch = Research.objects.get(id=research)
 		objResearch.addedOnMeeting = True
+		objResearch.date_accepted = request.POST.get("date")
 		objResearch.save()
 		researchList.append(objResearch)
 

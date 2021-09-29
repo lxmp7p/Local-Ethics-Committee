@@ -54,14 +54,18 @@
                                     <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="another_document_date">
                                 </div>
                             </div>
-                            <button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='another_document_form', parentId='another_document')">Добавить поле</button>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="dublicateInputs(cloneId='another_document_form', parentId='another_document')">Добавить поле</button></div>
+                        <div class="col"></div>
+                        <div class="col offset-6"><button id="addFieldButton" type="button" class="btn btn-outline-dark" onclick="deleteDublicateInputs(fieldClass='another_document_form')">Удалить поле</button></div>
                     </div>
                 </div>
                 <div class="card-header">
                     <div class="row justify-content-md-center"> 
                         <div class="col-lg-1">
-                            <button type="button" class="btn btn-outline-dark" onclick="changePage('pageAnotherFiles', 'page11')">Назад</button>
+                            <button type="button" class="btn btn-outline-dark" onclick="changePage('pageAnotherFiles', 'lastPage')">Назад</button>
                         </div>
                         <div class="col-4 "></div>
                         <div class="col-lg-1">

@@ -11,7 +11,7 @@ from .functions.report_maker import createReport
 
 class Meeting(View):
 	def getNotAcceptedResearch():
-		return Research.objects.filter(addedOnMeeting=False)
+		return Research.objects.filter(addedOnMeeting=False, date_accepted=None)
 
 	def getUserList():
 		User = get_user_model()

@@ -1,6 +1,6 @@
 {% load static %}
-    <script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'css/selectize.css' %}">
+<script type="text/javascript" src="{% static 'js/selectize.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/selectize.css' %}">
 
 <div id="page1">
     <div class="card">
@@ -88,25 +88,25 @@
 
 <script>
 
-        $("#relationResearchId").selectize({
-              create: true,
-              sortField: "text",
-            });
-            
-        function date_accepted_set_visible_false()
-        {
-            document.getElementById("date").hidden = false
-            document.getElementById("new_version_button").disabled = false
-            document.getElementById("old_version_button").disabled = true
-            document.getElementById("dateInput").required =true
-        }
-        function date_accepted_set_visible_true()
-        {
-            document.getElementById("date").hidden = true
-            document.getElementById("old_version_button").disabled = false
-            document.getElementById("new_version_button").disabled = true
-            document.getElementById("dateInput").required = false
-        }
+$("#relationResearchId").selectize({
+  create: true,
+  sortField: "text",
+});
+
+function date_accepted_set_visible_false()
+{
+    document.getElementById("date").hidden = false
+    document.getElementById("new_version_button").disabled = false
+    document.getElementById("old_version_button").disabled = true
+    document.getElementById("dateInput").required =true
+}
+function date_accepted_set_visible_true()
+{
+    document.getElementById("date").hidden = true
+    document.getElementById("old_version_button").disabled = false
+    document.getElementById("new_version_button").disabled = true
+    document.getElementById("dateInput").required = false
+}
 </script>
 
 <div id="loadForm">
@@ -116,10 +116,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-$("#getInfoBtn").click(function(){
-    var id = $('#relationResearchId').val();
-    $.ajax({
-        url: "/research/ajax/get_research_info/",
+    $("#getInfoBtn").click(function(){
+        var id = $('#relationResearchId').val();
+        $.ajax({
+            url: "/research/ajax/get_research_info/",
         type: 'GET', // This is the default though, you don't actually need to always mention it
         data:{
             relationResearchId: id,
@@ -140,14 +140,15 @@ $("#getInfoBtn").click(function(){
             $('#executor').val(data.mainResearcher);
             $('#division').val(data.researchCenter);
             $('#work_name').val(data.customer);
-
+            $('#duration').val(data.duration);
+            
             $("#getInfoBtn")[0].disabled = true;
         },
         failure: function(data) { 
             alert('Got an error dude');
         }
     });
-})
+    })
 });
 </script>
 
@@ -156,31 +157,31 @@ $("#getInfoBtn").click(function(){
 <input name="relationshipStatus" id="relationshipStatus" hidden="true">
 
 <script>
-    function firstResearch() {
-        document.getElementById('firstResearchBtn').disabled = true
-        document.getElementById('secondResearchBtn').disabled = false
-        document.getElementById('typeRequest').value = 'firstRequest'
-    }
+function firstResearch() {
+    document.getElementById('firstResearchBtn').disabled = true
+    document.getElementById('secondResearchBtn').disabled = false
+    document.getElementById('typeRequest').value = 'firstRequest'
+}
 
-    function secondResearch() {
-        document.getElementById('firstResearchBtn').disabled = false
-        document.getElementById('secondResearchBtn').disabled = true
-        document.getElementById('typeRequest').value = 'secondRequest'
-    }
+function secondResearch() {
+    document.getElementById('firstResearchBtn').disabled = false
+    document.getElementById('secondResearchBtn').disabled = true
+    document.getElementById('typeRequest').value = 'secondRequest'
+}
 
-     function relationshipTrue() {
-        document.getElementById('relationshipTrueBtn').disabled = true
-        document.getElementById('relationshipFalseBtn').disabled = false
-        document.getElementById('relationshipStatus').value = 'true'
-        document.getElementById('relationshipDiv').hidden = false
-    }
+function relationshipTrue() {
+    document.getElementById('relationshipTrueBtn').disabled = true
+    document.getElementById('relationshipFalseBtn').disabled = false
+    document.getElementById('relationshipStatus').value = 'true'
+    document.getElementById('relationshipDiv').hidden = false
+}
 
-    function relationshipFalse() {
-        document.getElementById('relationshipTrueBtn').disabled = false
-        document.getElementById('relationshipFalseBtn').disabled = true
-        document.getElementById('relationshipStatus').value = 'false'
-        document.getElementById('relationshipDiv').hidden = true
-    }
+function relationshipFalse() {
+    document.getElementById('relationshipTrueBtn').disabled = false
+    document.getElementById('relationshipFalseBtn').disabled = true
+    document.getElementById('relationshipStatus').value = 'false'
+    document.getElementById('relationshipDiv').hidden = true
+}
 </script>       
 
 
