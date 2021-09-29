@@ -6,25 +6,26 @@
 {% block content %}
 <div class='text-center col-md-8 offset-md-2'>
     <h1>Вход в систему</h1>
-        <div class="container">
-            <div class="login-form col-md-8 offset-md-2" >
-                <h3>{{error}}</h3>
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <input type="email" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Введите логин (номер телефона или эл.почту)">                 
-                        <br>
-                        <input type="password" name="password" class="form-control password1" id="exampleInputPassword1" placeholder="Пароль">
-                        <span class="fa fa-fw fa-eye password-icon show-password"></span>
-                    </div>
-            <input type="hidden" name="next" value="{{ next }}"/>
+    <div class="container">
+        <div class="login-form col-md-8 offset-md-2">
+            <h3>{{error}}</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="email" name="username" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Введите логин (номер телефона или эл.почту)">
+                    <br>
+                    <input type="password" name="password" class="form-control password1" id="exampleInputPassword1"
+                        placeholder="Пароль">
+                    <span class="fa fa-fw fa-eye password-icon show-password"></span>
+                </div>
+                <input type="hidden" name="next" value="{{ next }}" />
                 <button type="submit" class="custom_button">Войти</button>
-                <button type="button" class="custom_button" onclick="document.location='{% url 'register' %}'">Регистрация</button>
+                <button type="button" class="custom_button"
+                    onclick="document.location='{% url 'register' %}'">Регистрация</button>
             </form>
         </div>
-        </div>
+    </div>
 </div>
 
 {% endblock %}
-
-
