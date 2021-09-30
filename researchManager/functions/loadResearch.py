@@ -117,12 +117,13 @@ def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     fs.base_location = fs.base_location + folder_name
     filesInfo = filesInfo.copy()
     myDict = dict(filesInfo.lists())
-    if parentResearch:
-        for file in Files.objects.filter(research=parentResearch):
-            Files.objects.create(
-                file=file.file, research_id=researchId,
-                date=file.date, version=file.version, name=file.name
-            )
+    # ПОДСАСЫВАНИЕ ФАЙЛОВ ИЗ РОДИТЕЛЬСКОГО ИССЛЕДОВАНИЯ
+    # if parentResearch:
+    #     for file in Files.objects.filter(research=parentResearch):
+    #         Files.objects.create(
+    #             file=file.file, research_id=researchId,
+    #             date=file.date, version=file.version, name=file.name
+    #         )
     for file in files:
         fileList = files.getlist(file)
         for myFile in fileList:
@@ -154,28 +155,17 @@ def getResearchHistory(researchId):
         history.append({"historyResearch": historyResearch, "historyFiles": historyFiles})
     return research, filesList, history
 
-def getMainResearchsList(researchType):
+def getMainResearchsList(researchType, researchList = [], identityCodeList = [], have = False):
     """Выдает список самых новых исследований с уникальным identityCode"""
     allResearch = Research.objects.filter(type=researchType).order_by('-date_accepted')
-    researchList = []
     for notFiltredResearch in allResearch:
         if researchList:
-            have = False
-            for research in researchList:
-                if notFiltredResearch.identityCode == research.identityCode:
-                    have = True
-                else:
-                    if research.date_accepted or notFiltredResearch.date_accepted == None:
-                        research = notFiltredResearch
-                        have = False
-                    elif notFiltredResearch.date_accepted > research.date_accepted:
-                        research = notFiltredResearch
-                        have = False
-            if not have:
+            if notFiltredResearch.identityCode not in identityCodeList:
+                identityCodeList.append(notFiltredResearch.identityCode)
                 researchList.append(notFiltredResearch)
-                have = False
-        else: 
-            researchList.append(allResearch[0])
+        else:
+            identityCodeList.append(notFiltredResearch.identityCode)
+            researchList.append(notFiltredResearch)      
     return researchList
 
 def getValidPath(path):

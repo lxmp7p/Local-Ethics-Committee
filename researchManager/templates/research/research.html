@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 
 {% csrf_token %}
 {% if research.type == "clinicalResearch" %}
@@ -21,18 +23,6 @@
 
 {% if filesList %}
   <div class="col-12 text-center">
-<<<<<<< HEAD
-    <table style="font-size:13pt; width:100%" class="custom_table">
-      <thead>
-        <tr>
-          <th scope="col">Название документа</th>
-          <th scope="col">Версия</th>
-          <th scope="col">Дата</th>
-          <th scope="col">Открыть</th>
-          <th scope="col">Удалить</th>
-        </tr>
-      </thead>
-=======
     <table class="custom_table w-100">
         <thead>
             <tr>
@@ -42,7 +32,6 @@
               <th colspan="2" scope="col"></th>              
             </tr>
         </thead>
->>>>>>> origin/layoutNew
       <tbody>
         {% for file in filesList %}
         <tr>
@@ -51,12 +40,6 @@
           <td>{{ file.date }} </td>
           <form method="POST">
             {% csrf_token %}
-<<<<<<< HEAD
-            <td><a class="btn btn-success" href="{{ file.file.url }}" target="_blank">Открыть</a></td>
-            <td><button class="btn btn-danger" type="submit" name="idFile" value='{{ file.id }}'>Удалить</button></td>
-          </tr>
-        </form>
-=======
             <td><a class="btn" href="{{ file.file.url }}" target="_blank">
               <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-earmark-arrow-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M4 1h5v1H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V6h1v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2z"/>
@@ -65,7 +48,7 @@
                 <path fill-rule="evenodd" d="M8 6a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0v-4A.5.5 0 0 1 8 6z"/>
               </svg>
             </a></td>
-              <td><button class="btn" type="submit" name="idFile" value='{{ file.id }}'>
+              <td><button class="btn" type="submit" name="idFile" value='{{ file.id }}' onclick="return confirm('Удалить файл?')";>
                 <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-file-earmark-minus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                   <path d="M9 1H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5v-1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h5v2.5A1.5 1.5 0 0 0 10.5 6H13v2h1V6L9 1z"/>
                   <path fill-rule="evenodd" d="M11 11.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
@@ -73,41 +56,12 @@
               </button></td>
         </tr>
       </form>
->>>>>>> origin/layoutNew
         {% endfor %}
       </tbody>
     </table>
   </div>
 {% endif %}
 <div class="col-12 text-center">
-<<<<<<< HEAD
-  <table class="table" >
-    <thead>
-      <tr >
-        <th scope="col">Номер протокола</th>
-        <th scope="col">Дата заседания</th>
-        <th scope="col">Открыть</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for relatedResearch in history %}
-        {% if relatedResearch.historyResearch == research %}
-          <tr class="table-success">
-        {% else %}
-          <tr>
-        {% endif %}
-          <th scope="row">{{relatedResearch.historyResearch}}</th>
-          <td>{{relatedResearch.historyResearch.date_accepted}}</td>
-          <td>
-            {% if relatedResearch.historyResearch != research %}
-                <button type="submit" class="btn btn-info" onclick="javascript:document.location.href='{% url 'watchResearch' relatedResearch.historyResearch.id %}'">Открыть</button></td>
-            {% endif %}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-=======
       <table class="custom_table w-100" >
         <thead>
           <tr >
@@ -129,7 +83,6 @@
           {% if relatedResearch.historyResearch != research %}
               <form action="{% url 'watchResearch' relatedResearch.historyResearch.id %}">
                 <button type="submit" class="btn">
-                  
                   <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-folder" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z"/>
                     <path fill-rule="evenodd" d="M13.81 4H2.19a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4zM2.19 3A2 2 0 0 0 .198 5.181l.637 7A2 2 0 0 0 2.826 14h10.348a2 2 0 0 0 1.991-1.819l.637-7A2 2 0 0 0 13.81 3H2.19z"/>
@@ -149,7 +102,6 @@
           {% endfor %}
         </tbody>
       </table>
->>>>>>> origin/layoutNew
   </div>
 </tr>
 </tbody>

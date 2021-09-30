@@ -19,5 +19,6 @@ def get_research_info(request):
             "executor": research.executor,
             "division": research.division,
             "work_name": research.work_name,
+            "duration": research.duration,
     }
     return JsonResponse(researhInfo)
