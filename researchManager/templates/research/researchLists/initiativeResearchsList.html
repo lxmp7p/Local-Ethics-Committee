@@ -9,7 +9,7 @@
   <tbody>
     {% for research in researchList %}
       <tr style="cursor: pointer" onclick="window.location.href='{% url 'watchResearch' research.id %}'; return false">
-        <th>{{ research.name_research }}</th>
+        <td>{{ research.name_research }}</td>
         <td>{{ research.owner }}</td>
         <td>{{ research.date_created }}</td>
       </tr>
