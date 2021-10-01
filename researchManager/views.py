@@ -27,10 +27,7 @@ class LoadResearch(View):
         requestType = request.POST.get('typeRequest')
         relationshipStatus = request.POST.get('relationshipStatus')
         AddResearch(request=request, researchType=researchType, requestType=requestType, relationshipStatus=relationshipStatus)
-        return render(request, "research/loadResearch.html", {
-            'researchType': researchType,
-            'requestType': requestType,
-        })
+        return render(request, "research/researchType.html")
 
 class WatchResearch(View):
     """Просмотр списка исследований в системе"""
