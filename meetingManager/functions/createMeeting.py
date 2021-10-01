@@ -1,7 +1,9 @@
+from django.contrib.contenttypes.models import ContentType
 from ..models import Meeting, MeetingData
 from researchManager.models import Research
 import datetime
 import time as getTime
+from django.contrib.admin.models import LogEntry, ADDITION, CHANGE # these are action flags from the docs
 
 now = datetime.datetime.now()
 
@@ -29,7 +31,19 @@ def createMeeting(request):
 		MeetingData.objects.create(
 			usersInMeeting_id=user,
 			meeting=meeting,
-	)
+	) 
+	# '| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + folderName
+	meetingId = Meeting.objects.all().last()
+	LogEntry.objects.log_action(
+    	user_id = request.user.id,
+        content_type_id = ContentType.objects.get_for_model(Meeting).pk,
+        object_repr = request.POST.get("date"), 
+        object_id = meetingId.id,
+        change_message = '| '  + 'Создано заседание' + ' | ', 
+        action_flag = ADDITION)
+
+
+
 	return meeting, researchList, randNumber
 
 

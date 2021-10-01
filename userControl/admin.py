@@ -38,7 +38,7 @@ class RoleAdmin(admin.ModelAdmin):
 
  
 class LogEntryAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'action_time', 'user', 'content_type', 'object_id', 'object_repr', 'action_flag', 'change_message')
+    list_display = ('action_time', 'user', 'content_type', 'object_id', 'object_repr', 'action_flag', 'change_message')
     list_filter = ('content_type','action_flag')
     search_fields = ['user__username',]
     date_hierarchy = 'action_time'

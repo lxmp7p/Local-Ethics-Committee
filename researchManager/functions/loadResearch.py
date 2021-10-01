@@ -1,7 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.core.files.storage import FileSystemStorage
 
-from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm
+from ..forms import ClinicalResearchInformationForm, PreclinicalResearchInformationForm, InitiativeResearchInformationForm, DissertationWorkInformationForm
 from ..models import Research, Files
 import datetime
 import re
@@ -85,9 +85,18 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
             if informationForm.identityCode == research.identityCode:
                 checkidentityCode = True
                 break
-        
+
         informationForm.save()
     researchId = Research.objects.all().last()
+
+    LogEntry.objects.log_action(
+                user_id=request.user.id,
+                content_type_id=ContentType.objects.get_for_model(Research).pk,
+                object_repr=folderName, 
+                object_id=researchId.id,
+                change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + folderName, 
+                action_flag=ADDITION)
+
     if not researchId:
         researchId = 1
     else:

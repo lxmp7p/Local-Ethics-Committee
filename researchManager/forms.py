@@ -44,7 +44,8 @@ class DissertationWorkInformationForm(forms.ModelForm):
         model = Research
         fields = (
             'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
-            "name_research", "main_researcher", "division", "identityCode"
+            "name_research", "main_researcher", "division", "identityCode",
+            "work_name",
         )
 
 
