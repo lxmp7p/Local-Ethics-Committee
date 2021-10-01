@@ -156,6 +156,7 @@ def createIdentityCode():
 def getResearchHistory(researchId):
     """Выдает текущее исследование, список файлов и историю"""
     research = Research.objects.get(id=researchId)
+    print(Research._meta.get_fields())
     filesList = Files.objects.filter(research=research)
     history = []
     relatedResearchs = Research.objects.filter(identityCode=research.identityCode).order_by('-date_accepted')

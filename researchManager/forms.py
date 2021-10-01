@@ -13,7 +13,7 @@ class ClinicalResearchInformationForm(forms.ModelForm):
         fields = (
             'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
             "protocol_name", "drug_name", "main_researcher", "research_center",
-            "customer", "customer_contacts", "duration",  "protocol_number", "identityCode",
+            "customer", "customer_contacts", "duration", "protocol_number", "identityCode",
         )
         
 

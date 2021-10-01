@@ -28,7 +28,7 @@
                         </thead>
                         <tbody id='researchList'>
                             {% for research in researchOnMeetinList %}
-                            <tr>
+                            <tr id="{{ research.type_request }}">
                                 <td style="cursor: pointer"
                                     onclick="window.open('{% url 'watchResearch' research.id %}')">{{ research }})</td>
                                 <td style="cursor: pointer" onclick="window.open('{% url 'watchResearch' research.id %}')">{{ research.getType }}</td>

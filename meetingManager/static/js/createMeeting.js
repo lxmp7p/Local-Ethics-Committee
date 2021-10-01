@@ -67,6 +67,9 @@ function deleteInMeetingList(self, type, object){
 function filterResearchList(self){
     $("#researchList tr").each(function() {
         filterType = self.id.slice(0, -6);
+        console.log(filterType)
+        console.log(this)
+        //console.log($(self).attr('id'))
         if ($(this).attr('id') != filterType) {
             this.hidden = true;
         }
