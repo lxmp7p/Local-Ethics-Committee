@@ -10,7 +10,7 @@
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="protocol_name" name="protocol_name" placeholder="Название протокола" required>
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="drug_name" name="drug_name" placeholder="Название препарата" required>
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="main_researcher" name="main_researcher" placeholder="Главный исследователь" required>
-                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="research_center" name="research_center" placeholder="Исследовательский центр" required >
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="research_center" name="research_center" placeholder="Исследовательский центр" value="НМИЦ Онкологии им. Н.Н. Петрова" required >
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer" name="customer" placeholder="Заказчик исследования" required>
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="customer_contacts" name="customer_contacts" placeholder="Контактные данные заказчика" required>
                         <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="duration" name="duration" placeholder="Дата проведение исследования" required>
@@ -149,7 +149,7 @@
                     <h3>Протокол исследования</h3><hr>
                     <div class="protocol" id="protocol">
                         <div class="protocol_form" id="protocol_form">
-                            <input type="file" class="form-control"  name="protocol">
+                            <input type="file" class="form-control"  name="protocol_file">
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="protocol_version">
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="protocol_date">
                         </div>
@@ -181,7 +181,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col">
-                    <h3>Форма информированого листка</h3><hr>
+                    <h3>Информационный листок</h3><hr>
                     <div class="inform_list" id="inform_list">
                         <div class="inform_list_form" id="inform_list_form">
                             <input type="file" class="form-control"  name="inform_list">
@@ -256,7 +256,7 @@
                     <div class="insurance_contract" id="insurance_contract">
                         <div class="insurance_contract_form" id="insurance_contract_form">
                             <input type="file" class="form-control"  name="insurance_contract">
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Версия" name="insurance_contract_version">
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Номер договора" name="insurance_contract_version">
                             <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Дата" id="datepicker" name="insurance_contract_date">
                         </div>
                     </div>

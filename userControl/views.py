@@ -25,6 +25,8 @@ class Registration(View):
 class Authorization(View):
     """Авторизация в системе"""
     def get(self, request):
+        if request.user.is_authenticated:
+            return redirect("research/")
         return render(request, 'auth/login.html')
 
     def post(self, request):
@@ -33,16 +35,3 @@ class Authorization(View):
            return render(request, 'auth/login.html', {'error': error})
         else:
             return redirect(reverse('index'))
-
-
-class Logout(View):
-    """Выход из системы"""
-    def get(self, request):
-        logout(request)
-        return redirect('login')
-
-
-class Index(View):
-    """Регистрация нового пользователя в системе"""
-    def get(self, request):
-        return render(request, 'index.html')

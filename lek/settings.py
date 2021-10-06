@@ -144,3 +144,6 @@ AUTH_USER_MODEL = 'userControl.User'
 LOGIN_REQUIRED_URLS = (
     r'/research/(.*)$',
 )
+
+LOGIN_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

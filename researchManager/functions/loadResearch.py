@@ -26,28 +26,6 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
     folderName = getValidPath(folderName)
     saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
 
-def get_typeResearch(typeEng):
-    if typeEng == 'clinicalResearch':
-        return "Клиническое исследование"
-    if typeEng == 'preclinicalResearch':
-        return "Доклиническое исследование"
-    if typeEng == 'initiativeResearch':
-        return "Инициативное исследование"
-    if typeEng == 'dissertationWork':
-        return "Диссертационная работа"
-    raise ValueError('Undefined type Research: {}'.format(str))
-
-def get_typeResearch(typeEng):
-    if typeEng == 'clinicalResearch':
-        return "Клиническое исследование"
-    if typeEng == 'preclinicalResearch':
-        return "Доклиническое исследование"
-    if typeEng == 'initiativeResearch':
-        return "Инициативное исследование"
-    if typeEng == 'dissertationWork':
-        return "Диссертационная работа"
-    raise ValueError('Undefined type Research: {}'.format(str))
-
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
     Добавление клинического исследования
@@ -78,24 +56,23 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.owner=request.user
         informationForm.type=researchType
         informationForm.date_accepted=dateAccepted
-        
         researchList = getMainResearchsList(researchType)
         checkidentityCode = False
         for research in researchList:
             if informationForm.identityCode == research.identityCode:
                 checkidentityCode = True
                 break
-
         informationForm.save()
     researchId = Research.objects.all().last()
 
     LogEntry.objects.log_action(
-                user_id=request.user.id,
-                content_type_id=ContentType.objects.get_for_model(Research).pk,
-                object_repr=folderName, 
-                object_id=researchId.id,
-                change_message='| ' + informationForm.type_request + ' | ' + get_typeResearch(researchType) + ' : ' + folderName, 
-                action_flag=ADDITION)
+        user_id=request.user.id,
+        content_type_id=ContentType.objects.get_for_model(Research).pk,
+        object_repr=folderName, 
+        object_id=researchId.id,
+        change_message='| ' + informationForm.type_request + ' | ' + researchId.getType() + ' : ' + folderName, 
+        action_flag=ADDITION,
+    )
 
     if not researchId:
         researchId = 1
@@ -156,7 +133,6 @@ def createIdentityCode():
 def getResearchHistory(researchId):
     """Выдает текущее исследование, список файлов и историю"""
     research = Research.objects.get(id=researchId)
-    print(Research._meta.get_fields())
     filesList = Files.objects.filter(research=research)
     history = []
     relatedResearchs = Research.objects.filter(identityCode=research.identityCode).order_by('-date_accepted')
@@ -189,7 +165,7 @@ def getFilename(filenameEng):
         "permit": "Разрешение МЗ РФ",
         "inform_list": "Информационный листок пациента",
         "brochure_researcher": "Брошюра исследователя",
-        "protocol": "Протокол исследования",
+        "protocol_file": "Протокол исследования",
     } 
     for key in filenameWordlist:
         if key == filenameEng:

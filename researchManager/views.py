@@ -1,22 +1,15 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
 from django.http import request
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views.generic import View
 from .functions.loadResearch import AddResearch, getResearchHistory, getMainResearchsList
 from .models import *
-# Create your views here.
 
-
-class ResearchListView(View):
-    """Переход к нужному типу исследования"""
-    def get(self, request):
-        return render(request, "research/researchType.html")
 
 class LoadResearch(View):
     """Загрузка исследования"""
     def get(self, request, researchType):
-        researchList = None
         researchList = getMainResearchsList(researchType)
         return render(request, "research/loadResearch.html", {
             'researchType': researchType,
@@ -28,6 +21,7 @@ class LoadResearch(View):
         relationshipStatus = request.POST.get('relationshipStatus')
         AddResearch(request=request, researchType=researchType, requestType=requestType, relationshipStatus=relationshipStatus)
         return render(request, "research/researchType.html")
+
 
 class WatchResearch(View):
     """Просмотр списка исследований в системе"""

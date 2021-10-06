@@ -6,7 +6,7 @@ from .models import MeetingData
 from .models import Meeting as MeetingModel
 from .functions.createMeeting import createMeeting
 from .functions.report_maker import createReport
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 class Meeting(View):
@@ -16,9 +16,6 @@ class Meeting(View):
 	def getUserList():
 		User = get_user_model()
 		return User.objects.all()
-
-	def getMeetingList():
-		return MeetingModel.objects.all()
 
 
 class CreateMeeting(Meeting):
@@ -38,9 +35,9 @@ class CreateMeeting(Meeting):
 		})
 
 
-class MeetingList(Meeting):
+class MeetingList(View):
 	def get(self, request):
-		meetingList = Meeting.getMeetingList()
+		meetingList = MeetingModel.objects.all()
 		return render(request, "meetingList.html", {
 			"meetingList": meetingList,
 		})
