@@ -73,6 +73,20 @@ class Research(models.Model):
         if self.type == "secondRequest":
             return "Вторичная заявка"
 
+    def getSubName(self, MAX_LENGTH=70):
+        MAX_LENGTH = 70
+        if self.type == "clinicalResearch":
+            name = self.protocol_number
+        if self.type == "preclinicalResearch":
+            name = self.work_name
+        if self.type == "initiativeResearch":
+            name = self.name_research
+        if self.type == "dissertationWorksList":
+            name = self.work_name
+        if len(name) > MAX_LENGTH:
+            return name[:MAX_LENGTH] + '...'
+        else:
+            return name
 
 class Files(models.Model):
     name = models.CharField("Название документа", max_length=150)
