@@ -8,10 +8,12 @@
   </thead>
   <tbody>
     {% for research in researchList %}
+    {% if research.type == "initiativeResearch" %}
       <tr style="cursor: pointer" onclick="window.location.href='{% url 'watchResearch' research.id %}'; return false">
         <td>{{ research.name_research }}</td>
         <td>{{ research.owner }}</td>
         <td>{{ research.date_created }}</td>
       </tr>
+      {% endif %}
     {% endfor %}
   </tbody>

@@ -34,6 +34,7 @@ class Research(models.Model):
 
     def __str__(self, MAX_LENGTH=70):
         MAX_LENGTH = 70
+        name = "Ошибка данных"
         if self.type == "clinicalResearch":
             name = self.protocol_name
         if self.type == "preclinicalResearch":

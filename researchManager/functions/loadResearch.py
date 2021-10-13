@@ -65,14 +65,6 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.save()
     researchId = Research.objects.all().last()
 
-    LogEntry.objects.log_action(
-        user_id=request.user.id,
-        content_type_id=ContentType.objects.get_for_model(Research).pk,
-        object_repr=folderName, 
-        object_id=researchId.id,
-        change_message='| ' + informationForm.type_request + ' | ' + researchId.getType() + ' : ' + folderName, 
-        action_flag=ADDITION,
-    )
 
     if not researchId:
         researchId = 1

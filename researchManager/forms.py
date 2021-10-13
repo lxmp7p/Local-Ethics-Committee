@@ -43,9 +43,8 @@ class DissertationWorkInformationForm(forms.ModelForm):
     class Meta:
         model = Research
         fields = (
-            'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
+            "work_name", 'type_request', 'identityCode', 'owner', 'type', 'date_accepted',
             "name_research", "main_researcher", "division", "identityCode",
-            "work_name",
         )
 
 

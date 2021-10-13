@@ -27,6 +27,7 @@ class WatchResearch(View):
     """Просмотр списка исследований в системе"""
     def getResearchList(request, researchType):
         researchList = getMainResearchsList(researchType)
+        print(Research.objects.all())
         return render(request, "research/researchList.html", {
             'researchList': researchList,
             'researchType': researchType,
