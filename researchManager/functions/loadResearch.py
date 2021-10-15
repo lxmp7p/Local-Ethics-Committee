@@ -24,7 +24,15 @@ def AddResearch(request=None, researchType=None, requestType=None, relationshipS
         identityCode = createIdentityCode()
     folderName, researchId = CreateResearch(request, researchType, requestType, identityCode, dateAccepted)
     folderName = getValidPath(folderName)
-    saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
+    fileListText = saveFiles(request.FILES, request.POST, folderName, researchId, parentResearch)
+    LogEntry.objects.log_action(
+            user_id=request.user.id,
+            content_type_id=ContentType.objects.get_for_model(Research).pk,
+            object_repr=folderName, 
+            object_id=researchId,
+            change_message='| ' + requestType + ' | ' + researchType + ' : ' + folderName + '\nСписок файлов:\n' + fileListText, 
+            action_flag=ADDITION,
+        )
 
 def CreateResearch(request, researchType, requestType, identityCode, dateAccepted):
     """
@@ -65,12 +73,13 @@ def CreateResearch(request, researchType, requestType, identityCode, dateAccepte
         informationForm.save()
     researchId = Research.objects.all().last()
 
-
     if not researchId:
         researchId = 1
     else:
         researchId = researchId.id
     researchList = getMainResearchsList(researchType)
+    if len(folderName) > 80:
+        folderName = folderName[:80]
     return folderName, researchId
 
 
@@ -88,6 +97,7 @@ def getFileInfo(filesInfo, file):
 
 def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
     """Сохранение файлов и запись в БД информации о них"""
+    fileListText = ''
     folder_name = (f'/{str(now.strftime("%Y"))}/{str(folderName)}/')
     if parentResearch and parentResearch.version:
         folder_name += (f"{parentResearch.version + 1}/")
@@ -116,10 +126,12 @@ def saveFiles(files, filesInfo, folderName, researchId, parentResearch):
                 file=fileUrl, research_id=researchId,
                 date=date, version=version, name=name
             )
+            fileListText += (f"{name} Версия: {version} Дата: {date}|\n")
+    return fileListText
 
 def createIdentityCode():
     chars = string.ascii_uppercase + string.ascii_lowercase + string.digits
-    size = 8
+    size = 10
     return ''.join(random.choice(chars) for x in range(size,20))
 
 def getResearchHistory(researchId):
@@ -158,6 +170,15 @@ def getFilename(filenameEng):
         "inform_list": "Информационный листок пациента",
         "brochure_researcher": "Брошюра исследователя",
         "protocol_file": "Протокол исследования",
+        "insurance_contract": "Договор страхования",
+        "annotation": "Аннотация на используемые препараты",
+        "information_leaflet": "Информационный листок и согласие",
+        "professional_autobiographies": "Профессиональная автобиография",
+        "registration_card": "Индивидуальная регистрационная карта пациента",
+        "technical_task": "Техническое задание",
+        "calendar_plan": "Календарный план",
+        "costings": "Смета расходов",
+        "approval": "Одобрение",
     } 
     for key in filenameWordlist:
         if key == filenameEng:
