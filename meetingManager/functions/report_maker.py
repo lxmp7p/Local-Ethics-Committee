@@ -150,4 +150,5 @@ def createReport(researchList, meeting, randNumber):
 	time = str(meeting.time)
 	#Конец данных
 	reportInfoList = getReportInfoList(researchList, mail, organization, id_meeting, date, time)
+	print(researchList[0].work_name)
 	createDoc(reportInfoList, id_meeting, date, time, randNumber)

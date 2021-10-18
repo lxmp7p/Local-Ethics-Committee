@@ -43,6 +43,7 @@ class Research(models.Model):
             name = self.name_research
         if self.type == "dissertationWorksList":
             name = self.work_name
+            print(name)
         if len(name) > MAX_LENGTH:
             return name[:MAX_LENGTH] + '...'
         else:
@@ -65,7 +66,7 @@ class Research(models.Model):
             return self.work_name
         if self.type == "initiativeResearch":
             return self.name_research
-        if self.type == "dissertationWorksList":
+        if self.type == "dissertationWork":
             return self.work_name
 
     def getTypeRequest(self):
