@@ -48,7 +48,7 @@ class ReportInfo(object):
 
 	def getBodyRecords(self):
 		records = [
-		    ('Вопрос об одобрении ', 'инициативного исследования'),
+		    ('Вопрос об одобрении ', self.type_research),
 		    ('Название исследования: ', self.description),
 		    ('Главный исследователь:  ', self.main_researcher),
 		    ('Представлены документы: ', self.getDocListString()),
@@ -110,7 +110,7 @@ def getReportInfoList(researchList, mail, organization, id_meeting, date, time):
 	#Убираем все от сюда до следущего коммента
 	reportInfoList = []
 	for research in researchList:
-		type_research = research.getTypeRequest()
+		type_research = research.getType()
 		description = research.getDescription()
 		main_researcher = research.main_researcher
 		podrazdelenie = research.division
@@ -150,5 +150,4 @@ def createReport(researchList, meeting, randNumber):
 	time = str(meeting.time)
 	#Конец данных
 	reportInfoList = getReportInfoList(researchList, mail, organization, id_meeting, date, time)
-	print(researchList[0].work_name)
 	createDoc(reportInfoList, id_meeting, date, time, randNumber)

@@ -41,7 +41,7 @@ class Research(models.Model):
             name = self.work_name
         if self.type == "initiativeResearch":
             name = self.name_research
-        if self.type == "dissertationWorksList":
+        if self.type == "dissertationWork":
             name = self.work_name
             print(name)
         if len(name) > MAX_LENGTH:
@@ -56,7 +56,7 @@ class Research(models.Model):
             return "Доклиническое исследование"
         if self.type == "initiativeResearch":
             return "Инициативное исследование"
-        if self.type == "dissertationWorksList":
+        if self.type == "dissertationWork":
             return "Диссертационная работа"
 
     def getDescription(self):
@@ -83,7 +83,7 @@ class Research(models.Model):
             name = self.work_name
         if self.type == "initiativeResearch":
             name = self.name_research
-        if self.type == "dissertationWorksList":
+        if self.type == "dissertationWork":
             name = self.work_name
         if len(name) > MAX_LENGTH:
             return name[:MAX_LENGTH] + '...'

@@ -27,13 +27,15 @@
                             </tr>
                         </thead>
                         <tbody id='researchList'>
+                            <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true"
+                                id="secondRequestFilter" onclick="$('.researchBtn').click()">Добавить все</button>
                             {% for research in researchOnMeetinList %}
                             <tr id="{{ research.type_request }}">
                                 <td style="cursor: pointer"
                                     onclick="window.open('{% url 'watchResearch' research.id %}')">{{ research }})</td>
                                 <td style="cursor: pointer" onclick="window.open('{% url 'watchResearch' research.id %}')">{{ research.getType }}</td>
                                 <td>
-                                    <button type="button" id="{{ research.id }}" class="btn"
+                                    <button type="button" id="{{ research.id }}" class="btn researchBtn"
                                         onclick="addInMeetingList(this, 'researchInMeeting', '{{ research }}', '{{ research.id }}')">
                                         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-clipboard-plus"
                                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
