@@ -23,12 +23,11 @@
                             <tr>
                                 <th>Название</th>
                                 <th>Тип</th>
-                                <th></th>
+                                <th> <button type="button" class="btn-danger  active filter" aria-pressed="true"
+                                id="secondRequestFilter" onclick="$('.researchBtn').click()">Добавить все</button></th>
                             </tr>
                         </thead>
                         <tbody id='researchList'>
-                            <button type="button" class="btn btn-outline-dark active filter" aria-pressed="true"
-                                id="secondRequestFilter" onclick="$('.researchBtn').click()">Добавить все</button>
                             {% for research in researchOnMeetinList %}
                             <tr id="{{ research.type_request }}">
                                 <td style="cursor: pointer"

@@ -83,7 +83,6 @@ def createDoc(reportInfoList, id_meeting, date, time, randNumber):
 	document.add_heading('', 0)
 	document.add_page_break()
 	for reportInfo in reportInfoList:
-		document.add_paragraph(reportInfo.type_research)
 		records = reportInfo.getBodyRecords()
 		table = document.add_table(rows=1, cols=2)
 		for type, text in records:
